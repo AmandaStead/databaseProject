@@ -312,32 +312,32 @@ public class userDAO
         		"('9','9','9','2020-01-01', '111.11');");  
 
 	 statement.executeUpdate("INSERT INTO orderofwork(orderofworkedid, service, date, price_estimate)" +
-        		"VALUES (1, 'LAWN MOWING', '2020-01-01', 111.11),"
-        		+ "(2, 'GARDENING', '2020-01-02', 222.22),"
-        		+ "(3, 'LANDSCAPING', '2020-01-03', 333.33),"
-        		+ "(4, 'TREE REMOVAL', '2020-01-04', 444.44),"
-        		+ "(5, 'HEDGE TRIMMING', '2020-01-05', 555.55),"
-        		+ "(6, 'IRRIGATION', '2020-01-06', 666.66),"
-        		+ "(7, 'FERTILIZATION', '2020-01-07', 777.77),"
-        		+ "(8, 'PATIO INSTALLATION', '2020-01-08', 888.88),"
-        		+ "(9, 'SPRINKLER REPAIR', '2020-01-09', 999.99),"
-        		+ "(10, 'Service 10', '2020-01-10', 1010.10);");
+        		"VALUES ('1', 'LAWN MOWING', '2020-01-01', '111.11'),"
+        		+ "('2', 'GARDENING', '2020-01-02', '222.22'),"
+        		+ "('3', 'LANDSCAPING', '2020-01-03', '333.33'),"
+        		+ "('4', 'TREE REMOVAL', '2020-01-04', '444.44'),"
+        		+ "('5', 'HEDGE TRIMMING', '2020-01-05', '555.55'),"
+        		+ "('6', 'IRRIGATION', '2020-01-06', '666.66'),"
+        		+ "('7', 'FERTILIZATION', '2020-01-07', '777.77'),"
+        		+ "('8', 'PATIO INSTALLATION', '2020-01-08', '888.88'),"
+        		+ "('9', 'SPRINKLER REPAIR', '2020-01-09', '999.99'),"
+        		+ "('10', 'Service 10', '2020-01-10', '1010.10');");
         
         
         statement.executeUpdate("INSERT INTO service (serviceid, name, description, price)" +
-        		"VALUES (1, 'LAWN MOWING', 'Description 1', 100.00),"
-        		+ "(2, 'GARDENING', 'Description 2', 150.00),"
-        		+ "(3, 'LANDSCAPING', 'Description 3', 75.50),"
-        		+ "(4, 'TREE REMOVAL', 'Description 4', 200.00),"
-        		+ "(5, 'HEDGE TRIMMING', 'Description 5', 90.00),"
-        		+ "(6, 'IRRIGATION', 'Description 6', 120.00),"
-        		+ "(7, 'FERTILIZATION', 'Description 7', 180.00),"
-        		+ "(8, 'PATIO INSTALLATION', 'Description 8', 50.00),"
-        		+ "(9, 'SPRINKLER REPAIR', 'Description 9', 110.00),"
-        		+ "(10, 'Service 10', 'Description 10', 70.00);");
+        		"VALUES ('1', 'LAWN MOWING', 'Description 1', '100.00'),"
+        		+ "('2', 'GARDENING', 'Description 2', '150.00'),"
+        		+ "('3', 'LANDSCAPING', 'Description 3', '75.50'),"
+        		+ "('4', 'TREE REMOVAL', 'Description 4', '200.00'),"
+        		+ "('5', 'HEDGE TRIMMING', 'Description 5', '90.00'),"
+        		+ "('6', 'IRRIGATION', 'Description 6', '120.00'),"
+        		+ "('7', 'FERTILIZATION', 'Description 7', '180.00'),"
+        		+ "('8', 'PATIO INSTALLATION', 'Description 8', '50.00'),"
+        		+ "('9', 'SPRINKLER REPAIR', 'Description 9', '110.00'),"
+        		+ "('10', 'Service 10', 'Description 10', '70.00');");
         		
         
-        statement.executeUpdate("INSERT INTO bill(orderofworkid, finalprice, service) "
+         statement.executeUpdate("INSERT INTO bill(orderofworkid, finalprice, service) "
         		+ "VALUES ('1', '100', 'TREE TRIM'),"
         		+ "('2', '150', 'LAWN MOWING'),"
         		+ "('3', '75', 'GARDENING'),"
@@ -350,29 +350,28 @@ public class userDAO
         		+ "('10', '70', 'SPRINKLER REPAIR');");
         
         statement.executeUpdate("INSERT INTO note (customerid, custnote, ownernote)" +
-		        "VALUES (1, 'Customer Note 1', 'Owner Note 1'),"
-		        + "(2, 'Customer Note 2', 'Owner Note 2'),"
-		        + "(3, 'Customer Note 3', 'Owner Note 3'),"
-		        + "(4, 'Customer Note 4', 'Owner Note 4'),"
-		        + "(5, 'Customer Note 5', 'Owner Note 5'),"
-		        + "(6, 'Customer Note 6', 'Owner Note 6'),"
-		        + "(7, 'Customer Note 7', 'Owner Note 7'),"
-		        + "(8, 'Customer Note 8', 'Owner Note 8'),"
-		        + "(9, 'Customer Note 9', 'Owner Note 9'),"
-		        + "(10, 'Customer Note 10', 'Owner Note 10');");
+		        "VALUES ('1', 'Customer Note 1', 'Owner Note 1'),"
+		        + "('2', 'Customer Note 2', 'Owner Note 2'),"
+		        + "('3', 'Customer Note 3', 'Owner Note 3'),"
+		        + "('4', 'Customer Note 4', 'Owner Note 4'),"
+		        + "('5', 'Customer Note 5', 'Owner Note 5'),"
+		        + "('6', 'Customer Note 6', 'Owner Note 6'),"
+		        + "('7', 'Customer Note 7', 'Owner Note 7'),"
+		        + "('8', 'Customer Note 8', 'Owner Note 8'),"
+		        + "('9', 'Customer Note 9', 'Owner Note 9'),"
+		        + "('10', 'Customer Note 10', 'Owner Note 10');");
         
         statement.executeUpdate("INSERT INTO tree (treeid, pics, ft_from_house, size_height)" +
-        		"VALUES(1, 'oak_tree', 10, 15),"
-        		+ "(2, 'maple_tree', 20, 25),"
-        		+ "(3, 'pine_tree', 30, 35),"
-        		+ "(4, 'willow_tree', 40, 45),"
-        		+ "(5, 'birch_tree', 50, 55),"
-        		+ "(6, 'cedar_tree', 60, 65),"
-        		+ "(7, 'redwood_tree', 70, 75),"
-        		+ "(8, 'elm_tree', 80, 85),"
-        		+ "(9, 'sequoia_tree', 90, 95),"
-        		+ "(10, 'fir_tree', 100, 105);");        
-	    
+        		"VALUES ('1', 'oak_tree', '10', '15'),"
+        		+ "('2', 'maple_tree', '20', '25'),"
+        		+ "('3', 'pine_tree', '30', '35'),"
+        		+ "('4', 'willow_tree', '40', '45'),"
+        		+ "('5', 'birch_tree', '50', '55'),"
+        		+ "('6', 'cedar_tree', '60', '65'),"
+        		+ "('7', 'redwood_tree', '70', '75'),"
+        		+ "('8', 'elm_tree', '80', '85'),"
+        		+ "('9', 'sequoia_tree', '90', '95'),"
+        		+ "('10', 'fir_tree', '100', '105');");     
     }}
     
    
