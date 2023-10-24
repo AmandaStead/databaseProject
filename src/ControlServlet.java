@@ -23,7 +23,6 @@ import java.sql.PreparedStatement;
 public class ControlServlet extends HttpServlet {
 	    private static final long serialVersionUID = 1L;
 	    private userDAO userDAO = new userDAO();
-	    private quoteDAO quoteDAO = new quoteDAO();
 	    private String currentUser;
 	    private HttpSession session=null;
 	    
@@ -36,10 +35,8 @@ public class ControlServlet extends HttpServlet {
 	    {
 	    	userDAO = new userDAO();
 	    	currentUser= "";
-	    	
 	    }
-	   
-	
+	    
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        doGet(request, response);
 	    }
@@ -71,13 +68,7 @@ public class ControlServlet extends HttpServlet {
                  System.out.println("The action is: list");
                  listUser(request, response);           	
                  break;
-        	 //case "/listquote":
-                // System.out.println("The action is: listquote");
-                 //listquote(request, response);           	
-                 //break;
-                 
 	    	}
-        	
 	    }
 	    catch(Exception ex) {
         	System.out.println(ex.getMessage());
@@ -96,8 +87,7 @@ public class ControlServlet extends HttpServlet {
 	     
 	        System.out.println("listPeople finished: 111111111111111111111111111111111111");
 	    }
-
-	 
+	    	        
 	    private void rootPage(HttpServletRequest request, HttpServletResponse response, String view) throws ServletException, IOException, SQLException{
 	    	System.out.println("root view");
 			request.setAttribute("listUser", userDAO.listAllUsers());
@@ -105,19 +95,6 @@ public class ControlServlet extends HttpServlet {
 	    }
 	    
 	    
-	    
-	    //private void listquote(HttpServletRequest request, HttpServletResponse response)
-	            //throws SQLException, IOException, ServletException {
-	        //System.out.println("listquote started: 00000000000000000000000000000000000");
-	        
-	        //List<quote> listquote = quoteDAO.Allquotes();
-	       // request.setAttribute("listquote", listquote);       
-	       // RequestDispatcher dispatcher = request.getRequestDispatcher("quote.jsp");       
-	      //  dispatcher.forward(request, response);
-	     
-	      //  System.out.println("listquote finished: 111111111111111111111111111111111111");
-	   // }
-
 	    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	 String email = request.getParameter("email");
 	    	 String password = request.getParameter("password");
@@ -148,7 +125,6 @@ public class ControlServlet extends HttpServlet {
 	   	 	String lastName = request.getParameter("lastName");
 	   	 	String password = request.getParameter("password");
 	   	 	String birthday = request.getParameter("birthday");
-	   	 	String cc_num = request.getParameter("cc_num");
 	   	 	String adress_street_num = request.getParameter("adress_street_num"); 
 	   	 	String adress_street = request.getParameter("adress_street"); 
 	   	 	String adress_city = request.getParameter("adress_city"); 
@@ -159,7 +135,7 @@ public class ControlServlet extends HttpServlet {
 	   	 	if (password.equals(confirm)) {
 	   	 		if (!userDAO.checkEmail(email)) {
 		   	 		System.out.println("Registration Successful! Added to database");
-		            user users = new user(email,firstName, lastName, password, birthday, cc_num, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, 1000,0);
+		            user users = new user(email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, 1000,0);
 		   	 		userDAO.insert(users);
 		   	 		response.sendRedirect("login.jsp");
 	   	 		}
@@ -179,7 +155,12 @@ public class ControlServlet extends HttpServlet {
 	    	currentUser = "";
         		response.sendRedirect("login.jsp");
         	}
-	 
+	
+	    
+
+	     
+        
+	    
 	    
 	    
 	    
@@ -192,5 +173,3 @@ public class ControlServlet extends HttpServlet {
 	        
 	        
 	    
-
-

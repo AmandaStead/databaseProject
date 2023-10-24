@@ -92,7 +92,6 @@ public class userDAO
             String lastName = resultSet.getString("lastName");
             String password = resultSet.getString("password");
             String birthday = resultSet.getString("birthday");
-            String cc_num = resultSet.getString("cc_num");
             String adress_street_num = resultSet.getString("adress_street_num"); 
             String adress_street = resultSet.getString("adress_street"); 
             String adress_city = resultSet.getString("adress_city"); 
@@ -102,7 +101,7 @@ public class userDAO
             int PPS_bal = resultSet.getInt("PPS_bal");
 
              
-            user users = new user(email,firstName, lastName, password, birthday, cc_num, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, cash_bal,PPS_bal);
+            user users = new user(email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, cash_bal,PPS_bal);
             listUser.add(users);
         }        
         resultSet.close();
@@ -118,21 +117,20 @@ public class userDAO
     
     public void insert(user users) throws SQLException {
     	connect_func("root","pass1234");         
-		String sql = "insert into User(email, firstName, lastName, password, birthday, cc_num, adress_street_num, adress_street,adress_city,adress_state,adress_zip_code,cash_bal,PPS_bal) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
+		String sql = "insert into User(email, firstName, lastName, password, birthday,adress_street_num, adress_street,adress_city,adress_state,adress_zip_code,cash_bal,PPS_bal) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setString(1, users.getEmail());
 			preparedStatement.setString(2, users.getFirstName());
 			preparedStatement.setString(3, users.getLastName());
 			preparedStatement.setString(4, users.getPassword());
 			preparedStatement.setString(5, users.getBirthday());
-			preparedStatement.setString(6, users.getcc_num());
-			preparedStatement.setString(7, users.getAdress_street_num());		
-			preparedStatement.setString(8, users.getAdress_street());		
-			preparedStatement.setString(9, users.getAdress_city());		
-			preparedStatement.setString(10, users.getAdress_state());		
-			preparedStatement.setString(11, users.getAdress_zip_code());		
-			preparedStatement.setInt(12, users.getCash_bal());		
-			preparedStatement.setInt(13, users.getPPS_bal());		
+			preparedStatement.setString(6, users.getAdress_street_num());		
+			preparedStatement.setString(7, users.getAdress_street());		
+			preparedStatement.setString(8, users.getAdress_city());		
+			preparedStatement.setString(9, users.getAdress_state());		
+			preparedStatement.setString(10, users.getAdress_zip_code());		
+			preparedStatement.setInt(11, users.getCash_bal());		
+			preparedStatement.setInt(12, users.getPPS_bal());		
 
 		preparedStatement.executeUpdate();
         preparedStatement.close();
@@ -151,7 +149,7 @@ public class userDAO
     }
      
     public boolean update(user users) throws SQLException {
-        String sql = "update User set firstName=?, lastName =?,password = ?,birthday=?, cc_num =?, adress_street_num =?, adress_street=?,adress_city=?,adress_state=?,adress_zip_code=?, cash_bal=?, PPS_bal =? where email = ?";
+        String sql = "update User set firstName=?, lastName =?,password = ?,birthday=?,adress_street_num =?, adress_street=?,adress_city=?,adress_state=?,adress_zip_code=?, cash_bal=?, PPS_bal =? where email = ?";
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
@@ -160,14 +158,13 @@ public class userDAO
 		preparedStatement.setString(3, users.getLastName());
 		preparedStatement.setString(4, users.getPassword());
 		preparedStatement.setString(5, users.getBirthday());
-		preparedStatement.setString(6, users.getcc_num());
-		preparedStatement.setString(7, users.getAdress_street_num());		
-		preparedStatement.setString(8, users.getAdress_street());		
-		preparedStatement.setString(9, users.getAdress_city());		
-		preparedStatement.setString(10, users.getAdress_state());		
-		preparedStatement.setString(11, users.getAdress_zip_code());		
-		preparedStatement.setInt(12, users.getCash_bal());		
-		preparedStatement.setInt(13, users.getPPS_bal());
+		preparedStatement.setString(6, users.getAdress_street_num());		
+		preparedStatement.setString(7, users.getAdress_street());		
+		preparedStatement.setString(8, users.getAdress_city());		
+		preparedStatement.setString(9, users.getAdress_state());		
+		preparedStatement.setString(10, users.getAdress_zip_code());		
+		preparedStatement.setInt(11, users.getCash_bal());		
+		preparedStatement.setInt(12, users.getPPS_bal());
          
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
@@ -190,7 +187,6 @@ public class userDAO
             String lastName = resultSet.getString("lastName");
             String password = resultSet.getString("password");
             String birthday = resultSet.getString("birthday");
-            String cc_num = resultSet.getString("cc_num");
             String adress_street_num = resultSet.getString("adress_street_num"); 
             String adress_street = resultSet.getString("adress_street"); 
             String adress_city = resultSet.getString("adress_city"); 
@@ -198,7 +194,7 @@ public class userDAO
             String adress_zip_code = resultSet.getString("adress_zip_code"); 
             int cash_bal = resultSet.getInt("cash_bal");
             int PPS_bal = resultSet.getInt("PPS_bal");
-            user = new user(email, firstName, lastName, password, birthday, cc_num, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal);
+            user = new user(email, firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal);
         }
          
         resultSet.close();
@@ -266,12 +262,18 @@ public class userDAO
     	}
     	return false;
     }
+    
+    
     public void init() throws SQLException, FileNotFoundException, IOException{
     	connect_func();
         statement =  (Statement) connect.createStatement();
-        
+        statement.executeUpdate("drop database if exists trees");
+        statement.executeUpdate("create database trees");
+        statement.executeUpdate("use trees");
      
         statement.executeUpdate("DROP TABLE IF EXISTS user, quote, bill, orderofwork, note, service, tree");
+
+        
 
         // Create new tables
         
@@ -311,9 +313,8 @@ public class userDAO
         		"('8','8','8','2020-01-01', '111.11')," +
         		"('9','9','9','2020-01-01', '111.11');");  
 
-	 statement.executeUpdate("INSERT INTO orderofwork(orderofworkedid, service, date, price_estimate)" +
-        		"VALUES ('1', 'LAWN MOWING', '2020-01-01', '111.11'),"
-        		+ "('2', 'GARDENING', '2020-01-02', '222.22'),"
+	 statement.executeUpdate("INSERT INTO orderofwork(orderofworkid, service, date, price_estimate) VALUES ('1', 'LAWN MOWING', '2020-01-01', '111.11')," +
+        		"('2', 'GARDENING', '2020-01-02', '222.22'),"
         		+ "('3', 'LANDSCAPING', '2020-01-03', '333.33'),"
         		+ "('4', 'TREE REMOVAL', '2020-01-04', '444.44'),"
         		+ "('5', 'HEDGE TRIMMING', '2020-01-05', '555.55'),"
@@ -322,35 +323,30 @@ public class userDAO
         		+ "('8', 'PATIO INSTALLATION', '2020-01-08', '888.88'),"
         		+ "('9', 'SPRINKLER REPAIR', '2020-01-09', '999.99'),"
         		+ "('10', 'Service 10', '2020-01-10', '1010.10');");
-        
-        
-        statement.executeUpdate("INSERT INTO service (serviceid, name, description, price)" +
-        		"VALUES ('1', 'LAWN MOWING', 'Description 1', '100.00'),"
-        		+ "('2', 'GARDENING', 'Description 2', '150.00'),"
-        		+ "('3', 'LANDSCAPING', 'Description 3', '75.50'),"
-        		+ "('4', 'TREE REMOVAL', 'Description 4', '200.00'),"
-        		+ "('5', 'HEDGE TRIMMING', 'Description 5', '90.00'),"
-        		+ "('6', 'IRRIGATION', 'Description 6', '120.00'),"
-        		+ "('7', 'FERTILIZATION', 'Description 7', '180.00'),"
-        		+ "('8', 'PATIO INSTALLATION', 'Description 8', '50.00'),"
-        		+ "('9', 'SPRINKLER REPAIR', 'Description 9', '110.00'),"
-        		+ "('10', 'Service 10', 'Description 10', '70.00');");
-        		
-        
-         statement.executeUpdate("INSERT INTO bill(orderofworkid, finalprice, service) "
-        		+ "VALUES ('1', '100', 'TREE TRIM'),"
-        		+ "('2', '150', 'LAWN MOWING'),"
-        		+ "('3', '75', 'GARDENING'),"
-        		+ "('4', '200', 'LANDSCAPING'),"
-        		+ "('5', '90', 'TREE REMOVAL'),"
-        		+ "('6', '120', 'HEDGE TRIMMING'),"
-        		+ "('7', '180', 'IRRIGATION'),"
-        		+ "('8', '50', 'FERTILIZATION'),"
-        		+ "('9', '110', 'PATIO INSTALLATION'),"
-        		+ "('10', '70', 'SPRINKLER REPAIR');");
-        
-        statement.executeUpdate("INSERT INTO note (customerid, custnote, ownernote)" +
-		        "VALUES ('1', 'Customer Note 1', 'Owner Note 1'),"
+	  statement.executeUpdate("INSERT INTO service (serviceid, name, description, price) VALUES ('1', 'LAWN MOWING', 'Description 1', '100.00')," +
+      		 "('2', 'GARDENING', 'Description 2', '150.00'),"
+      		+ "('3', 'LANDSCAPING', 'Description 3', '75.50'),"
+      		+ "('4', 'TREE REMOVAL', 'Description 4', '200.00'),"
+      		+ "('5', 'HEDGE TRIMMING', 'Description 5', '90.00'),"
+      		+ "('6', 'IRRIGATION', 'Description 6', '120.00'),"
+      		+ "('7', 'FERTILIZATION', 'Description 7', '180.00'),"
+      		+ "('8', 'PATIO INSTALLATION', 'Description 8', '50.00'),"
+      		+ "('9', 'SPRINKLER REPAIR', 'Description 9', '110.00'),"
+      		+ "('10', 'Service 10', 'Description 10', '70.00');");
+      		
+      
+       statement.executeUpdate("INSERT INTO bill(orderofworkid, finalprice, service) VALUES ('1', '100.00', 'TREE TRIM'),"
+      		+ "('2', '150.00', 'LAWN MOWING'),"
+      		+ "('3', '75.00', 'GARDENING'),"
+      		+ "('4', '200.00', 'LANDSCAPING'),"
+      		+ "('5', '90.00', 'TREE REMOVAL'),"
+      		+ "('6', '120.00', 'HEDGE TRIMMING'),"
+      		+ "('7', '180.00', 'IRRIGATION'),"
+      		+ "('8', '50.00', 'FERTILIZATION'),"
+      		+ "('9', '110.00', 'PATIO INSTALLATION'),"
+      		+ "('10', '70.00', 'SPRINKLER REPAIR');");
+      
+      statement.executeUpdate("INSERT INTO note (customerid, custnote, ownernote) VALUES ('1', 'Customer Note 1', 'Owner Note 1'),"
 		        + "('2', 'Customer Note 2', 'Owner Note 2'),"
 		        + "('3', 'Customer Note 3', 'Owner Note 3'),"
 		        + "('4', 'Customer Note 4', 'Owner Note 4'),"
@@ -360,23 +356,21 @@ public class userDAO
 		        + "('8', 'Customer Note 8', 'Owner Note 8'),"
 		        + "('9', 'Customer Note 9', 'Owner Note 9'),"
 		        + "('10', 'Customer Note 10', 'Owner Note 10');");
+      
+      statement.executeUpdate("INSERT INTO tree (treeid, pics, ft_from_house, size_height) VALUES ('1', 'oak_tree', '10', '15'),"
+      		+ "('2', 'maple_tree', '20', '25'),"
+      		+ "('3', 'pine_tree', '30', '35'),"
+      		+ "('4', 'willow_tree', '40', '45'),"
+      		+ "('5', 'birch_tree', '50', '55'),"
+      		+ "('6', 'cedar_tree', '60', '65'),"
+      		+ "('7', 'redwood_tree', '70', '75'),"
+      		+ "('8', 'elm_tree', '80', '85'),"
+      		+ "('9', 'sequoia_tree', '90', '95'),"
+      		+ "('10', 'fir_tree', '100', '105');");     
+  }} 
         
-        statement.executeUpdate("INSERT INTO tree (treeid, pics, ft_from_house, size_height)" +
-        		"VALUES ('1', 'oak_tree', '10', '15'),"
-        		+ "('2', 'maple_tree', '20', '25'),"
-        		+ "('3', 'pine_tree', '30', '35'),"
-        		+ "('4', 'willow_tree', '40', '45'),"
-        		+ "('5', 'birch_tree', '50', '55'),"
-        		+ "('6', 'cedar_tree', '60', '65'),"
-        		+ "('7', 'redwood_tree', '70', '75'),"
-        		+ "('8', 'elm_tree', '80', '85'),"
-        		+ "('9', 'sequoia_tree', '90', '95'),"
-        		+ "('10', 'fir_tree', '100', '105');");     
-    }}
-    
-   
-    
-    
+        
+      
     
     
     

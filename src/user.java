@@ -1,4 +1,4 @@
- public class user 
+public class user 
 {
 		protected String password;
 	 	protected String email;
@@ -10,7 +10,6 @@
 	    protected String adress_state;
 	    protected String adress_zip_code;
 	    protected String birthday;
-	    protected String cc_num;
 	    protected int cash_bal;
 	    protected int PPS_bal;
 	 
@@ -23,20 +22,19 @@
 	        this.email = email;
 	    }
 	    
-	    public user(String email,String firstName, String lastName, String password,String birthday, String cc_num, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal) 
+	    public user(String email,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal) 
 	    {
-	    	this(firstName,lastName,password,birthday, cc_num, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal);
+	    	this(firstName,lastName,password,birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal);
 	    	this.email = email;
 	    }
 	 
 	
-	    public user(String firstName, String lastName, String password,String birthday, String cc_num, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal) 
+	    public user(String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal) 
 	    {
 	    	this.firstName = firstName;
 	    	this.lastName = lastName;
 	    	this.password = password;
 	        this.birthday = birthday;
-	        this.cc_num = cc_num;
 	        this.adress_street_num = adress_street_num;
 	        this.adress_street = adress_street;
 	        this.adress_city= adress_city;
@@ -80,12 +78,6 @@
 	    }
 	    public void setBirthday(String birthday) {
 	    	this.birthday = birthday;
-	    }
-	    public String getcc_num() {
-	    	return cc_num;
-	    }
-	    public void setcc_num(String cc_num) {
-	    	this.cc_num = cc_num;
 	    }
 	    
 	    public String getAdress_street_num() {
