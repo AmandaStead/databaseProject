@@ -14,8 +14,9 @@
  
 	<body>
 	 <center>
-		 <a href="login.jsp"target ="_self" > logout</a><br><br> 
-		 <p> You can show all the transactions or other attributes here like balance, name of the user and others.</p>
+		 <a href="login.jsp"target ="_self" > Logout</a><br><br> 
+		 <a href="CreateQuote.jsp"target ="_self" > Create Quote</a><br><br> 
+		 <p> Welcome, please select an action! </p>
 		 </center>
 	</body>
 </html>

@@ -23,13 +23,12 @@ import java.sql.PreparedStatement;
 public class ControlServlet extends HttpServlet {
 	    private static final long serialVersionUID = 1L;
 	    private userDAO userDAO = new userDAO();
-	    private String currentUser;
-	    private HttpSession session=null;
-	    
 	    public ControlServlet()
-	    {
-	    	
-	    }
+		{
+			
+		}
+		private String currentUser;
+	    private HttpSession session=null;
 	    
 	    public void init()
 	    {
@@ -68,7 +67,10 @@ public class ControlServlet extends HttpServlet {
                  System.out.println("The action is: list");
                  listUser(request, response);           	
                  break;
+        	
 	    	}
+	    	
+        	
 	    }
 	    catch(Exception ex) {
         	System.out.println(ex.getMessage());

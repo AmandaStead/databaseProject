@@ -31,7 +31,7 @@ public class quoteDAO
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
-
+	
 	public quoteDAO(){}
 	
 	/** 
@@ -78,104 +78,128 @@ public class quoteDAO
             System.out.println(connect);
         }
     }
-    //public List<quote> Allquotes() throws SQLException {
-      //  List<quote> quotes = new ArrayList<>();        
-        //String sql = "SELECT * FROM quote";      
-        //connect_func();      
-        //statement = (Statement) connect.createStatement();
-        //ResultSet resultSet = statement.executeQuery(sql);
+    
+    public List<quote> listAllquotes() throws SQLException {
+        List<quote> listquote = new ArrayList<quote>();        
+        String sql = "SELECT * FROM quote";      
+        connect_func();      
+        statement = (Statement) connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
          
-        //while (resultSet.next()) {
-        	//int quoteid = resultSet.getInt("quoteid");
-            //int serviceid = resultSet.getInt("serviceid");
-            //int customerid = resultSet.getInt("customerid");
-            //String quotedate  = resultSet.getString("quotedate");
-            //int totalcost = resultSet.getInt("totalcost");
+        while (resultSet.next()) {
+            int serviceid = resultSet.getInt("serviceid");
+            int customerid = resultSet.getInt("customerid");
+            String date = resultSet.getString("date");
+            double totalcost = resultSet.getDouble("totalcost");
+            String custnote = resultSet.getString("custnote");
+            int heightft = resultSet.getInt("heightft"); 
             
-            
-            //quote quotelist = new quote(quoteid, serviceid, customerid, quotedate, totalcost);
-            //quotes.add(quotelist);
-        
-        //}  
- 
-           
-        //resultSet.close();
-        //disconnect();        
-        //return quotes;
-        //}
 
-protected void disconnect() throws SQLException {
-    if (connect != null && !connect.isClosed()) {
-    	connect.close();
+             
+            quote quotes = new quote(serviceid, customerid, date, totalcost, custnote,  heightft);
+            listquote.add(quotes);
+        }        
+        resultSet.close();
+        disconnect();        
+        return listquote;
     }
-}
-public void createQuote(quote quote) {
-    String sql = "INSERT INTO quote (ServiceID, CustomerID, QuoteDate, TotalCost) VALUES (?, ?, ?, ?)";
-    try (PreparedStatement statement = connect.prepareStatement(sql)) {
-        statement.setInt(1, quote.getServiceID());
-        statement.setInt(2, quote.getCustomerID());
-        statement.setString(3, quote.getQuoteDate());
-        statement.setDouble(4, quote.getTotalCost());
-        statement.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();}
-    }
-public quote getQuoteById(int quoteID) {
-    String sql = "SELECT * FROM Quote WHERE QuoteID = ?";
-    try (PreparedStatement statement = connect.prepareStatement(sql)) {
-        statement.setInt(1, quoteID);
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-            return returnData(resultSet);
+    
+    protected void disconnect() throws SQLException {
+        if (connect != null && !connect.isClosed()) {
+        	connect.close();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
     }
-    return null;
-}
-private quote returnData(ResultSet resultSet) throws SQLException {
-    quote quote = new quote();
-    quote.setQuoteID(resultSet.getInt("QuoteID"));
-    quote.setServiceID(resultSet.getInt("ServiceID"));
-    quote.setCustomerID(resultSet.getInt("CustomerID"));
-    quote.setQuoteDate(resultSet.getString("QuoteDate"));
-    quote.setTotalCost(resultSet.getDouble("TotalCost"));
-    return quote;
-}
+    
+    public void insert(quote quotes) throws SQLException {
+    	connect_func("root","pass1234");         
+		String sql = "insert into quote(quoteid, serviceid, customerid, date, totalcost,custnote, heightft) values (?, ?, ?, ?, ?, ?, ?)";
+		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+			preparedStatement.setInt(1, quotes.getQuoteID());
+			preparedStatement.setInt(2, quotes.getServiceID());
+			preparedStatement.setInt(3, quotes.getCustomerID());
+			preparedStatement.setString(4, quotes.getDate());
+			preparedStatement.setDouble(5, quotes.getTotalCost());
+			preparedStatement.setString(6, quotes.getCustnote());		
+			preparedStatement.setInt(7, quotes.getHeightFT());		
+			
+		preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+    
+    public boolean delete(int quoteid) throws SQLException {
+        String sql = "DELETE FROM quote WHERE quoteid = ?";        
+        connect_func();
+         
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setInt(1, quoteid);
+         
+        boolean rowDeleted = preparedStatement.executeUpdate() > 0;
+        preparedStatement.close();
+        return rowDeleted;     
+    }
+     
+    public boolean update(quote quotes) throws SQLException {
+        String sql = "update quote set quoteid=?, serviceid=?,customerid = ?,date=?,totalcost =?, custnote=?,heightft=? where quoteid = ?";
+        connect_func();
+        
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setInt(1, quotes.getQuoteID());
+		preparedStatement.setInt(2, quotes.getServiceID());
+		preparedStatement.setInt(3, quotes.getCustomerID());
+		preparedStatement.setString(4, quotes.getDate());
+		preparedStatement.setDouble(5, quotes.getTotalCost());
+		preparedStatement.setInt(6, quotes.getHeightFT());		
+		
+         
+        boolean rowUpdated = preparedStatement.executeUpdate() > 0;
+        preparedStatement.close();
+        return rowUpdated;     
+    }
+    
+    public quote getQuote(int quoteID) throws SQLException {
+    	quote quote = null;
+        String sql = "SELECT * FROM quote WHERE quoteid = ?";
+         
+        connect_func();
+         
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setInt(1, quoteID);
+         
+        ResultSet resultSet = preparedStatement.executeQuery();
+         
+        if (resultSet.next()) {
+            int serviceID = resultSet.getInt("serviceID");
+            int customerID = resultSet.getInt("customerID");
+            String date = resultSet.getString("date");
+            double totalCost = resultSet.getDouble("totalCost"); 
+            String custnote = resultSet.getString("custnote"); 
+            int heightFT = resultSet.getInt("heightFT"); 
+          
+            quote = new quote(serviceID, customerID, date, totalCost, custnote,  heightFT);
+        }
+        resultSet.close();
+        statement.close();
+         
+        return quote;
+         
+      
+    }
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+    
 
     
     
+    
 
-
-
-
-
+   } 
+        
+        
+      
+    
+    
+    
+	
+	
 
 
