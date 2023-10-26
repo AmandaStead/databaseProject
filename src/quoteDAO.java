@@ -27,6 +27,7 @@ import java.util.List;
 public class quoteDAO 
 {
 	private static final long serialVersionUID = 1L;
+	public static Object insertquote;
 	private Connection connect = null;
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
@@ -79,6 +80,7 @@ public class quoteDAO
         }
     }
     
+    
     public List<quote> listAllquotes() throws SQLException {
         List<quote> listquote = new ArrayList<quote>();        
         String sql = "SELECT * FROM quote";      
@@ -110,8 +112,8 @@ public class quoteDAO
         }
     }
     
-    public void insert(quote quotes) throws SQLException {
-    	connect_func("root","pass1234");         
+    public void insertquote(quote quotes) throws SQLException {
+    	connect_func();         
 		String sql = "insert into quote(quoteid, serviceid, customerid, date, totalcost,custnote, heightft) values (?, ?, ?, ?, ?, ?, ?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setInt(1, quotes.getQuoteID());
@@ -126,7 +128,7 @@ public class quoteDAO
         preparedStatement.close();
     }
     
-    public boolean delete(int quoteid) throws SQLException {
+    public boolean deletequote(int quoteid) throws SQLException {
         String sql = "DELETE FROM quote WHERE quoteid = ?";        
         connect_func();
          
@@ -138,7 +140,7 @@ public class quoteDAO
         return rowDeleted;     
     }
      
-    public boolean update(quote quotes) throws SQLException {
+    public boolean updatequote(quote quotes) throws SQLException {
         String sql = "update quote set quoteid=?, serviceid=?,customerid = ?,date=?,totalcost =?, custnote=?,heightft=? where quoteid = ?";
         connect_func();
         
