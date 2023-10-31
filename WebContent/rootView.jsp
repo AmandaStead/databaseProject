@@ -15,6 +15,11 @@
 	<form action = "initialize">
 		<input type = "submit" value = "Initialize the Database"/>
 	</form>
+	
+	
+	<form action = "listquote">
+		<input type = "submit" value = "listquote"/>
+	</form>
 	<a href="login.jsp"target ="_self" > logout</a><br><br> 
 
 <h1>List all users</h1>
@@ -42,7 +47,10 @@
                     <td><c:out value="${users.cash_bal}"/></td>
                     <td><c:out value="${users.PPS_bal}" /></td>
             </c:forEach>
-        </table>
+            
+
+            
+   
 	</div>
 	</div>
 

@@ -33,6 +33,7 @@ public class quoteDAO
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 	
+	
 	public quoteDAO(){}
 	
 	/** 
@@ -89,16 +90,21 @@ public class quoteDAO
         ResultSet resultSet = statement.executeQuery(sql);
          
         while (resultSet.next()) {
+        	int quoteid = resultSet.getInt("quoteid");
             int serviceid = resultSet.getInt("serviceid");
             int customerid = resultSet.getInt("customerid");
+            int offer_id = resultSet.getInt("offer_id");
             String date = resultSet.getString("date");
             double totalcost = resultSet.getDouble("totalcost");
             String custnote = resultSet.getString("custnote");
-            int heightft = resultSet.getInt("heightft"); 
+            String heightft = resultSet.getString("heightft"); 
+            String diameter_width = resultSet.getString("diameter_width"); 
+            String ft_from_house = resultSet.getString("ft_from_house"); 
+            String location = resultSet.getString("location"); 
             
 
              
-            quote quotes = new quote(serviceid, customerid, date, totalcost, custnote,  heightft);
+            quote quotes = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location);
             listquote.add(quotes);
         }        
         resultSet.close();
@@ -114,15 +120,19 @@ public class quoteDAO
     
     public void insertquote(quote quotes) throws SQLException {
     	connect_func();         
-		String sql = "insert into quote(quoteid, serviceid, customerid, date, totalcost,custnote, heightft) values (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into quote(quoteid, serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location) values (?, ?, ?, ?,?, ?, ?, ?, ?, ?,?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setInt(1, quotes.getQuoteID());
 			preparedStatement.setInt(2, quotes.getServiceID());
 			preparedStatement.setInt(3, quotes.getCustomerID());
-			preparedStatement.setString(4, quotes.getDate());
-			preparedStatement.setDouble(5, quotes.getTotalCost());
-			preparedStatement.setString(6, quotes.getCustnote());		
-			preparedStatement.setInt(7, quotes.getHeightFT());		
+			preparedStatement.setInt(4, quotes.getoffer_id());
+			preparedStatement.setString(5, quotes.getDate());
+			preparedStatement.setDouble(6, quotes.getTotalCost());
+			preparedStatement.setString(7, quotes.getCustnote());		
+			preparedStatement.setString(8, quotes.getHeightFT());		
+			preparedStatement.setString(9, quotes.getdiameter_width());
+			preparedStatement.setString(10, quotes.getft_from_house());
+			preparedStatement.setString(11, quotes.getlocation());
 			
 		preparedStatement.executeUpdate();
         preparedStatement.close();
@@ -140,23 +150,22 @@ public class quoteDAO
         return rowDeleted;     
     }
      
-    public boolean updatequote(quote quotes) throws SQLException {
-        String sql = "update quote set quoteid=?, serviceid=?,customerid = ?,date=?,totalcost =?, custnote=?,heightft=? where quoteid = ?";
+    public boolean update(quote quotes) throws SQLException {
+        String sql = "update quote set custnote = ?, totalcost=? where quoteid=?";
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setInt(1, quotes.getQuoteID());
-		preparedStatement.setInt(2, quotes.getServiceID());
-		preparedStatement.setInt(3, quotes.getCustomerID());
-		preparedStatement.setString(4, quotes.getDate());
-		preparedStatement.setDouble(5, quotes.getTotalCost());
-		preparedStatement.setInt(6, quotes.getHeightFT());		
-		
-         
+        
+        preparedStatement.setString(1, quotes.getCustnote());
+        preparedStatement.setDouble(2, quotes.getTotalCost());
+        preparedStatement.setInt(3, quotes.getQuoteID());
+        
+	
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
         return rowUpdated;     
     }
+
     
     public quote getQuote(int quoteID) throws SQLException {
     	quote quote = null;
@@ -170,14 +179,19 @@ public class quoteDAO
         ResultSet resultSet = preparedStatement.executeQuery();
          
         if (resultSet.next()) {
+        	
             int serviceID = resultSet.getInt("serviceID");
             int customerID = resultSet.getInt("customerID");
+            int offerID = resultSet.getInt("offerID");
             String date = resultSet.getString("date");
             double totalCost = resultSet.getDouble("totalCost"); 
             String custnote = resultSet.getString("custnote"); 
-            int heightFT = resultSet.getInt("heightFT"); 
+            String heightFT = resultSet.getString("heightFT"); 
+            String diameter_width = resultSet.getString("diameter_width"); 
+            String ft_from_house = resultSet.getString("ft_from_house"); 
+            String location = resultSet.getString("location"); 
           
-            quote = new quote(serviceID, customerID, date, totalCost, custnote,  heightFT);
+            quote = new quote(quoteID, serviceID, customerID, offerID, date, totalCost, custnote,  heightFT, diameter_width,ft_from_house, location);
         }
         resultSet.close();
         statement.close();
@@ -186,7 +200,8 @@ public class quoteDAO
          
       
     }
-    
+
+
 
     
 

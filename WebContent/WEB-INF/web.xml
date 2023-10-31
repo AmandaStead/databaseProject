@@ -42,6 +42,10 @@
 		<servlet-name>ControlServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>ControlServlet</servlet-name>
+        <url-pattern>/listquote</url-pattern>
+    </servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>login.jsp</welcome-file>

@@ -23,12 +23,14 @@ import java.sql.PreparedStatement;
 public class ControlServlet extends HttpServlet {
 	    private static final long serialVersionUID = 1L;
 	    private userDAO userDAO = new userDAO();
+	    private quoteDAO quoteDAO = new quoteDAO();
 	    public ControlServlet()
 		{
 			
 		}
 		private String currentUser;
 	    private HttpSession session=null;
+	
 	    
 	    public void init()
 	    {
@@ -57,9 +59,11 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("Database successfully initialized!");
         		rootPage(request,response,"");
         		break;
+        
         	case "/root":
         		rootPage(request,response, "");
         		break;
+        	
         	case "/logout":
         		logout(request,response);
         		break;
@@ -67,6 +71,18 @@ public class ControlServlet extends HttpServlet {
                  System.out.println("The action is: list");
                  listUser(request, response);           	
                  break;
+        	case "/listquote": 
+                System.out.println("The action is: list quote");
+                rootPagequote(request, response);           	
+                break;
+        	case "/createquote": 
+                System.out.println("The action is: createquote");
+                createquote(request, response);           	
+                break;
+        	case "/editquote": 
+                System.out.println("The action is: editquote");
+                editquote(request, response);           	
+                break;
         	
         	
 	    	}
@@ -78,6 +94,47 @@ public class ControlServlet extends HttpServlet {
 	    	}
 	    }
         	
+	    private void listquote(HttpServletRequest request, HttpServletResponse response)
+	            throws SQLException, IOException, ServletException {
+	        System.out.println("listQuote started: 00000000000000000000000000000000000");
+
+	     
+	        List<quote> listquote = quoteDAO.listAllquotes();
+	        request.setAttribute("listquote", listquote);       
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("QuoteList.jsp");       
+	        dispatcher.forward(request, response);
+	     
+	        System.out.println("listQuote finished: 111111111111111111111111111111111111");}
+	    
+	    private void createquote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	    	
+	        String date = request.getParameter("date");
+	        String custnote = request.getParameter("custnote");
+	        String heightFTParam = request.getParameter("heightFT");
+	        String diameter_width = request.getParameter("diameter_width");
+	        String ft_from_house = request.getParameter("ft_from_house");
+	        String location = request.getParameter("location");
+	   	 	
+	    	quote quotes = new quote(date,custnote, heightFTParam, diameter_width, ft_from_house, location);
+   	 		quoteDAO.insertquote(quotes);
+   	 		response.sendRedirect("login.jsp");	}
+	    
+private void editquote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	    	
+	        
+	        int quoteid = Integer.parseInt(request.getParameter("quoteid"));
+			String custnote = request.getParameter("custnote");
+	        double totalcost = Double.parseDouble(request.getParameter("totalcost"));
+	        
+	       
+	   	 	
+	    	quote quotes = new quote(quoteid,custnote,totalcost);
+   	 		quoteDAO.update(quotes);
+   	 		response.sendRedirect("login.jsp");	}
+	    
+	
+	    
+	   	 	
 	    private void listUser(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
 	        System.out.println("listUser started: 00000000000000000000000000000000000");
@@ -95,6 +152,11 @@ public class ControlServlet extends HttpServlet {
 	    	System.out.println("root view");
 			request.setAttribute("listUser", userDAO.listAllUsers());
 	    	request.getRequestDispatcher("rootView.jsp").forward(request, response);
+	    }
+	    private void rootPagequote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("root view quote");
+	    	request.setAttribute("listquote", quoteDAO.listAllquotes());
+	    	request.getRequestDispatcher("QuoteList.jsp").forward(request, response);
 	    }
 	    
 	    
