@@ -95,16 +95,18 @@ public class quoteDAO
             int customerid = resultSet.getInt("customerid");
             int offer_id = resultSet.getInt("offer_id");
             String date = resultSet.getString("date");
-            double totalcost = resultSet.getDouble("totalcost");
+            int totalcost = resultSet.getInt("totalcost");
             String custnote = resultSet.getString("custnote");
             String heightft = resultSet.getString("heightft"); 
             String diameter_width = resultSet.getString("diameter_width"); 
             String ft_from_house = resultSet.getString("ft_from_house"); 
             String location = resultSet.getString("location"); 
+            String clientDecision = resultSet.getString("clientDecision");
+            String supplierDecision = resultSet.getString("supplierDecision");
             
 
              
-            quote quotes = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location);
+            quote quotes = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,clientDecision, supplierDecision);
             listquote.add(quotes);
         }        
         resultSet.close();
@@ -127,12 +129,13 @@ public class quoteDAO
 			preparedStatement.setInt(3, quotes.getCustomerID());
 			preparedStatement.setInt(4, quotes.getoffer_id());
 			preparedStatement.setString(5, quotes.getDate());
-			preparedStatement.setDouble(6, quotes.getTotalCost());
+			preparedStatement.setInt(6, quotes.gettotalcost());
 			preparedStatement.setString(7, quotes.getCustnote());		
 			preparedStatement.setString(8, quotes.getHeightFT());		
 			preparedStatement.setString(9, quotes.getdiameter_width());
 			preparedStatement.setString(10, quotes.getft_from_house());
 			preparedStatement.setString(11, quotes.getlocation());
+			
 			
 		preparedStatement.executeUpdate();
         preparedStatement.close();
@@ -151,21 +154,23 @@ public class quoteDAO
     }
      
     public boolean update(quote quotes) throws SQLException {
-        String sql = "update quote set custnote = ?, totalcost=? where quoteid=?";
+        String sql = "update quote set supplierDecision=?,custnote = ?, totalcost=? where quoteid=?";
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
         
-        preparedStatement.setString(1, quotes.getCustnote());
-        preparedStatement.setDouble(2, quotes.getTotalCost());
-        preparedStatement.setInt(3, quotes.getQuoteID());
+        
+        preparedStatement.setString(1, quotes.getsupplierDecision());
+        preparedStatement.setString(2, quotes.getCustnote());
+        preparedStatement.setInt(3, quotes.gettotalcost());
+        preparedStatement.setInt(4, quotes.getQuoteID());
         
 	
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;
         preparedStatement.close();
         return rowUpdated;     
     }
-
+   
     
     public quote getQuote(int quoteID) throws SQLException {
     	quote quote = null;
@@ -184,14 +189,16 @@ public class quoteDAO
             int customerID = resultSet.getInt("customerID");
             int offerID = resultSet.getInt("offerID");
             String date = resultSet.getString("date");
-            double totalCost = resultSet.getDouble("totalCost"); 
+            int totalcost = resultSet.getInt("totalcost"); 
             String custnote = resultSet.getString("custnote"); 
             String heightFT = resultSet.getString("heightFT"); 
             String diameter_width = resultSet.getString("diameter_width"); 
             String ft_from_house = resultSet.getString("ft_from_house"); 
             String location = resultSet.getString("location"); 
+            String clientDecision = resultSet.getString("clientDecision"); 
+            String supplierDecision = resultSet.getString("supplierDecision");
           
-            quote = new quote(quoteID, serviceID, customerID, offerID, date, totalCost, custnote,  heightFT, diameter_width,ft_from_house, location);
+            quote = new quote(quoteID, serviceID, customerID, offerID, date, totalcost, custnote,  heightFT, diameter_width,ft_from_house, location,clientDecision, supplierDecision);
         }
         resultSet.close();
         statement.close();

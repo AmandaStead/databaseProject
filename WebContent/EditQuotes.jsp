@@ -22,6 +22,10 @@
         
         <label for="custnote">Customer Note:</label>
         <textarea name="custnote" id="custnote" rows="4" required></textarea><br>
+        
+         <label for="Decision">'Agree', 'Disagree', or 'Quit':</label>
+        <input type='text' name="supplierDecision" id="supplierDecision" required><br>
+        
 
  
         

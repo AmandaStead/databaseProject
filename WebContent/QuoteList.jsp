@@ -23,6 +23,8 @@
                 <th>diameter_width</th>
                 <th>ft_from_house</th>
                 <th>location</th>
+                <th>clientDecision</th>
+                <th>supplierDecision</th>
                 
 
             </tr>
@@ -30,17 +32,19 @@
               <a href="EditQuotes.jsp" target="_self">Edit Quotes</a>
         <c:forEach var="quote" items="${listquote}">
             <tr style="text-align:center">
-            <td><c:out value="${quote.serviceID}" /></td>
+            <td><c:out value="${quote.quoteID}" /></td>
                 <td><c:out value="${quote.serviceID}" /></td>
                 <td><c:out value="${quote.customerID}" /></td>
                 <td><c:out value="${quote.offer_id}" /></td>
                 <td><c:out value="${quote.date}" /></td>
-                <td><c:out value="${quote.totalCost}" /></td>
+                <td><c:out value="${quote.totalcost}" /></td>
                 <td><c:out value="${quote.custnote}" /></td>
                 <td><c:out value="${quote.heightFT}" /></td>
                 <td><c:out value="${quote.diameter_width}" /></td>
                 <td><c:out value="${quote.ft_from_house}" /></td>
                 <td><c:out value="${quote.location}" /></td>
+                <td><c:out value="${quote.clientDecision}" /></td>
+                <td><c:out value="${quote.supplierDecision}" /></td>
             </tr>
             </c:forEach>
         </table>

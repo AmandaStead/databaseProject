@@ -85,6 +85,10 @@ public class ControlServlet extends HttpServlet {
                 break;
         	
         	
+              
+        		
+        	
+        	
 	    	}
 	    	
         	
@@ -108,33 +112,36 @@ public class ControlServlet extends HttpServlet {
 	    
 	    private void createquote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	
-	        String date = request.getParameter("date");
+	    	
+	    	String date = request.getParameter("date");
 	        String custnote = request.getParameter("custnote");
 	        String heightFTParam = request.getParameter("heightFT");
 	        String diameter_width = request.getParameter("diameter_width");
 	        String ft_from_house = request.getParameter("ft_from_house");
 	        String location = request.getParameter("location");
+	        
 	   	 	
 	    	quote quotes = new quote(date,custnote, heightFTParam, diameter_width, ft_from_house, location);
    	 		quoteDAO.insertquote(quotes);
    	 		response.sendRedirect("login.jsp");	}
 	    
-private void editquote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	    private void editquote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	
 	        
 	        int quoteid = Integer.parseInt(request.getParameter("quoteid"));
 			String custnote = request.getParameter("custnote");
-	        double totalcost = Double.parseDouble(request.getParameter("totalcost"));
+	        int totalcost = Integer.parseInt(request.getParameter("totalcost"));
+	        String clientDecision = request.getParameter("clientDecision");
+	        String supplierDecision = request.getParameter("supplierDecision");
 	        
-	       
-	   	 	
-	    	quote quotes = new quote(quoteid,custnote,totalcost);
-   	 		quoteDAO.update(quotes);
-   	 		response.sendRedirect("login.jsp");	}
-	    
-	
-	    
-	   	 	
+     
+	        quote quotes = new quote(quoteid,custnote,totalcost,clientDecision,supplierDecision);
+	        quoteDAO.update(quotes);
+	        response.sendRedirect("login.jsp");
+	    }
+	        
+	        
+	        
 	    private void listUser(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
 	        System.out.println("listUser started: 00000000000000000000000000000000000");
@@ -176,6 +183,7 @@ private void editquote(HttpServletRequest request, HttpServletResponse response)
 			 	 currentUser = email;
 				 System.out.println("Login Successful! Redirecting");
 				 request.getRequestDispatcher("activitypage.jsp").forward(request, response);
+				 
 			 			 			 			 
 	    	 }
 	    	 else {
@@ -185,6 +193,7 @@ private void editquote(HttpServletRequest request, HttpServletResponse response)
 	    }
 	           
 	    private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	    	int customerid = Integer.parseInt(request.getParameter("customerid"));
 	    	String email = request.getParameter("email");
 	   	 	String firstName = request.getParameter("firstName");
 	   	 	String lastName = request.getParameter("lastName");
@@ -200,7 +209,7 @@ private void editquote(HttpServletRequest request, HttpServletResponse response)
 	   	 	if (password.equals(confirm)) {
 	   	 		if (!userDAO.checkEmail(email)) {
 		   	 		System.out.println("Registration Successful! Added to database");
-		            user users = new user(email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, 1000,0);
+		            user users = new user(customerid,email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, 1000,0);
 		   	 		userDAO.insert(users);
 		   	 		response.sendRedirect("login.jsp");
 	   	 		}

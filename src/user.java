@@ -1,5 +1,6 @@
 public class user 
 {
+		protected int customerid;
 		protected String password;
 	 	protected String email;
 	    protected String firstName;
@@ -22,15 +23,16 @@ public class user
 	        this.email = email;
 	    }
 	    
-	    public user(String email,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal) 
+	    public user(int customerid,String email,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal) 
 	    {
-	    	this(firstName,lastName,password,birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal);
+	    	this(customerid,firstName,lastName,password,birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal);
 	    	this.email = email;
 	    }
 	 
 	
-	    public user(String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal) 
+	    public user(int customerid,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal) 
 	    {
+	    	this.customerid = customerid;
 	    	this.firstName = firstName;
 	    	this.lastName = lastName;
 	    	this.password = password;
@@ -45,6 +47,12 @@ public class user
 	    }
 	    
 	   //getter and setter methods
+	    public int getcustomerid() {
+	        return customerid;
+	    }
+	    public void setcustomerid(int customerid) {
+	        this.customerid = customerid;
+	    }
 	    public String getEmail() {
 	        return email;
 	    }
