@@ -46,7 +46,25 @@ public class user
 	        this.PPS_bal = PPS_bal;
 	    }
 	    
-	   //getter and setter methods
+	   public user(String email, String firstName, String lastName, String password, String birthday,
+				String adress_street_num, String adress_street, String adress_city, String adress_state,
+				String adress_zip_code, int cash_bal, int PPS_bal) {
+		   	
+		   	this.email = email;
+		   	this.firstName = firstName;
+	    	this.lastName = lastName;
+	    	this.password = password;
+	        this.birthday = birthday;
+	        this.adress_street_num = adress_street_num;
+	        this.adress_street = adress_street;
+	        this.adress_city= adress_city;
+	        this.adress_state = adress_state;
+	        this.adress_zip_code = adress_zip_code;
+	        this.cash_bal = cash_bal;
+	        this.PPS_bal = PPS_bal;
+		}
+
+		//getter and setter methods
 	    public int getcustomerid() {
 	        return customerid;
 	    }
