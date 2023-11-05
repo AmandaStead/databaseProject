@@ -32,6 +32,9 @@
         
          <label for="location">location:</label>
         <input type="text" name="location" id="location" required><br>
+        
+        <label for="tree_count">Tree Count:</label>
+        <input type="text" name="tree_count" id="tree_count" required><br>
 
         <input type="submit" value="Submit Quote">
     </form>

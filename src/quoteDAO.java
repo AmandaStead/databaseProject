@@ -101,12 +101,13 @@ public class quoteDAO
             String diameter_width = resultSet.getString("diameter_width"); 
             String ft_from_house = resultSet.getString("ft_from_house"); 
             String location = resultSet.getString("location"); 
+            String tree_count = resultSet.getString("tree_count");
             String clientDecision = resultSet.getString("clientDecision");
             String supplierDecision = resultSet.getString("supplierDecision");
             
 
              
-            quote quotes = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,clientDecision, supplierDecision);
+            quote quotes = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
             listquote.add(quotes);
         }        
         resultSet.close();
@@ -122,7 +123,7 @@ public class quoteDAO
     
     public void insertquote(quote quotes) throws SQLException {
     	connect_func();         
-		String sql = "insert into quote(quoteid, serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location) values (?, ?, ?, ?,?, ?, ?, ?, ?, ?,?)";
+		String sql = "insert into quote(quoteid, serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location, tree_count) values (?, ?, ?, ?,?, ?, ?, ?, ?, ?,?, ?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setInt(1, quotes.getQuoteID());
 			preparedStatement.setInt(2, quotes.getServiceID());
@@ -135,11 +136,56 @@ public class quoteDAO
 			preparedStatement.setString(9, quotes.getdiameter_width());
 			preparedStatement.setString(10, quotes.getft_from_house());
 			preparedStatement.setString(11, quotes.getlocation());
+			preparedStatement.setString(12, quotes.gettree_count());
 			
 			
 		preparedStatement.executeUpdate();
         preparedStatement.close();
     }
+    public quote getQuoteByQuoteID(int quoteID) throws SQLException {
+        quote quote = null;
+        String sql = "SELECT * FROM quote WHERE quoteid = ?";
+        
+        connect_func(); // Ensure that the database connection is established
+        
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setInt(1, quoteID);
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+        
+            
+        	
+        	while (resultSet.next()) {
+            	int quoteid = resultSet.getInt("quoteid");
+                int serviceid = resultSet.getInt("serviceid");
+                int customerid = resultSet.getInt("customerid");
+                int offer_id = resultSet.getInt("offer_id");
+                String date = resultSet.getString("date");
+                int totalcost = resultSet.getInt("totalcost");
+                String custnote = resultSet.getString("custnote");
+                String heightft = resultSet.getString("heightft"); 
+                String diameter_width = resultSet.getString("diameter_width"); 
+                String ft_from_house = resultSet.getString("ft_from_house"); 
+                String location = resultSet.getString("location"); 
+                String tree_count = resultSet.getString("tree_count");
+                String clientDecision = resultSet.getString("clientDecision");
+                String supplierDecision = resultSet.getString("supplierDecision");
+                
+
+                 
+                quote = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
+        }
+        
+        resultSet.close();
+        preparedStatement.close();
+        disconnect();
+        
+        return quote;
+		
+    }
+		
+
     
     public boolean deletequote(int quoteid) throws SQLException {
         String sql = "DELETE FROM quote WHERE quoteid = ?";        
@@ -172,42 +218,7 @@ public class quoteDAO
     }
    
     
-    public quote getQuote(int quoteID) throws SQLException {
-    	quote quote = null;
-        String sql = "SELECT * FROM quote WHERE quoteid = ?";
-         
-        connect_func();
-         
-        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-        preparedStatement.setInt(1, quoteID);
-         
-        ResultSet resultSet = preparedStatement.executeQuery();
-         
-        if (resultSet.next()) {
-        	
-            int serviceID = resultSet.getInt("serviceID");
-            int customerID = resultSet.getInt("customerID");
-            int offerID = resultSet.getInt("offerID");
-            String date = resultSet.getString("date");
-            int totalcost = resultSet.getInt("totalcost"); 
-            String custnote = resultSet.getString("custnote"); 
-            String heightFT = resultSet.getString("heightFT"); 
-            String diameter_width = resultSet.getString("diameter_width"); 
-            String ft_from_house = resultSet.getString("ft_from_house"); 
-            String location = resultSet.getString("location"); 
-            String clientDecision = resultSet.getString("clientDecision"); 
-            String supplierDecision = resultSet.getString("supplierDecision");
-          
-            quote = new quote(quoteID, serviceID, customerID, offerID, date, totalcost, custnote,  heightFT, diameter_width,ft_from_house, location,clientDecision, supplierDecision);
-        }
-        resultSet.close();
-        statement.close();
-         
-        return quote;
-         
-      
-    }
-
+    
 
 
     

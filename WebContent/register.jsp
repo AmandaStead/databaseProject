@@ -35,6 +35,36 @@
 	
 				</tr>
 				<tr>
+					<th>Address Street Number: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="adress_street_num" size="45" value="#####" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<th>Address Street Name: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="adress_street" size="45" value="Address Street Name:" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<th>Address City: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="adress_city" size="45" value="Address City" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
+					<th>Address State: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="adress_state" size="45" value="Address State" onfocus="this.value=''">
+					</td>
+				</tr>
+					<tr>
+					<th>Address ZipCode: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="adress_zip_code" size="45" value="Address ZipCode:" onfocus="this.value=''">
+					</td>
+				</tr>
+				<tr>
 					<th>Password: </th>
 					<td align="center" colspan="3"> 
 						<input type="password" name="password" size="45" value="password" onfocus="this.value=''">
@@ -45,7 +75,7 @@
 					<td align="center" colspan="3">
 						<input type="password" name="confirmation" size="45" value="password" onfocus="this.value=''">
 					</td>
-				
+			
 				</tr>
 				<tr>
 					<td align="center" colspan="5">

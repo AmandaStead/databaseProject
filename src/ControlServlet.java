@@ -59,11 +59,9 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("Database successfully initialized!");
         		rootPage(request,response,"");
         		break;
-        
-        	case "/root":
+         	case "/root":
         		rootPage(request,response, "");
         		break;
-        	
         	case "/logout":
         		logout(request,response);
         		break;
@@ -82,6 +80,10 @@ public class ControlServlet extends HttpServlet {
         	case "/editquote": 
                 System.out.println("The action is: editquote");
                 editquote(request, response);           	
+                break;
+        	case "/getQuote": 
+                System.out.println("The action is: getQuote");
+                getQuote(request, response);           	
                 break;
         	
         	
@@ -119,9 +121,10 @@ public class ControlServlet extends HttpServlet {
 	        String diameter_width = request.getParameter("diameter_width");
 	        String ft_from_house = request.getParameter("ft_from_house");
 	        String location = request.getParameter("location");
+	        String tree_count = request.getParameter("tree_count");
 	        
 	   	 	
-	    	quote quotes = new quote(date,custnote, heightFTParam, diameter_width, ft_from_house, location);
+	    	quote quotes = new quote(date,custnote, heightFTParam, diameter_width, ft_from_house, location,tree_count);
    	 		quoteDAO.insertquote(quotes);
    	 		response.sendRedirect("login.jsp");	}
 	    
@@ -139,9 +142,9 @@ public class ControlServlet extends HttpServlet {
 	        quoteDAO.update(quotes);
 	        response.sendRedirect("login.jsp");
 	    }
+	
 	        
-	        
-	        
+	       
 	    private void listUser(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
 	        System.out.println("listUser started: 00000000000000000000000000000000000");
