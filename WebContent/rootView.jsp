@@ -21,6 +21,8 @@
 		<input type = "submit" value = "listquote"/>
 	</form>
 	<a href="login.jsp"target ="_self" > logout</a><br><br> 
+	
+	
 
 <h1>List all users</h1>
     <div align="center">
@@ -53,7 +55,7 @@
 
             
    
-	</div> 
+	</div>
 	</div>
 
 </body>

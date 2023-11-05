@@ -16,6 +16,7 @@
 	 <center>
 		 <a href="login.jsp"target ="_self" > Logout</a><br><br> 
 		 <a href="CreateQuote.jsp"target ="_self" > Create Quote</a><br><br> 
+		 <a href="QuoteList.jsp"target ="_self" > List Quote</a><br><br> 
 		 <p> Welcome, please select an action! </p>
 		 </center>
 	</body>

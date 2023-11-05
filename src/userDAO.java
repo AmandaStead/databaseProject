@@ -45,15 +45,15 @@ public class userDAO
             } catch (ClassNotFoundException e) {
                 throw new SQLException(e);
             }
-            connect = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/trees?allowPublicKeyRetrieval=true&useSSL=false&user=John&password=pass1234");
+            connect = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/trees?allowPublicKeyRetrieval=true&useSSL=false&user=root&password=Karimax@2023");
             System.out.println(connect);
         }
     }
     
     public boolean database_login(String email, String password) throws SQLException{
     	try {
-    		connect_func("root","pass1234");
-    		String sql = "select * from user where email = ?";
+    		connect_func("root","test");
+    		String sql = "select * from User where email = ?";
     		preparedStatement = connect.prepareStatement(sql);
     		preparedStatement.setString(1, email);
     		ResultSet rs = preparedStatement.executeQuery();
@@ -108,7 +108,7 @@ public class userDAO
         resultSet.close();
         disconnect();        
         return listUser;
-    }
+    }  	 
     
     protected void disconnect() throws SQLException {
         if (connect != null && !connect.isClosed()) {
@@ -117,7 +117,7 @@ public class userDAO
     }
     
     public void insert(user users) throws SQLException {
-    	connect_func("root","pass1234");         
+    	connect_func("root","test");         
 		String sql = "insert into User(email, firstName, lastName, password, birthday,adress_street_num, adress_street,adress_city,adress_state,adress_zip_code,cash_bal,PPS_bal) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setString(1, users.getEmail());
@@ -279,9 +279,9 @@ public class userDAO
 
         // Create new tables
         
-        statement.executeUpdate("CREATE TABLE if not EXISTS user (customerid INT PRIMARY KEY AUTO_INCREMENT, email VARCHAR(50) NOT NULL, firstname VARCHAR(10), lastName VARCHAR(10) NOT NULL, phonenumber VARCHAR(10), password VARCHAR(20) NOT NULL, birthday DATE NOT NULL, adress_street_num VARCHAR(4), adress_street VARCHAR(30), adress_city VARCHAR(20), adress_state VARCHAR(2), adress_zip_code VARCHAR(5), cash_bal DECIMAL(13,2) DEFAULT 1000, pps_bal DECIMAL(13,2) DEFAULT 0, cc_num VARCHAR(16) DEFAULT 0000, cc_exp DATE, cc_cvv VARCHAR(3));");
+        statement.executeUpdate("CREATE TABLE if not EXISTS User (customerid INT PRIMARY KEY AUTO_INCREMENT, email VARCHAR(50) NOT NULL, firstname VARCHAR(10), lastName VARCHAR(10) NOT NULL, phonenumber VARCHAR(10), password VARCHAR(20) NOT NULL, birthday DATE NOT NULL, adress_street_num VARCHAR(4), adress_street VARCHAR(30), adress_city VARCHAR(20), adress_state VARCHAR(2), adress_zip_code VARCHAR(5), cash_bal DECIMAL(13,2) DEFAULT 1000, pps_bal DECIMAL(13,2) DEFAULT 0, cc_num VARCHAR(16) DEFAULT 0000, cc_exp DATE, cc_cvv VARCHAR(3));");
         statement.executeUpdate("CREATE TABLE if not EXISTS orderofwork (orderofworkid INT PRIMARY KEY AUTO_INCREMENT, service VARCHAR(50), date DATE, price_estimate DECIMAL(10,2));");
-        statement.executeUpdate("CREATE TABLE if not EXISTS quote (quoteid INT PRIMARY KEY AUTO_INCREMENT, serviceid INT, offer_id INT, customerid INT, date DATE, totalcost DECIMAL(10,2), custnote VARCHAR(50), heightFT INT, diameter_width INT, ft_from_house INT, location VARCHAR(50), tree_count VARCHAR(20), clientDecision VARCHAR(50), supplierDecision VARCHAR(50));");     
+        statement.executeUpdate("CREATE TABLE if not EXISTS quote (quoteid INT PRIMARY KEY AUTO_INCREMENT, serviceid INT, offer_id INT, customerid INT, date DATE, totalcost DECIMAL(10,2), custnote VARCHAR(50), heightFT INT, diameter_width INT, ft_from_house INT, location VARCHAR(50), clientDecision VARCHAR(50), supplierDecision VARCHAR(50));");     
         statement.executeUpdate("CREATE TABLE if not EXISTS service (serviceid INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50), description VARCHAR(50), price DECIMAL(10,2));");
         statement.executeUpdate("CREATE TABLE if not EXISTS bill (orderofworkid INT, finalprice DECIMAL (10,2), service VARCHAR(50));");
         statement.executeUpdate("CREATE TABLE if not EXISTS note (customerid INT, custnote VARCHAR(50), ownernote VARCHAR(50));");
@@ -290,7 +290,7 @@ public class userDAO
       
         
         // Insert data
-        statement.executeUpdate("INSERT INTO user (email, firstname, lastname, phonenumber, password, birthday, adress_street_num, adress_street, adress_city, adress_state, adress_zip_code, cash_bal, pps_bal, cc_num, cc_exp, cc_cvv) VALUES ('susie@gmail.com', 'Susie ', 'Guzman', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202', '1000', '1000','414123541254145', '2020-01-01', '441'), "+
+        statement.executeUpdate("INSERT INTO User (email, firstname, lastname, phonenumber, password, birthday, adress_street_num, adress_street, adress_city, adress_state, adress_zip_code, cash_bal, pps_bal, cc_num, cc_exp, cc_cvv) VALUES ('susie@gmail.com', 'Susie ', 'Guzman', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202', '1000', '1000','414123541254145', '2020-01-01', '441'), "+
         		"('susie@gmail.com', 'Susie ', 'Guzman', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202', '1000', '1000', '414123541254145', '2020-01-01', '441'),"+
     		 	"('don@gmail.com', 'Don', 'Cummings', '5842124561', 'don123', '1969-03-20', '1000', 'hi street', 'mama', 'MO', '12345', '1000', '1000', '414123541254145', '2020-01-01', '441'),"+
     	 	 	"('margarita@gmail.com', 'Margarita', 'Lawson', '5842124561','margarita1234', '1980-02-02', '1234', 'ivan street', 'tata','CO','12561', '1000', '1000', '414123541254145', '2020-01-01', '441'),"+
@@ -303,16 +303,16 @@ public class userDAO
     			"('jeannette@gmail.com', 'Jeannette ', 'Stone', '5842124561', 'jeannette1234', '2001-04-24', '0981', 'snoop street', 'kojik', 'HW', '87654', '1000', '1000','414123541254145', '2020-01-01', '441'),"+
     			"('root', 'default', 'default','0000000000', 'pass1234', '2020-10-10', '0000', 'Default', 'Default', 'OH', '12345', '1000', '1000', 'default', '2020-02-02', '000');");  
         
-	statement.executeUpdate("INSERT INTO quote(quoteid, serviceid, offer_id, customerid, date, totalcost, custnote, heightFT, diameter_width, ft_from_house,location,tree_count,clientDecision, supplierDecision) VALUES ('10','10','10','10','2020-01-01', '111','Need 3 trees trimmed', '5', '10', 10, 'Right side of house', '1', 'agreement','agreement'),"+
-        		"('1','1','1','1','2020-01-01', '111', '1 tree taken down', '8', '3','8','Front of House','2', 'agreement','disagree'),"+    
-        		"('2','2','2','2','2020-01-01', '111', '4 trees removed', '5','2', '8','backyard','3', 'agreement','disagree')," +
-        		"('3','3','3','3','2020-01-01', '111', 'Trees trimmed', '3','5','7','driveway','4', 'agreement','agreement')," +
-        		"('4','4','4','4','2020-01-01', '111', 'Trees trimmed', '12','6','12','driveway','5', 'Disagree','agreement')," +
-        		"('5','5','5','5','2020-01-01', '111','3 trimmed', '7','4', '8', 'front yard right side','6', 'agreement', 'disagree')," +
-        		"('6','6','6','6','2020-01-01', '111', '6 trees trimmed', '5','4','17','backyard','7', 'Disagree','agreement')," +
-        		"('7','7','7','7','2020-01-01', '111', '2 Trees removed and 5 trimmed', '4','5','15','side of house','8', 'agreement','agreement')," +
-        		"('8','8','8','8','2020-01-01', '111','1 tree trimmed', '6','6','17','side of house','9', 'Disagree','Disagree')," +
-        		"('9','9','9','9','2020-01-01', '111', '1 tree trimmed, 2 removed', '6','2','7','front yard','10','Disagree','agreement');");  
+	statement.executeUpdate("INSERT INTO quote(quoteid, serviceid, offer_id, customerid, date, totalcost, custnote, heightFT, diameter_width, ft_from_house,location,clientDecision, supplierDecision) VALUES ('10','10','10','10','2020-01-01', '111','Need 3 trees trimmed', '5', '10', 10, 'Right side of house', 'agreement','agreement'),"+
+        		"('1','1','1','1','2020-01-01', '111', '1 tree taken down', '8', '3','8','Front of House', 'agreement','disagree'),"+    
+        		"('2','2','2','2','2020-01-01', '111', '4 trees removed', '5','2', '8','backyard', 'agreement','disagree')," +
+        		"('3','3','3','3','2020-01-01', '111', 'Trees trimmed', '3','5','7','driveway', 'agreement','agreement')," +
+        		"('4','4','4','4','2020-01-01', '111', 'Trees trimmed', '12','6','12','driveway', 'Disagree','agreement')," +
+        		"('5','5','5','5','2020-01-01', '111','3 trimmed', '7','4', '8', 'front yard right side', 'agreement', 'disagree')," +
+        		"('6','6','6','6','2020-01-01', '111', '6 trees trimmed', '5','4','17','backyard', 'Disagree','agreement')," +
+        		"('7','7','7','7','2020-01-01', '111', '2 Trees removed and 5 trimmed', '4','5','15','side of house', 'agreement','agreement')," +
+        		"('8','8','8','8','2020-01-01', '111','1 tree trimmed', '6','6','17','side of house', 'Disagree','Disagree')," +
+        		"('9','9','9','9','2020-01-01', '111', '1 tree trimmed, 2 removed', '6','2','7','front yard','Disagree','agreement');");  
 
 
 	 statement.executeUpdate("INSERT INTO orderofwork(orderofworkid, service, date, price_estimate) VALUES ('1', 'LAWN MOWING', '2020-01-01', '111.11')," +

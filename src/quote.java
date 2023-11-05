@@ -1,3 +1,5 @@
+
+
 public class quote {
     protected int quoteID;
     protected int serviceID;
@@ -6,17 +8,15 @@ public class quote {
     protected String date;
     protected int totalcost;
     protected String custnote;
-    protected String suppliernote;
     protected String heightFT;
     protected String diameter_width;
     protected String ft_from_house;
     protected String location;
-    protected String tree_count;
     protected String clientDecision;
     protected String supplierDecision;
     
 
-    public quote(String date, String custnote, String heightFT, String diameter_width, String ft_from_house, String location, String tree_count) {
+    public quote(String date, String custnote, String heightFT, String diameter_width, String ft_from_house, String location) {
        //createquote 
         
     	
@@ -28,7 +28,6 @@ public class quote {
         this.diameter_width = diameter_width;
         this.ft_from_house = ft_from_house;
         this.location = location;
-        this.tree_count = tree_count;
         
         
         
@@ -41,7 +40,7 @@ public class quote {
     // Getters and setters 
 
     
-    public quote(int quoteID, int serviceid, int customerid, int offer_id, String date, int totalcost, String custnote, String heightft, String diameter_width, String ft_from_house, String location, String tree_count, String clientDecision, String supplierDecision) {
+    public quote(int quoteID, int serviceid, int customerid, int offer_id, String date, int totalcost, String custnote, String heightft, String diameter_width, String ft_from_house, String location, String clientDecision, String supplierDecision) {
     	
       	this.quoteID = quoteID;
       	this.serviceID = serviceid;
@@ -54,12 +53,12 @@ public class quote {
         this.diameter_width = diameter_width;
         this.ft_from_house = ft_from_house;
         this.location = location;
-        this.tree_count = tree_count;
         this.clientDecision = clientDecision;
         this.supplierDecision = supplierDecision;
 		// TODO Auto-generated constructor stub
 	}
- 
+
+
 
 
 	public quote(int quoteID, String custnote, int totalcost,String clientDecision, String supplierDecision) {
@@ -120,9 +119,6 @@ public class quote {
     public String getlocation() {
     	return location;
     }
-    public String gettree_count() {
-    	return tree_count;
-    }
     public String getclientDecision() {
     	return clientDecision;
     }
@@ -170,9 +166,6 @@ public class quote {
     }
     public void setlocation(String location) {
         this.location = location;
-    }
-    public void settree_count(String tree_count) {
-        this.tree_count = tree_count;
     }
     public void setclientDecision(String clientDecision) {
         this.clientDecision = clientDecision;

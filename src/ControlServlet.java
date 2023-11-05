@@ -59,9 +59,11 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("Database successfully initialized!");
         		rootPage(request,response,"");
         		break;
-         	case "/root":
+        
+        	case "/root":
         		rootPage(request,response, "");
         		break;
+        	
         	case "/logout":
         		logout(request,response);
         		break;
@@ -81,17 +83,36 @@ public class ControlServlet extends HttpServlet {
                 System.out.println("The action is: editquote");
                 editquote(request, response);           	
                 break;
-        	case "/getQuote": 
-                System.out.println("The action is: getQuote");
-                getQuote(request, response);           	
+                
+        	case "/customerreply": 
+                System.out.println("The action is: editquote");
+                clientDecision(request, response);           	
                 break;
+         
         	
-        	
-              
-        		
-        	
-        	
-	    	}
+        	case "/supplierreply": 
+                System.out.println("The action is: editquote");
+                supplierDecision(request, response);           	
+                break;
+	    	
+	    case "/customerquoteedit": 
+            System.out.println("The action is: editquote");
+            customerquoteedit(request, response);           	
+            break;
+     
+    	
+    	
+    	
+	    case "/supplierquoteedit": 
+            System.out.println("The action is: editquote");
+            supplierquoteedit(request, response);           	
+            break;
+            
+	    
+     
+    	
+    	
+    	}
 	    	
         	
 	    }
@@ -99,6 +120,65 @@ public class ControlServlet extends HttpServlet {
         	System.out.println(ex.getMessage());
 	    	}
 	    }
+	    
+  private void customerquoteedit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	    	
+	        
+	        String quoteid = request.getParameter("quoteid");
+			String customerDecision = request.getParameter("customerDecision");
+	      
+	        
+     
+	        
+	        quoteDAO.updateCliendDecision(customerDecision,quoteid);
+	        response.sendRedirect("listquote");
+	    }
+  
+  private void supplierquoteedit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+  	
+      
+      String quoteid = request.getParameter("quoteid");
+		String supplierDecision = request.getParameter("SupplierDecision");
+    
+      
+
+      
+      quoteDAO.updateSupplierDecision(supplierDecision,quoteid);
+      response.sendRedirect("listquote");
+  }
+	    
+	    
+	    
+	    private void clientDecision(HttpServletRequest request, HttpServletResponse response)
+	            throws SQLException, IOException, ServletException {
+	    	
+	    	
+	    	 String id = request.getParameter("id");
+	    	 String date=request.getParameter("date");
+	        System.out.println("opening client started: 00000000000000000000000000000000000");
+	        request.setAttribute("id", id);
+	        request.setAttribute("date", date);
+	    
+	             
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("CustomerReply.jsp");       
+	        dispatcher.forward(request, response);
+	     
+	        System.out.println("opening client decision finished: 111111111111111111111111111111111111");}
+	    
+	    private void supplierDecision(HttpServletRequest request, HttpServletResponse response)
+	            throws SQLException, IOException, ServletException {
+	    	  System.out.println("opening supplier started: 00000000000000000000000000000000000");
+
+	     
+	        String id = request.getParameter("id");
+	    	 String date=request.getParameter("date");
+	      
+	        request.setAttribute("id", id);
+	        request.setAttribute("date", date);
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("SupplierReply.jsp");       
+	        dispatcher.forward(request, response);
+	     
+	        System.out.println("opening supplier decision finished: 111111111111111111111111111111111111");}
         	
 	    private void listquote(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
@@ -121,10 +201,9 @@ public class ControlServlet extends HttpServlet {
 	        String diameter_width = request.getParameter("diameter_width");
 	        String ft_from_house = request.getParameter("ft_from_house");
 	        String location = request.getParameter("location");
-	        String tree_count = request.getParameter("tree_count");
 	        
 	   	 	
-	    	quote quotes = new quote(date,custnote, heightFTParam, diameter_width, ft_from_house, location,tree_count);
+	    	quote quotes = new quote(date,custnote, heightFTParam, diameter_width, ft_from_house, location);
    	 		quoteDAO.insertquote(quotes);
    	 		response.sendRedirect("login.jsp");	}
 	    
@@ -142,9 +221,9 @@ public class ControlServlet extends HttpServlet {
 	        quoteDAO.update(quotes);
 	        response.sendRedirect("login.jsp");
 	    }
-	
 	        
-	       
+	        
+	        
 	    private void listUser(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
 	        System.out.println("listUser started: 00000000000000000000000000000000000");
