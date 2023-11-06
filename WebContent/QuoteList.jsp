@@ -31,6 +31,8 @@
             </tr>
            
               <a href="EditQuotes.jsp" target="_self">Edit Quotes</a>
+              <br> <a href="rootView.jsp" target="_self">Return to Admin View</a><br>
+              <a href="login.jsp" target="_self">Log Off</a>
         <c:forEach var="quote" items="${listquote}">
             <tr style="text-align:center">
             <td><c:out value="${quote.quoteID}" /></td>
