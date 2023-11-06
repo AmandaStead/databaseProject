@@ -17,9 +17,7 @@
 	</form>
 	
 	
-	<form action = "listquote">
-		<input type = "submit" value = "listquote"/>
-	</form>
+	
 	<a href="login.jsp"target ="_self" > logout</a><br><br> 
 	
 	

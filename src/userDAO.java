@@ -52,7 +52,21 @@ public class userDAO
     
     public boolean database_login(String email, String password) throws SQLException{
     	try {
-    		connect_func("root","test");
+    		connect_func("root","pass1234");
+    		String sql = "select * from User where email = ?";
+    		preparedStatement = connect.prepareStatement(sql);
+    		preparedStatement.setString(1, email);
+    		ResultSet rs = preparedStatement.executeQuery();
+    		return rs.next();
+    	}
+    	catch(SQLException e) {
+    		System.out.println("failed login");
+    		return false;
+    	}
+    }
+    public boolean database_loginJohn(String email, String password) throws SQLException{
+    	try {
+    		connect_func("john","pass1234");
     		String sql = "select * from User where email = ?";
     		preparedStatement = connect.prepareStatement(sql);
     		preparedStatement.setString(1, email);
@@ -117,7 +131,7 @@ public class userDAO
     }
     
     public void insert(user users) throws SQLException {
-    	connect_func("root","test");         
+    	connect_func("root","pass1234");         
 		String sql = "insert into User(email, firstName, lastName, password, birthday,adress_street_num, adress_street,adress_city,adress_state,adress_zip_code,cash_bal,PPS_bal) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setString(1, users.getEmail());
@@ -301,6 +315,7 @@ public class userDAO
     			"('angelo@gmail.com', 'Angelo', 'Francis', '5842124561', 'angelo1234', '2021-06-14', '4680', 'egypt street', 'lolas', 'DT', '13579', '1000', '1000', '414123541254145', '2020-01-01', '441'),"+
     			"('rudy@gmail.com', 'Rudy', 'Smith', '5842124561', 'rudy1234', '1706-06-05', '1234', 'sign street', 'samo ne tu','MH', '09876', '1000', '1000', '414123541254145', '2020-01-01', '441'),"+
     			"('jeannette@gmail.com', 'Jeannette ', 'Stone', '5842124561', 'jeannette1234', '2001-04-24', '0981', 'snoop street', 'kojik', 'HW', '87654', '1000', '1000','414123541254145', '2020-01-01', '441'),"+
+    			"('john', 'default', 'default','0000000000', 'pass1234', '2020-10-10', '0000', 'Default', 'Default', 'OH', '12345', '1000', '1000', 'default', '2020-02-02', '000'),"+
     			"('root', 'default', 'default','0000000000', 'pass1234', '2020-10-10', '0000', 'Default', 'Default', 'OH', '12345', '1000', '1000', 'default', '2020-02-02', '000');");  
         
 	statement.executeUpdate("INSERT INTO quote(quoteid, serviceid, offer_id, customerid, date, totalcost, custnote, heightFT, diameter_width, ft_from_house,location, tree_count,clientDecision, supplierDecision) VALUES ('10','10','10','10','2020-01-01', '111','Need 3 trees trimmed', '5', '10', 10, 'Right side of house','4', 'agreement','agreement'),"+

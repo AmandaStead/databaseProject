@@ -260,6 +260,12 @@ public class ControlServlet extends HttpServlet {
 				 session.setAttribute("username", email);
 				 rootPage(request, response, "");
 	    	 }
+	    	 else if (email.equals("john") && password.equals("pass1234")) {
+				 System.out.println("Login Successful! Redirecting to root");
+				 session = request.getSession();
+				 session.setAttribute("username", email);
+				 request.getRequestDispatcher("ownerView.jsp").forward(request, response);
+	    	 }
 	    	 else if(userDAO.isValid(email, password)) 
 	    	 {
 			 	 
