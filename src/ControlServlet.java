@@ -201,9 +201,10 @@ public class ControlServlet extends HttpServlet {
 	        String diameter_width = request.getParameter("diameter_width");
 	        String ft_from_house = request.getParameter("ft_from_house");
 	        String location = request.getParameter("location");
+	        String tree_count = request.getParameter("tree_count");
 	        
 	   	 	
-	    	quote quotes = new quote(date,custnote, heightFTParam, diameter_width, ft_from_house, location);
+	    	quote quotes = new quote(date,custnote, heightFTParam, diameter_width, ft_from_house, location, tree_count);
    	 		quoteDAO.insertquote(quotes);
    	 		response.sendRedirect("login.jsp");	}
 	    

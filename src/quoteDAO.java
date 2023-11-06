@@ -47,7 +47,7 @@ public class quoteDAO
             } catch (ClassNotFoundException e) {
                 throw new SQLException(e);
             }
-            connect = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/trees?allowPublicKeyRetrieval=true&useSSL=false&user=root&password=test");
+            connect = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/trees?allowPublicKeyRetrieval=true&useSSL=false&user=root&password=pass1234");
             System.out.println(connect);
         }
     }
@@ -100,13 +100,14 @@ public class quoteDAO
             String heightft = resultSet.getString("heightft"); 
             String diameter_width = resultSet.getString("diameter_width"); 
             String ft_from_house = resultSet.getString("ft_from_house"); 
-            String location = resultSet.getString("location"); 
+            String location = resultSet.getString("location");
+            String tree_count = resultSet.getString("tree_count");
             String clientDecision = resultSet.getString("clientDecision");
             String supplierDecision = resultSet.getString("supplierDecision");
             
 
              
-            quote quotes = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,clientDecision, supplierDecision);
+            quote quotes = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
             listquote.add(quotes);
         }        
         resultSet.close();
@@ -122,7 +123,7 @@ public class quoteDAO
     
     public void insertquote(quote quotes) throws SQLException {
     	connect_func();         
-		String sql = "insert into quote(quoteid, serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location) values (?, ?, ?, ?,?, ?, ?, ?, ?, ?,?)";
+		String sql = "insert into quote(quoteid, serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location, tree_count) values (?, ?, ?, ?,?, ?, ?, ?, ?, ?,?,?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setInt(1, quotes.getQuoteID());
 			preparedStatement.setInt(2, quotes.getServiceID());
@@ -135,6 +136,7 @@ public class quoteDAO
 			preparedStatement.setString(9, quotes.getdiameter_width());
 			preparedStatement.setString(10, quotes.getft_from_house());
 			preparedStatement.setString(11, quotes.getlocation());
+			preparedStatement.setString(12, quotes.gettree_count());
 			
 			
 		preparedStatement.executeUpdate();
@@ -195,10 +197,11 @@ public class quoteDAO
             String diameter_width = resultSet.getString("diameter_width"); 
             String ft_from_house = resultSet.getString("ft_from_house"); 
             String location = resultSet.getString("location"); 
+            String tree_count = resultSet.getString("tree_count");
             String clientDecision = resultSet.getString("clientDecision"); 
             String supplierDecision = resultSet.getString("supplierDecision");
           
-            quote = new quote(quoteID, serviceID, customerID, offerID, date, totalcost, custnote,  heightFT, diameter_width,ft_from_house, location,clientDecision, supplierDecision);
+            quote = new quote(quoteID, serviceID, customerID, offerID, date, totalcost, custnote,  heightFT, diameter_width,ft_from_house, location,tree_count,clientDecision, supplierDecision);
         }
         resultSet.close();
         statement.close();
