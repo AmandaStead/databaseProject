@@ -82,11 +82,11 @@ public class quoteDAO
     }
     
     
-    public List<quote> listAllquotes() throws SQLException {
+    public List<quote> listAllquotes(HttpServletRequest request) throws SQLException {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
         List<quote> listquote = new ArrayList<quote>();        
-        String sql = "SELECT * FROM quote  where customerid="+userId+";
+        String sql = "SELECT * FROM quote  where customerid="+userId+"";
         connect_func();      
         statement = (Statement) connect.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);

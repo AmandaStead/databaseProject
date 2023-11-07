@@ -184,9 +184,9 @@ public class ControlServlet extends HttpServlet {
 	            throws SQLException, IOException, ServletException {
 	        System.out.println("listQuote started: 00000000000000000000000000000000000");
 
-	     
-	        List<quote> listquote = quoteDAO.listAllquotes();
-	        request.setAttribute("listquote", listquote);       
+
+			List<quote> listquote = quoteDAO.listAllquotes(request);
+	        request.setAttribute("listquote", listquote);
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("QuoteList.jsp");       
 	        dispatcher.forward(request, response);
 	     
@@ -245,7 +245,7 @@ public class ControlServlet extends HttpServlet {
 	    }
 	    private void rootPagequote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 	    	System.out.println("root view quote");
-	    	request.setAttribute("listquote", quoteDAO.listAllquotes());
+			request.setAttribute("listquote", quoteDAO.listAllquotes(request));
 	    	request.getRequestDispatcher("QuoteList.jsp").forward(request, response);
 	    }
 	    
@@ -253,7 +253,7 @@ public class ControlServlet extends HttpServlet {
 	    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	 String email = request.getParameter("email");
 	    	 String password = request.getParameter("password");
-			String userId = (String) session.getAttribute("userId");
+			String userId ="10";
 
 	    	 
 	    	 if (email.equals("root") && password.equals("pass1234")) {
@@ -267,6 +267,7 @@ public class ControlServlet extends HttpServlet {
 				 System.out.println("Login Successful! Redirecting to root");
 				 session = request.getSession();
 				 session.setAttribute("username", email);
+				 session.setAttribute("userId", userId);
 				 request.getRequestDispatcher("ownerView.jsp").forward(request, response);
 	    	 }
 	    	 else if(userDAO.isValid(email, password)) 
