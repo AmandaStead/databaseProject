@@ -253,11 +253,14 @@ public class ControlServlet extends HttpServlet {
 	    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	 String email = request.getParameter("email");
 	    	 String password = request.getParameter("password");
+			String userId = (String) session.getAttribute("userId");
+
 	    	 
 	    	 if (email.equals("root") && password.equals("pass1234")) {
 				 System.out.println("Login Successful! Redirecting to root");
 				 session = request.getSession();
 				 session.setAttribute("username", email);
+				 session.setAttribute("userId", userId);
 				 rootPage(request, response, "");
 	    	 }
 	    	 else if (email.equals("john") && password.equals("pass1234")) {
