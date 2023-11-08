@@ -83,6 +83,30 @@ public class quote {
 
 
 
+	public quote(int quoteid, int serviceid, int offer_id, String date, int totalcost, String custnote,
+			String heightft, String diameter_width, String ft_from_house, String location, String tree_count,
+			String clientDecision, String supplierDecision) {
+		// TODO Auto-generated constructor stub
+		this.quoteID = quoteid;
+      	this.serviceID = serviceid;
+      	
+      	this.offer_id = offer_id;
+    	this.date = date;
+    	this.totalcost = totalcost;
+        this.custnote = custnote;
+        this.heightFT = heightft;
+        this.diameter_width = diameter_width;
+        this.ft_from_house = ft_from_house;
+        this.location = location;
+        this.tree_count = tree_count;
+        this.clientDecision = clientDecision;
+        this.supplierDecision = supplierDecision;
+		
+	}
+
+
+
+
 	public int getQuoteID() {
         return quoteID;
     }

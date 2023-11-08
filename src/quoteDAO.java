@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -81,8 +82,7 @@ public class quoteDAO
         }
     }
     
-    
-    public List<quote> listAllquotes(HttpServletRequest request) throws SQLException {
+    public List<quote> listOnequote(HttpServletRequest request) throws SQLException {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
         List<quote> listquote = new ArrayList<quote>();        
@@ -91,6 +91,41 @@ public class quoteDAO
         statement = (Statement) connect.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
          
+        while (resultSet.next()) {
+        	int quoteid = resultSet.getInt("quoteid");
+            int serviceid = resultSet.getInt("serviceid");
+            int customerid = resultSet.getInt("customerid");
+            int offer_id = resultSet.getInt("offer_id");
+            String date = resultSet.getString("date");
+            int totalcost = resultSet.getInt("totalcost");
+            String custnote = resultSet.getString("custnote");
+            String heightft = resultSet.getString("heightft"); 
+            String diameter_width = resultSet.getString("diameter_width"); 
+            String ft_from_house = resultSet.getString("ft_from_house"); 
+            String location = resultSet.getString("location");
+            String tree_count = resultSet.getString("tree_count");
+            String clientDecision = resultSet.getString("clientDecision");
+            String supplierDecision = resultSet.getString("supplierDecision");
+            
+
+             
+            quote quotes = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
+            listquote.add(quotes);
+        }        
+        resultSet.close();
+        disconnect();        
+        return listquote;
+    }
+    
+    
+    
+    
+    public List<quote> listAllquotes() throws SQLException {
+        List<quote> listquote = new ArrayList<quote>();        
+        String sql = "SELECT * FROM quote";      
+        connect_func();      
+        statement = (Statement) connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
         while (resultSet.next()) {
         	int quoteid = resultSet.getInt("quoteid");
             int serviceid = resultSet.getInt("serviceid");

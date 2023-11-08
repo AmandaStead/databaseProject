@@ -75,6 +75,10 @@ public class ControlServlet extends HttpServlet {
                 System.out.println("The action is: list quote");
                 rootPagequote(request, response);           	
                 break;
+        	case "/userQuoteView":
+        		System.out.println("The action is: list user quote");
+                userQuoteView(request, response);           	
+                break;
         	case "/createquote": 
                 System.out.println("The action is: createquote");
                 createquote(request, response);           	
@@ -185,7 +189,7 @@ public class ControlServlet extends HttpServlet {
 	        System.out.println("listQuote started: 00000000000000000000000000000000000");
 
 
-			List<quote> listquote = quoteDAO.listAllquotes(request);
+			List<quote> listquote = quoteDAO.listAllquotes();
 	        request.setAttribute("listquote", listquote);
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("QuoteList.jsp");       
 	        dispatcher.forward(request, response);
@@ -244,9 +248,15 @@ public class ControlServlet extends HttpServlet {
 	    	request.getRequestDispatcher("rootView.jsp").forward(request, response);
 	    }
 	    private void rootPagequote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
-	    	System.out.println("root view quote");
-			request.setAttribute("listquote", quoteDAO.listAllquotes(request));
+	    	System.out.println("Owner view quote");
+			request.setAttribute("listquote", quoteDAO.listAllquotes());
 	    	request.getRequestDispatcher("QuoteList.jsp").forward(request, response);
+	    }
+	    
+	    private void userQuoteView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("User view quote");
+			request.setAttribute("listquote", quoteDAO.listOnequote(request));
+	    	request.getRequestDispatcher("Userviewquote.jsp").forward(request, response);
 	    }
 	    
 	    
