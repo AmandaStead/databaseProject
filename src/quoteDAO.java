@@ -28,6 +28,7 @@ import java.util.List;
 public class quoteDAO 
 {
 	private static final long serialVersionUID = 1L;
+	private static final int customerid = 0;
 	public static Object insertquote;
 	private Connection connect = null;
 	private Statement statement = null;
@@ -83,13 +84,20 @@ public class quoteDAO
     }
     
     public List<quote> listOnequote(HttpServletRequest request) throws SQLException {
-        HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
+    	HttpSession session = request.getSession();
+        String customerId = (String) session.getAttribute("customerId");
+        connect_func(); 
+
+    	int customerIdInt = Integer.parseInt(customerId);
+
         List<quote> listquote = new ArrayList<quote>();        
-        String sql = "SELECT * FROM quote  where customerid="+userId+"";
-        connect_func();      
-        statement = (Statement) connect.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
+        String sql = "SELECT quote.*, user.* from quote inner join user on quote.customerid = user.customerid where quote.customerid = ? ";
+        PreparedStatement preparedStatement = connect.prepareStatement(sql);
+        preparedStatement.setInt(1, customerIdInt);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+         
+        
          
         while (resultSet.next()) {
         	int quoteid = resultSet.getInt("quoteid");

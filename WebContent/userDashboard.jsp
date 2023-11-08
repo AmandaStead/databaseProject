@@ -1,29 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
- 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>UserView</title>
+<title>Activity page</title>
 </head>
-<body>
 
-<div align = "center">
+<center><h1>Welcome! You have been successfully logged in</h1> </center>
 
-
-
-
-	<a href="login.jsp"target ="_self" > logout</a><br><br> 
-	
+ 
+	<body>
+	 <center>
+		 <a href="login.jsp"target ="_self" > Logout</a><br><br> 
+		 <a href="CreateQuote.jsp"target ="_self" > Create Quote</a><br><br> 
+		
+	</form>
+		
+		 <p> Welcome, please select an action! </p>
+		 </center>
 		 
-		<title>Your Quotes</title>
+	<title>All Quotes list</title>
 </head>
 <body>
+
+
+		
    <div align="center">
         <table border="1" cellpadding="5">
-            <caption><h2>Your Quotes</h2></caption>
+            <caption><h2>List of Quotes</h2></caption>
             <tr>
 				<th>QuoteID</th>
                 <th>ServiceID</th>
@@ -42,10 +49,8 @@
                 
 
             </tr>
-          
-              
-              
-        <c:forEach var="quote" items="${listquote}">
+            
+            <c:forEach var="quote" items="${listquote}">
             <tr style="text-align:center">
             <td><c:out value="${quote.quoteID}" /></td>
                 <td><c:out value="${quote.serviceID}" /></td>
@@ -66,10 +71,5 @@
             </c:forEach>
         </table>
     </div>   
-</body>
-</html>
-
-
-
 </body>
 </html>

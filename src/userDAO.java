@@ -186,6 +186,34 @@ public class userDAO
         return rowUpdated;     
     }
     
+    
+    public String getCustomerId(String email, String password) throws SQLException {
+        String customerId = null;
+        String sql = "SELECT customerid FROM user WHERE email = ? AND password = ?";
+
+        try {
+            connect_func();
+            PreparedStatement preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            if (resultSet.next()) {
+                customerId = resultSet.getString("customerid");
+            }
+
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnect();
+        }
+
+        return customerId;
+    }
+
+    
     public user getUser(String email) throws SQLException {
     	user user = null;
         String sql = "SELECT * FROM User WHERE email = ?";

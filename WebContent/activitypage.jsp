@@ -17,10 +17,19 @@
 		 <a href="login.jsp"target ="_self" > Logout</a><br><br> 
 		 <a href="CreateQuote.jsp"target ="_self" > Create Quote</a><br><br> 
 		 <form action = "userQuoteView">
-		<input type = "submit" value = "userQuoteView"/>
+		<input type = "submit" value = "View your quotes"/>
+	</form>
+		
 	</form>
 		
 		 <p> Welcome, please select an action! </p>
 		 </center>
 		 
-	
+	<title>All Quotes list</title>
+</head>
+<body>
+
+
+		
+   <div align="center">
+        

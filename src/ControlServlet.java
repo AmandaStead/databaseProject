@@ -135,7 +135,7 @@ public class ControlServlet extends HttpServlet {
      
 	        
 	        quoteDAO.updateCliendDecision(customerDecision,quoteid);
-	        response.sendRedirect("listquote");
+	        response.sendRedirect("ThankYou.jsp");
 	    }
   
   private void supplierquoteedit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -256,45 +256,53 @@ public class ControlServlet extends HttpServlet {
 	    private void userQuoteView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 	    	System.out.println("User view quote");
 			request.setAttribute("listquote", quoteDAO.listOnequote(request));
-	    	request.getRequestDispatcher("Userviewquote.jsp").forward(request, response);
+	    	request.getRequestDispatcher("userDashboard.jsp").forward(request, response);
 	    }
 	    
 	    
 	    protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	 String email = request.getParameter("email");
 	    	 String password = request.getParameter("password");
-			String userId ="10";
+	    	 String customerId = userDAO.getCustomerId(email, password);
+			
 
 	    	 
 	    	 if (email.equals("root") && password.equals("pass1234")) {
 				 System.out.println("Login Successful! Redirecting to root");
 				 session = request.getSession();
 				 session.setAttribute("username", email);
-				 session.setAttribute("userId", userId);
+				 session.setAttribute("customerid", customerId);
 				 rootPage(request, response, "");
 	    	 }
 	    	 else if (email.equals("john") && password.equals("pass1234")) {
 				 System.out.println("Login Successful! Redirecting to root");
 				 session = request.getSession();
 				 session.setAttribute("username", email);
-				 session.setAttribute("userId", userId);
+				 session.setAttribute("customerid", customerId);
+				 
 				 request.getRequestDispatcher("ownerView.jsp").forward(request, response);
 	    	 }
 	    	 else if(userDAO.isValid(email, password)) 
 	    	 {
 			 	 
-			 	 currentUser = email;
-				 System.out.println("Login Successful! Redirecting");
-				 request.getRequestDispatcher("activitypage.jsp").forward(request, response);
-				 
-			 			 			 			 
-	    	 }
-	    	 else {
-	    		 request.setAttribute("loginStr","Login Failed: Please check your credentials.");
-	    		 request.getRequestDispatcher("login.jsp").forward(request, response);
-	    	 }
+	    		 if (customerId != null) {
+	    		        System.out.println("Login Successful! Redirecting");
+	    		        
+	    		        session = request.getSession();
+	    		        session.setAttribute("email", email);
+	    		        session.setAttribute("customerId", customerId);
+	    		        request.getRequestDispatcher("activitypage.jsp").forward(request, response);
+	    		    } else {
+	    		        request.setAttribute("loginStr", "Login Failed: Please check your credentials.");
+	    		        request.getRequestDispatcher("login.jsp").forward(request, response);
+	    		    }
+	    		}
 	    }
 	           
+	    
+	    
+	    
+	    
 	    private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	
 	    	String email = request.getParameter("email");
