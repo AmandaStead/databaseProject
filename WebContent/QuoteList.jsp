@@ -49,7 +49,7 @@
                 <td><c:out value="${quote.ft_from_house}" /></td>
                 <td><c:out value="${quote.location}" /></td>
                 <td><c:out value="${quote.tree_count}" /></td>
-                <td> <a href="customerreply?id=${quote.quoteID}&date=${quote.date}" target="_self"><input type="button" value="${quote.clientDecision}" /></a></td>
+                <td> <a href="customerreply?id=${quote.quoteID}&date=${quote.date}" target="_self"><input type="button" value="${quote.clientDecision}" disabled /></a></td>
                 <td> <a href="supplierreply?id=${quote.quoteID}&date=${quote.date}" target="_self"><input type="button" value="${quote.supplierDecision}" /></a></td>
                
             </tr>

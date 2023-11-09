@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Successfully Submitted!  </title>
 </head>
 <body>
-Successfully Submitted <br>
+Successfully Submitted! <br>
+
+
 <a href="login.jsp"target ="_self" > Logout</a><br><br> 
 </body>
 </html>

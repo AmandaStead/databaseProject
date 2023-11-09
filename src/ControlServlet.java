@@ -210,7 +210,7 @@ public class ControlServlet extends HttpServlet {
 	   	 	
 	    	quote quotes = new quote(date,custnote, heightFTParam, diameter_width, ft_from_house, location, tree_count);
    	 		quoteDAO.insertquote(quotes);
-   	 		response.sendRedirect("login.jsp");	}
+   	 		response.sendRedirect("ThankYou.jsp");	}
 	    
 	    private void editquote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	
@@ -224,7 +224,7 @@ public class ControlServlet extends HttpServlet {
      
 	        quote quotes = new quote(quoteid,custnote,totalcost,clientDecision,supplierDecision);
 	        quoteDAO.update(quotes);
-	        response.sendRedirect("login.jsp");
+	        response.sendRedirect("Successful.jsp");
 	    }
 	        
 	        
