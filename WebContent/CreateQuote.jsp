@@ -18,7 +18,7 @@
         <input type="file" name="photo" id="photo"><br>
         
 
-        <label for="custnote">Customer Note:</label>
+        <label for="custnote">Note:</label>
         <textarea name="custnote" id="custnote" rows="4" required></textarea><br>
 
         <label for="heightFT">Height (in Feet):</label>

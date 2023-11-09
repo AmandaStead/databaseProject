@@ -38,7 +38,7 @@
                 <th>CustomerID</th>
                 <th>Date</th>
                 <th>TotalCost</th>
-                <th>CustomerNote</th>
+                <th>Note</th>
                 <th>HeightFT</th>
                 <th>diameter_width</th>
                 <th>ft_from_house</th>

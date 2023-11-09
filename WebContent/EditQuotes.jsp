@@ -20,8 +20,10 @@
          <label for="totalcost">totalcost</label>
         <input type="text" name="totalcost" id="totalcost" required><br>
         
-        <label for="custnote">Customer Note:</label>
+        <label for="custnote"> Note:</label>
         <textarea name="custnote" id="custnote" rows="4" required></textarea><br>
+        
+       
         
          <label for="Decision">'Agree', 'Disagree', or 'Quit':</label>
         <input type='text' name="supplierDecision" id="supplierDecision" required><br>
