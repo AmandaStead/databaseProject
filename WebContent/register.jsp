@@ -32,6 +32,61 @@
 					<td align="center" colspan="3">
 						<input type="text" name="birthday" size="45" value="YYYY-MM-DD" onfocus="this.value=''">
 					</td>
+				<tr>
+				<tr>
+				<th>cc_num: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="cc_num" size="45" value="cc_num" onfocus="this.value=''">
+					</td>
+				<tr>
+				<tr>
+				<th>cc_exp: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="cc_exp" size="45" value="cc_exp" onfocus="this.value=''">
+					</td>
+				<tr>	
+				<tr>
+				<th>cc_cvv: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="cc_cvv" size="45" value="cc_cvv" onfocus="this.value=''">
+					</td>
+				<tr>
+				<tr>
+				<th>adress_street_num: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="adress_street_num" size="45" value="adress_street_num" onfocus="this.value=''">
+					</td>
+				<tr>
+				<tr>
+				<th>adress_street: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="adress_street" size="45" value="adress_street" onfocus="this.value=''">
+					</td>
+				<tr>
+				<tr>
+				<th>adress_city: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="adress_city" size="45" value="adress_city" onfocus="this.value=''">
+					</td>
+				<tr>
+				<tr>
+				<th>adress_state: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="adress_state" size="45" value="adress_state" onfocus="this.value=''">
+					</td>
+				<tr>
+				<tr>
+				<th>adress_zip_code: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="adress_zip_code" size="45" value="adress_zip_code" onfocus="this.value=''">
+					</td>
+				<tr>
+				<tr>
+				<th>phone: </th>
+					<td align="center" colspan="3">
+						<input type="text" name="phone" size="45" value="1234567891" onfocus="this.value=''">
+					</td>
+				<tr>
 	
 				</tr>
 				<tr>

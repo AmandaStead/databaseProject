@@ -114,9 +114,13 @@ public class userDAO
             String adress_zip_code = resultSet.getString("adress_zip_code"); 
             int cash_bal = resultSet.getInt("cash_bal");
             int PPS_bal = resultSet.getInt("PPS_bal");
+            String cc_num = resultSet.getString("cc_num");
+            String cc_exp = resultSet.getString("cc_exp");
+            String cc_cvv = resultSet.getString("cc_cvv");
+            String phone = resultSet.getString("phone");
 
              
-            user users = new user(customerid,email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, cash_bal,PPS_bal);
+            user users = new user(customerid,email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, cash_bal,PPS_bal,cc_num,cc_exp,cc_cvv,phone);
             listUser.add(users);
         }        
         resultSet.close();
@@ -132,7 +136,7 @@ public class userDAO
     
     public void insert(user users) throws SQLException {
     	connect_func("root","pass1234");         
-		String sql = "insert into User(email, firstName, lastName, password, birthday,adress_street_num, adress_street,adress_city,adress_state,adress_zip_code,cash_bal,PPS_bal) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
+		String sql = "insert into User(email, firstName, lastName, password, birthday,adress_street_num, adress_street,adress_city,adress_state,adress_zip_code,cash_bal,PPS_bal,cc_num,cc_exp,cc_cvv,phone) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?,?,?,?,?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setString(1, users.getEmail());
 			preparedStatement.setString(2, users.getFirstName());
@@ -145,7 +149,11 @@ public class userDAO
 			preparedStatement.setString(9, users.getAdress_state());		
 			preparedStatement.setString(10, users.getAdress_zip_code());		
 			preparedStatement.setInt(11, users.getCash_bal());		
-			preparedStatement.setInt(12, users.getPPS_bal());		
+			preparedStatement.setInt(12, users.getPPS_bal());
+			preparedStatement.setString(13, users.getcc_num());
+			preparedStatement.setString(14, users.getcc_exp());
+			preparedStatement.setString(15, users.getcc_cvv());
+			preparedStatement.setString(16, users.getphone());
 
 		preparedStatement.executeUpdate();
         preparedStatement.close();
@@ -238,7 +246,11 @@ public class userDAO
             String adress_zip_code = resultSet.getString("adress_zip_code"); 
             int cash_bal = resultSet.getInt("cash_bal");
             int PPS_bal = resultSet.getInt("PPS_bal");
-            user = new user(customerid,email, firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal);
+            String cc_num = resultSet.getString("cc_num");
+            String cc_exp = resultSet.getString("cc_exp");
+            String cc_cvv = resultSet.getString("cc_cvv");
+            String phone = resultSet.getString("phone");
+            user = new user(customerid,email, firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal,cc_num,cc_exp,cc_cvv,phone);
         }
          
         resultSet.close();
@@ -321,8 +333,8 @@ public class userDAO
 
         // Create new tables
         
-        statement.executeUpdate("CREATE TABLE if not EXISTS User (customerid INT PRIMARY KEY AUTO_INCREMENT, email VARCHAR(50) NOT NULL, firstname VARCHAR(10), lastName VARCHAR(10) NOT NULL, phonenumber VARCHAR(10), password VARCHAR(20) NOT NULL, birthday DATE NOT NULL, adress_street_num VARCHAR(4), adress_street VARCHAR(30), adress_city VARCHAR(20), adress_state VARCHAR(2), adress_zip_code VARCHAR(5), cash_bal DECIMAL(13,2) DEFAULT 1000, pps_bal DECIMAL(13,2) DEFAULT 0, cc_num VARCHAR(16) DEFAULT 0000, cc_exp DATE, cc_cvv VARCHAR(3));");
-        statement.executeUpdate("CREATE TABLE if not EXISTS orderofwork (orderofworkid INT PRIMARY KEY AUTO_INCREMENT, service VARCHAR(50), date DATE, price_estimate DECIMAL(10,2));");
+        statement.executeUpdate("CREATE TABLE if not EXISTS User (customerid INT PRIMARY KEY AUTO_INCREMENT, email VARCHAR(50) NOT NULL, firstname VARCHAR(10), lastName VARCHAR(10) NOT NULL, phone VARCHAR(10), password VARCHAR(20) NOT NULL, birthday DATE NOT NULL, adress_street_num VARCHAR(4), adress_street VARCHAR(30), adress_city VARCHAR(20), adress_state VARCHAR(2), adress_zip_code VARCHAR(5), cash_bal DECIMAL(13,2) DEFAULT 1000, pps_bal DECIMAL(13,2) DEFAULT 0, cc_num VARCHAR(16) DEFAULT 0000, cc_exp DATE, cc_cvv VARCHAR(3));");
+        statement.executeUpdate("CREATE TABLE if not EXISTS orderofwork (quoteid INT, date DATE, price DECIMAL(10,2));");
         statement.executeUpdate("CREATE TABLE if not EXISTS quote (quoteid INT PRIMARY KEY AUTO_INCREMENT, serviceid INT, offer_id INT, customerid INT, date DATE, totalcost DECIMAL(10,2), custnote VARCHAR(50), heightFT INT, diameter_width INT, ft_from_house INT, location VARCHAR(50), tree_count VARCHAR(20), clientDecision VARCHAR(50), supplierDecision VARCHAR(50));");     
         statement.executeUpdate("CREATE TABLE if not EXISTS service (serviceid INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50), description VARCHAR(50), price DECIMAL(10,2));");
         statement.executeUpdate("CREATE TABLE if not EXISTS bill (orderofworkid INT, finalprice DECIMAL (10,2), service VARCHAR(50));");
@@ -332,7 +344,7 @@ public class userDAO
       
         
         // Insert data
-        statement.executeUpdate("INSERT INTO User (email, firstname, lastname, phonenumber, password, birthday, adress_street_num, adress_street, adress_city, adress_state, adress_zip_code, cash_bal, pps_bal, cc_num, cc_exp, cc_cvv) VALUES ('susie@gmail.com', 'Susie ', 'Guzman', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202', '1000', '1000','414123541254145', '2020-01-01', '441'), "+
+        statement.executeUpdate("INSERT INTO User (email, firstname, lastname, phone, password, birthday, adress_street_num, adress_street, adress_city, adress_state, adress_zip_code, cash_bal, pps_bal, cc_num, cc_exp, cc_cvv) VALUES ('susie@gmail.com', 'Susie ', 'Guzman', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202', '1000', '1000','414123541254145', '2020-01-01', '441'), "+
         		"('susie@gmail.com', 'Susie ', 'Guzman', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202', '1000', '1000', '414123541254145', '2020-01-01', '441'),"+
     		 	"('don@gmail.com', 'Don', 'Cummings', '5842124561', 'don123', '1969-03-20', '1000', 'hi street', 'mama', 'MO', '12345', '1000', '1000', '414123541254145', '2020-01-01', '441'),"+
     	 	 	"('margarita@gmail.com', 'Margarita', 'Lawson', '5842124561','margarita1234', '1980-02-02', '1234', 'ivan street', 'tata','CO','12561', '1000', '1000', '414123541254145', '2020-01-01', '441'),"+
@@ -358,16 +370,16 @@ public class userDAO
         		"('9','9','9','9','2020-01-01', '111', '1 tree trimmed, 2 removed', '6','2','7','front yard','12','Disagree','agreement');");  
 
 
-	 statement.executeUpdate("INSERT INTO orderofwork(orderofworkid, service, date, price_estimate) VALUES ('1', 'LAWN MOWING', '2020-01-01', '111.11')," +
-        		"('2', 'GARDENING', '2020-01-02', '222.22'),"
-        		+ "('3', 'LANDSCAPING', '2020-01-03', '333.33'),"
-        		+ "('4', 'TREE REMOVAL', '2020-01-04', '444.44'),"
-        		+ "('5', 'HEDGE TRIMMING', '2020-01-05', '555.55'),"
-        		+ "('6', 'IRRIGATION', '2020-01-06', '666.66'),"
-        		+ "('7', 'FERTILIZATION', '2020-01-07', '777.77'),"
-        		+ "('8', 'PATIO INSTALLATION', '2020-01-08', '888.88'),"
-        		+ "('9', 'SPRINKLER REPAIR', '2020-01-09', '999.99'),"
-        		+ "('10', 'Service 10', '2020-01-10', '1010.10');");
+	 statement.executeUpdate("INSERT INTO orderofwork(quoteid, date, price) VALUES ('1', '2020-01-01', '111.11')," +
+        		"('2', '2020-01-02', '222.22'),"
+        		+ "('3','2020-01-03', '333.33'),"
+        		+ "('4', '2020-01-04', '444.44'),"
+        		+ "('5','2020-01-05', '555.55'),"
+        		+ "('6','2020-01-06', '666.66'),"
+        		+ "('7','2020-01-07', '777.77'),"
+        		+ "('8','2020-01-08', '888.88'),"
+        		+ "('9','2020-01-09', '999.99'),"
+        		+ "('10', '2020-01-10', '1010.10');");
 	  statement.executeUpdate("INSERT INTO service (serviceid, name, description, price) VALUES ('1', 'LAWN MOWING', 'Description 1', '100.00')," +
       		 "('2', 'GARDENING', 'Description 2', '150.00'),"
       		+ "('3', 'LANDSCAPING', 'Description 3', '75.50'),"

@@ -87,30 +87,36 @@ public class ControlServlet extends HttpServlet {
                 System.out.println("The action is: editquote");
                 editquote(request, response);           	
                 break;
-                
         	case "/customerreply": 
                 System.out.println("The action is: editquote");
                 clientDecision(request, response);           	
                 break;
-         
-        	
         	case "/supplierreply": 
                 System.out.println("The action is: editquote");
                 supplierDecision(request, response);           	
                 break;
-	    	
-	    case "/customerquoteedit": 
-            System.out.println("The action is: editquote");
-            customerquoteedit(request, response);           	
-            break;
-     
+            case "/customerquoteedit": 
+                System.out.println("The action is: editquote");
+                customerquoteedit(request, response);           	
+                break;
+    	    case "/supplierquoteedit": 
+                System.out.println("The action is: editquote");
+                supplierquoteedit(request, response);           	
+                break;
+    	    case "/insertorderofwork": 
+                System.out.println("The action is: insertorderofwork");
+                insertorderofwork(request, response);           	
+                break;
+    	    
+                
+                
+         
+        	
+           	
+	    
     	
     	
-    	
-	    case "/supplierquoteedit": 
-            System.out.println("The action is: editquote");
-            supplierquoteedit(request, response);           	
-            break;
+	    
             
 	    
 
@@ -212,6 +218,20 @@ public class ControlServlet extends HttpServlet {
    	 		quoteDAO.insertquote(quotes);
    	 		response.sendRedirect("ThankYou.jsp");	}
 	    
+	    private void insertorderofwork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	    	
+	    	
+	    	String date = request.getParameter("date");
+	    	int quoteid = Integer.parseInt(request.getParameter("quoteid"));
+	    	int price = Integer.parseInt(request.getParameter("price"));
+	     
+	        
+	   	 	
+	    	orderofwork orderofworks = new orderofwork(quoteid,date,price);
+   	 		quoteDAO.insertorderofwork(orderofworks);
+   	 		response.sendRedirect("ThankYou.jsp");	}
+	    
+	    
 	    private void editquote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	
 	        
@@ -226,9 +246,8 @@ public class ControlServlet extends HttpServlet {
 	        quoteDAO.update(quotes);
 	        response.sendRedirect("Successful.jsp");
 	    }
-	        
-	        
-	        
+	    
+	      
 	    private void listUser(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException, ServletException {
 	        System.out.println("listUser started: 00000000000000000000000000000000000");
@@ -314,13 +333,19 @@ public class ControlServlet extends HttpServlet {
 	   	 	String adress_street = request.getParameter("adress_street"); 
 	   	 	String adress_city = request.getParameter("adress_city"); 
 	   	 	String adress_state = request.getParameter("adress_state"); 
-	   	 	String adress_zip_code = request.getParameter("adress_zip_code"); 	   	 	
+	   	 	String adress_zip_code = request.getParameter("adress_zip_code");
 	   	 	String confirm = request.getParameter("confirmation");
+	   	 	String cc_num = request.getParameter("cc_num");
+	   	 	String cc_exp = request.getParameter("cc_exp");
+	   	 	String cc_cvv = request.getParameter("cc_cvv");
+	   	 	String phone = request.getParameter("phone");
+	   	 	
+	   	 	
 	   	 	
 	   	 	if (password.equals(confirm)) {
 	   	 		if (!userDAO.checkEmail(email)) {
 		   	 		System.out.println("Registration Successful! Added to database");
-		            user users = new user(email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, 1000,0);
+		            user users = new user(email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, 1000,0,cc_num,cc_exp,cc_cvv,phone);
 		   	 		userDAO.insert(users);
 		   	 		response.sendRedirect("login.jsp");
 	   	 		}

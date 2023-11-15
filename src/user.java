@@ -13,6 +13,11 @@ public class user
 	    protected String birthday;
 	    protected int cash_bal;
 	    protected int PPS_bal;
+	    protected String cc_num;
+	    protected String cc_exp;
+	    protected String cc_cvv;
+	    protected String phone;
+	    
 	 
 	    //constructors
 	    public user() {
@@ -23,14 +28,14 @@ public class user
 	        this.email = email;
 	    }
 	    
-	    public user(int customerid,String email,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal) 
+	    public user(int customerid,String email,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal, String cc_num, String cc_exp, String cc_cvv, String phone) 
 	    {
-	    	this(customerid,firstName,lastName,password,birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal);
+	    	this(customerid,firstName,lastName,password,birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal,cc_num, cc_exp, cc_cvv, phone);
 	    	this.email = email;
 	    }
 	 
 	
-	    public user(int customerid,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal) 
+	    public user(int customerid,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal, String cc_num, String cc_exp, String cc_cvv, String phone) 
 	    {
 	    	this.customerid = customerid;
 	    	this.firstName = firstName;
@@ -44,11 +49,16 @@ public class user
 	        this.adress_zip_code = adress_zip_code;
 	        this.cash_bal = cash_bal;
 	        this.PPS_bal = PPS_bal;
+	        this.cc_num = cc_num;
+	        this.cc_exp = cc_exp;
+	        this.cc_cvv = cc_cvv;
+	        this.phone = phone;
+	       
 	    }
 	    
 	   public user(String email, String firstName, String lastName, String password, String birthday,
 				String adress_street_num, String adress_street, String adress_city, String adress_state,
-				String adress_zip_code, int cash_bal, int PPS_bal) {
+				String adress_zip_code, int cash_bal, int PPS_bal, String cc_num, String cc_exp, String cc_cvv, String phone) {
 		   	
 		   	this.email = email;
 		   	this.firstName = firstName;
@@ -62,7 +72,12 @@ public class user
 	        this.adress_zip_code = adress_zip_code;
 	        this.cash_bal = cash_bal;
 	        this.PPS_bal = PPS_bal;
+	        this.cc_num = cc_num;
+	        this.cc_exp = cc_exp;
+	        this.cc_cvv = cc_cvv;
+	        this.phone = phone;
 		}
+
 
 		//getter and setter methods
 	    public int getcustomerid() {
@@ -149,5 +164,39 @@ public class user
 	    }
 	    public void setPPS_bal(int PPS_bal) {
 	    	this.PPS_bal = PPS_bal;
+	    	
 	    }
+	    public String getcc_num() {
+	    	return cc_num;
+	    	
+	    }
+	    public void setcc_num(String cc_num) {
+	    	this.cc_num = cc_num;
+	    	
+	    }
+	    public String getcc_exp() {
+	    	return cc_exp;
+	    }
+	    
+	    public void setcc_exp(String cc_exp) {
+	    	this.cc_exp = cc_exp;
+	    	
+	    }
+	    public String getcc_cvv() {
+	    	return cc_cvv;
+	    	
+	    }
+	    public void setcc_cvv(String cc_cvv) {
+	    	this.cc_cvv = cc_cvv;
+	    	
+	    }
+	    public String getphone() {
+	    	return phone;
+	    	
+	    }
+	    public void setphone(String phone) {
+	    	this.phone = phone;
+	    	
+	    }
+	    
 	}

@@ -24,6 +24,10 @@
                 <th>Birthday</th>
                 <th>cash_bal($)</th>
                 <th>PPS_bal</th>
+                <th>cc_num</th>
+                <th>cc_exp</th>
+                <th>cc_cvv</th>
+                <th>phone</th>
             </tr>
             <c:forEach var="user" items="${get_user}">
                 <tr style="text-align:center">
@@ -35,6 +39,10 @@
                     <td>"${user.birthday}"</td>
                     <td>"${user.cash_bal}"</td>
                     <td>"${user.PPS_bal}"</td>
+                    <td>"${user.cc_num}"</td>
+                    <td>"${user.cc_exp}"</td>
+                    <td>"${user.cc_cvv}"</td>
+                    <td>"${user.phone}"</td>
                  </tr>
             </c:forEach>
           </table>

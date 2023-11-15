@@ -30,6 +30,7 @@ public class quoteDAO
 	private static final long serialVersionUID = 1L;
 	private static final int customerid = 0;
 	public static Object insertquote;
+	public static Object insertorderfwork;
 	private Connection connect = null;
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
@@ -165,6 +166,24 @@ public class quoteDAO
         	connect.close();
         }
     }
+    
+    public void insertorderofwork(orderofwork orderofworks) throws SQLException {
+    	connect_func();         
+		String sql = "insert into orderofwork(quoteid, date, price) values (?, ?, ?)";
+		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+			preparedStatement.setInt(1, orderofworks.getQuoteId());
+			preparedStatement.setString(2, orderofworks.getDate());
+			preparedStatement.setInt(3, orderofworks.getPrice());
+			
+			
+			
+		preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+    
+    
+    
+    
     
     public void insertquote(quote quotes) throws SQLException {
     	connect_func();         

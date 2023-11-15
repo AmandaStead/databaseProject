@@ -52,7 +52,7 @@
             
             <c:forEach var="quote" items="${listquote}">
             <tr style="text-align:center">
-            <td><c:out value="${quote.quoteID}" /></td>
+                <td><c:out value="${quote.quoteID}" /></td>
                 <td><c:out value="${quote.serviceID}" /></td>
                 <td><c:out value="${quote.customerID}" /></td>
                 <td><c:out value="${quote.offer_id}" /></td>
@@ -64,12 +64,14 @@
                 <td><c:out value="${quote.ft_from_house}" /></td>
                 <td><c:out value="${quote.location}" /></td>
                 <td><c:out value="${quote.tree_count}" /></td>
-                <td> <a href="customerreply?id=${quote.quoteID}&date=${quote.date}" target="_self"><input type="button" value="${quote.clientDecision}" /></a></td>
+                <td> <a href="customerreply?id=${quote.quoteID}&date=${quote.date}&totalcost=${quote.totalcost}" target="_self"><input type="button" value="${quote.clientDecision}" /></a></td>
                 <td> <a href="supplierreply?id=${quote.quoteID}&date=${quote.date}" target="_self"><input type="button"  value="${quote.supplierDecision}" disabled  /></a></td>
                
             </tr>
             </c:forEach>
         </table>
-    </div>   
+    </div> 
+    
+      
 </body>
 </html>
