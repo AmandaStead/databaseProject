@@ -25,19 +25,4 @@
         <input type="submit" value="Submit Quote">
     </form>
 
-    <!-- Form for creating order of work -->
-    <h2>Create Order Of Work</h2>
-    <form action="insertorderofwork" method="post">
-        <label for="quoteid">Quote ID:</label>
-        <input type="text" name="quoteid" id="quoteid" required><br>
-
-        <label for="date">Date to be Serviced:</label>
-        <input type="text" name="date" id="date"><br>
-        
-        <label for="price">Final Price:</label>
-        <input type="text" name="price" id="price" required><br>
-
-        <input type="submit" value="Create Order of Work">
-    </form>
-</body>
-</html>
+ 
