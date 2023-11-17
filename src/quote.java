@@ -19,6 +19,7 @@ public class quote {
 
     public quote(String date, String custnote, String heightFT, String diameter_width, String ft_from_house, String location, String tree_count) {
        //createquote 
+    	//
         
     	
     	
