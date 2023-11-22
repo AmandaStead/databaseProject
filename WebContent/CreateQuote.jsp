@@ -3,10 +3,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Create New Quote</title>
+    <title>Request a Quote </title>
 </head>
 <body>
-    <h1>Create New Quote</h1>
+    <h1>Request a Quote, please fill out the information</h1>
 
     <form action="createquote" method="post">
       

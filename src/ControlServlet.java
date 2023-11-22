@@ -345,7 +345,7 @@ public class ControlServlet extends HttpServlet {
 	   	 	if (password.equals(confirm)) {
 	   	 		if (!userDAO.checkEmail(email)) {
 		   	 		System.out.println("Registration Successful! Added to database");
-		            user users = new user(email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code, 1000,0,cc_num,cc_exp,cc_cvv,phone);
+		            user users = new user(email,firstName, lastName, password, birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cc_num,cc_exp,cc_cvv,phone);
 		   	 		userDAO.insert(users);
 		   	 		response.sendRedirect("login.jsp");
 	   	 		}

@@ -11,8 +11,6 @@ public class user
 	    protected String adress_state;
 	    protected String adress_zip_code;
 	    protected String birthday;
-	    protected int cash_bal;
-	    protected int PPS_bal;
 	    protected String cc_num;
 	    protected String cc_exp;
 	    protected String cc_cvv;
@@ -20,22 +18,21 @@ public class user
 	    
 	 
 	    //constructors
-	    public user() {
-	    }
+	   
 	 
 	    public user(String email) 
 	    {
 	        this.email = email;
 	    }
 	    
-	    public user(int customerid,String email,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal, String cc_num, String cc_exp, String cc_cvv, String phone) 
+	    public user(int customerid,String email,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code,String cc_num, String cc_exp, String cc_cvv, String phone) 
 	    {
-	    	this(customerid,firstName,lastName,password,birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cash_bal,PPS_bal,cc_num, cc_exp, cc_cvv, phone);
+	    	this(customerid,firstName,lastName,password,birthday, adress_street_num,  adress_street,  adress_city,  adress_state,  adress_zip_code,cc_num, cc_exp, cc_cvv, phone);
 	    	this.email = email;
 	    }
 	 
 	
-	    public user(int customerid,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, int cash_bal,  int PPS_bal, String cc_num, String cc_exp, String cc_cvv, String phone) 
+	    public user(int customerid,String firstName, String lastName, String password,String birthday, String adress_street_num, String adress_street, String adress_city, String adress_state,String adress_zip_code, String cc_num, String cc_exp, String cc_cvv, String phone) 
 	    {
 	    	this.customerid = customerid;
 	    	this.firstName = firstName;
@@ -47,8 +44,6 @@ public class user
 	        this.adress_city= adress_city;
 	        this.adress_state = adress_state;
 	        this.adress_zip_code = adress_zip_code;
-	        this.cash_bal = cash_bal;
-	        this.PPS_bal = PPS_bal;
 	        this.cc_num = cc_num;
 	        this.cc_exp = cc_exp;
 	        this.cc_cvv = cc_cvv;
@@ -58,7 +53,7 @@ public class user
 	    
 	   public user(String email, String firstName, String lastName, String password, String birthday,
 				String adress_street_num, String adress_street, String adress_city, String adress_state,
-				String adress_zip_code, int cash_bal, int PPS_bal, String cc_num, String cc_exp, String cc_cvv, String phone) {
+				String adress_zip_code,String cc_num, String cc_exp, String cc_cvv, String phone) {
 		   	
 		   	this.email = email;
 		   	this.firstName = firstName;
@@ -70,8 +65,6 @@ public class user
 	        this.adress_city= adress_city;
 	        this.adress_state = adress_state;
 	        this.adress_zip_code = adress_zip_code;
-	        this.cash_bal = cash_bal;
-	        this.PPS_bal = PPS_bal;
 	        this.cc_num = cc_num;
 	        this.cc_exp = cc_exp;
 	        this.cc_cvv = cc_cvv;
@@ -151,21 +144,8 @@ public class user
 	    public void setAdress_zip_code(String adress_zip_code) {
 	        this.adress_zip_code = adress_zip_code;
 	    }
-	    
-	    public int getCash_bal() {
-	    	return cash_bal;
-	    }
-	    public void setCash_bal(int cash_bal) {
-	    	this.cash_bal = cash_bal;
-	    }
-	    
-	    public int getPPS_bal() {
-	    	return PPS_bal;
-	    }
-	    public void setPPS_bal(int PPS_bal) {
-	    	this.PPS_bal = PPS_bal;
-	    	
-	    }
+
+
 	    public String getcc_num() {
 	    	return cc_num;
 	    	

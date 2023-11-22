@@ -15,12 +15,12 @@
     <h1>Reply for Quote Dated <%= date %></h1>
     
 
-    <!-- Form for customer reply -->
+    
     <form action="customerquoteedit" method="post">
         <!-- Hidden input field to store quoteid -->
         <input type="hidden" name="quoteid" value="<%= id %>">
 
-        <!-- ... (other input fields for customer reply) ... -->
+        
         <label for="customerDecision">'Agree', 'Disagree', or 'Quit':</label>
         <input type='text' name="customerDecision" id="customerDecision" required><br>
         
@@ -28,17 +28,17 @@
         
         
 
-        <!-- Submit button for customer reply -->
+        
         <input type="submit" value="Submit Value">
     </form>
 
-    <!-- Button to create OrderOfWork -->
+    
     <h2>Create Order Of Work</h2>
     <form action="insertorderofwork" method="post">
-        <!-- Hidden input field to store quoteid -->
+        
         <input type="hidden" name="quoteid" value="<%= id %>">
 
-        <!-- ... (other input fields for order of work) ... -->
+        
         <label for="date">Date to be Serviced:</label>
         <input type="text" name="date" id="date" value=<%= date %>><br>
 

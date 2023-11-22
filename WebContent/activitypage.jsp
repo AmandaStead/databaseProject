@@ -15,7 +15,7 @@
 	<body>
 	 <center>
 		 <a href="login.jsp"target ="_self" > Logout</a><br><br> 
-		 <a href="CreateQuote.jsp"target ="_self" > Create Quote</a><br><br> 
+		 <a href="CreateQuote.jsp"target ="_self" > Request a Quote</a><br><br> 
 		 <form action = "userQuoteView">
 		<input type = "submit" value = "View your quotes"/>
 	</form>
