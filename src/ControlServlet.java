@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
- 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -203,35 +206,67 @@ public class ControlServlet extends HttpServlet {
 	        System.out.println("listQuote finished: 111111111111111111111111111111111111");}
 	    
 	    private void createquote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-	    	
-	    	
-	    	String date = request.getParameter("date");
+
+	        String scheduleStartStr = request.getParameter("schedulestart");
+	        Timestamp scheduleStart = null;
+	        if (scheduleStartStr != null && !scheduleStartStr.isEmpty()) {
+	            try {
+	                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	                Date parsedDate = dateFormat.parse(scheduleStartStr);
+	                scheduleStart = new Timestamp(parsedDate.getTime());
+	            } catch (ParseException e) {
+	                e.printStackTrace(); 
+	            }
+	        }
+
+	        String date = request.getParameter("date");
 	        String custnote = request.getParameter("custnote");
 	        String heightFTParam = request.getParameter("heightFT");
 	        String diameter_width = request.getParameter("diameter_width");
 	        String ft_from_house = request.getParameter("ft_from_house");
 	        String location = request.getParameter("location");
 	        String tree_count = request.getParameter("tree_count");
-	        
-	   	 	
-	    	quote quotes = new quote(date,custnote, heightFTParam, diameter_width, ft_from_house, location, tree_count);
-   	 		quoteDAO.insertquote(quotes);
-   	 		response.sendRedirect("ThankYou.jsp");	}
-	    
+
+	        quote quotes = new quote(scheduleStart, date, custnote, heightFTParam, diameter_width, ft_from_house, location, tree_count);
+	        quoteDAO.insertquote(quotes, request);
+	        response.sendRedirect("ThankYou.jsp");
+	    }
+
 	    private void insertorderofwork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-	    	
-	    	
-	    	String date = request.getParameter("date");
-	    	int quoteid = Integer.parseInt(request.getParameter("quoteid"));
-	    	int price = Integer.parseInt(request.getParameter("price"));
-	     
+	        int quoteid = Integer.parseInt(request.getParameter("quoteid"));
+	        int price = Integer.parseInt(request.getParameter("price"));
+
+	       
+	        String scheduleStartStr = request.getParameter("schedulestart");
+	        Timestamp scheduleStart = null;
+	        if (scheduleStartStr != null && !scheduleStartStr.isEmpty()) {
+	            try {
+	                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	                Date parsedDate = dateFormat.parse(scheduleStartStr);
+	                scheduleStart = new Timestamp(parsedDate.getTime());
+	            } catch (ParseException e) {
+	                e.printStackTrace(); 
+	            }
+	        }
+
 	        
-	   	 	
-	    	orderofwork orderofworks = new orderofwork(quoteid,date,price);
-   	 		quoteDAO.insertorderofwork(orderofworks);
-   	 		response.sendRedirect("ThankYou.jsp");	}
-	    
-	    
+	        String scheduleEndStr = request.getParameter("scheduleend");
+	        Timestamp scheduleEnd = null;
+	        if (scheduleEndStr != null && !scheduleEndStr.isEmpty()) {
+	            try {
+	                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	                Date parsedDate = dateFormat.parse(scheduleEndStr);
+	                scheduleEnd = new Timestamp(parsedDate.getTime());
+	            } catch (ParseException e) {
+	                e.printStackTrace(); 
+	            }
+	        }
+
+	        orderofwork orderofworks = new orderofwork(quoteid, price, scheduleStart, scheduleEnd);
+	        quoteDAO.insertorderofwork(orderofworks);
+	        response.sendRedirect("ThankYou.jsp");
+	    }
+
 	    private void editquote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 	    	
 	        
@@ -290,14 +325,14 @@ public class ControlServlet extends HttpServlet {
 				 System.out.println("Login Successful! Redirecting to root");
 				 session = request.getSession();
 				 session.setAttribute("username", email);
-				 session.setAttribute("customerid", customerId);
+				 session.setAttribute("root_customerid", customerId);
 				 rootPage(request, response, "");
 	    	 }
 	    	 else if (email.equals("john") && password.equals("pass1234")) {
 				 System.out.println("Login Successful! Redirecting to root");
 				 session = request.getSession();
 				 session.setAttribute("username", email);
-				 session.setAttribute("customerid", customerId);
+				 session.setAttribute("owner_customerid", customerId);
 				 
 				 request.getRequestDispatcher("ownerView.jsp").forward(request, response);
 	    	 }

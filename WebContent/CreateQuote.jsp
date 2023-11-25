@@ -6,13 +6,21 @@
     <title>Request a Quote </title>
 </head>
 <body>
+
     <h1>Request a Quote, please fill out the information</h1>
 
     <form action="createquote" method="post">
       
-
-        <label for="date">Date:</label>
+ 	
+ 		
+ 		
+        <label for="date">Today's Date:</label>
         <input type="text" name="date" id="date" required><br>
+        
+        
+        <label for="schedulestart">Start Date and Time: "2000-01-01 10:00:00"</label>
+        <input type="text" name="schedulestart" id="schedulestart"><br>
+       
 
         <label for="photo">Upload Photo:</label>
         <input type="file" name="photo" id="photo"><br>

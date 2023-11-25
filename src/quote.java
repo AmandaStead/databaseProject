@@ -1,10 +1,12 @@
-
+import java.sql.Timestamp;
 
 public class quote {
     protected int quoteID;
     protected int serviceID;
     protected int customerID;
     protected int offer_id;
+    private Timestamp schedulestart;
+    private Timestamp scheduleend;
     protected String date;
     protected int totalcost;
     protected String custnote;
@@ -17,13 +19,15 @@ public class quote {
     protected String supplierDecision;
     
 
-    public quote(String date, String custnote, String heightFT, String diameter_width, String ft_from_house, String location, String tree_count) {
-       //createquote 
+    public quote(Timestamp schedulestart,String date, String custnote, String heightFT, String diameter_width, String ft_from_house, String location, String tree_count) {
+       //createquoite 
     	//
         
     	
     	
     	
+    	
+    	this.schedulestart = schedulestart;
     	this.date = date;
         this.custnote = custnote;
         this.heightFT = heightFT;
@@ -43,12 +47,14 @@ public class quote {
     // Getters and setters 
 
     
-    public quote(int quoteID, int serviceid, int customerid, int offer_id, String date, int totalcost, String custnote, String heightft, String diameter_width, String ft_from_house, String location, String tree_count, String clientDecision, String supplierDecision) {
+    public quote(int quoteID, int serviceid, int customerid, int offer_id,Timestamp schedulestart,Timestamp scheduleend, String date, int totalcost, String custnote, String heightft, String diameter_width, String ft_from_house, String location, String tree_count, String clientDecision, String supplierDecision) {
     	
       	this.quoteID = quoteID;
       	this.serviceID = serviceid;
       	this.customerID = customerid;
       	this.offer_id = offer_id;
+      	this.schedulestart = schedulestart;
+      	this.scheduleend = scheduleend;
     	this.date = date;
     	this.totalcost = totalcost;
         this.custnote = custnote;
@@ -84,7 +90,7 @@ public class quote {
 
 
 
-	public quote(int quoteid, int serviceid, int offer_id, String date, int totalcost, String custnote,
+	public quote(int quoteid, int serviceid, int offer_id, Timestamp schedulestart, Timestamp scheduleend,String date, int totalcost, String custnote,
 			String heightft, String diameter_width, String ft_from_house, String location, String tree_count,
 			String clientDecision, String supplierDecision) {
 		// TODO Auto-generated constructor stub
@@ -92,6 +98,8 @@ public class quote {
       	this.serviceID = serviceid;
       	
       	this.offer_id = offer_id;
+      	this.schedulestart = schedulestart;
+      	this.scheduleend = scheduleend;
     	this.date = date;
     	this.totalcost = totalcost;
         this.custnote = custnote;
@@ -122,6 +130,23 @@ public class quote {
     public int getCustomerID() {
         return customerID;
     }
+    public Timestamp getSchedulestart() {
+        return schedulestart;
+    }
+
+    public void setSchedulestart(Timestamp schedulestart) {
+        this.schedulestart = schedulestart;
+    }
+
+    // Getter and Setter for scheduleend
+    public Timestamp getScheduleend() {
+        return scheduleend;
+    }
+
+    public void setScheduleend(Timestamp scheduleend) {
+        this.scheduleend = scheduleend;
+    }
+
 
     public String getDate() {
         return date;

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.sql.PreparedStatement;
 //import java.sql.Connection;
 //import java.sql.PreparedStatement;
@@ -105,6 +106,8 @@ public class quoteDAO
             int serviceid = resultSet.getInt("serviceid");
             int customerid = resultSet.getInt("customerid");
             int offer_id = resultSet.getInt("offer_id");
+            Timestamp schedulestart = resultSet.getTimestamp("schedulestart");
+            Timestamp scheduleend = resultSet.getTimestamp("scheduleend");
             String date = resultSet.getString("date");
             int totalcost = resultSet.getInt("totalcost");
             String custnote = resultSet.getString("custnote");
@@ -118,7 +121,7 @@ public class quoteDAO
             
 
              
-            quote quotes = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
+            quote quotes = new quote(quoteid,serviceid, customerid, offer_id,schedulestart,scheduleend, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
             listquote.add(quotes);
         }        
         resultSet.close();
@@ -140,6 +143,8 @@ public class quoteDAO
             int serviceid = resultSet.getInt("serviceid");
             int customerid = resultSet.getInt("customerid");
             int offer_id = resultSet.getInt("offer_id");
+            Timestamp schedulestart = resultSet.getTimestamp("schedulestart");
+            Timestamp scheduleend = resultSet.getTimestamp("scheduleend");
             String date = resultSet.getString("date");
             int totalcost = resultSet.getInt("totalcost");
             String custnote = resultSet.getString("custnote");
@@ -153,7 +158,7 @@ public class quoteDAO
             
 
              
-            quote quotes = new quote(quoteid,serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
+            quote quotes = new quote(quoteid,serviceid, customerid, offer_id,schedulestart,scheduleend, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
             listquote.add(quotes);
         }        
         resultSet.close();
@@ -169,43 +174,55 @@ public class quoteDAO
     
     public void insertorderofwork(orderofwork orderofworks) throws SQLException {
     	connect_func();         
-		String sql = "insert into orderofwork(quoteid, date, price) values (?, ?, ?)";
+		String sql = "insert into orderofwork(quoteid,price,schedulestart,scheduleend) values (?, ?, ?, ?)";
 		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
 			preparedStatement.setInt(1, orderofworks.getQuoteId());
-			preparedStatement.setString(2, orderofworks.getDate());
-			preparedStatement.setInt(3, orderofworks.getPrice());
+			preparedStatement.setInt(2, orderofworks.getPrice());
+			preparedStatement.setTimestamp(3, orderofworks.getschedulestart());
+			preparedStatement.setTimestamp(4, orderofworks.getschedulend());
 			
 			
-			
-		preparedStatement.executeUpdate();
-        preparedStatement.close();
-    }
-    
-    
-    
-    
-    
-    public void insertquote(quote quotes) throws SQLException {
-    	connect_func();         
-		String sql = "insert into quote(quoteid, serviceid, customerid, offer_id, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location, tree_count) values (?, ?, ?, ?,?, ?, ?, ?, ?, ?,?,?)";
-		preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
-			preparedStatement.setInt(1, quotes.getQuoteID());
-			preparedStatement.setInt(2, quotes.getServiceID());
-			preparedStatement.setInt(3, quotes.getCustomerID());
-			preparedStatement.setInt(4, quotes.getoffer_id());
-			preparedStatement.setString(5, quotes.getDate());
-			preparedStatement.setInt(6, quotes.gettotalcost());
-			preparedStatement.setString(7, quotes.getCustnote());		
-			preparedStatement.setString(8, quotes.getHeightFT());		
-			preparedStatement.setString(9, quotes.getdiameter_width());
-			preparedStatement.setString(10, quotes.getft_from_house());
-			preparedStatement.setString(11, quotes.getlocation());
-			preparedStatement.setString(12, quotes.gettree_count());
 			
 			
 		preparedStatement.executeUpdate();
         preparedStatement.close();
     }
+    
+    
+    
+    
+    public void insertquote(quote quotes, HttpServletRequest request) throws SQLException {
+        HttpSession session = request.getSession();
+        String customerId = (String) session.getAttribute("customerId");
+        connect_func();
+
+        int customerIdInt = Integer.parseInt(customerId);
+
+        String sql = "insert into quote(quoteid, serviceid,customerid, schedulestart, scheduleend, date, totalcost, custnote, heightft, diameter_width, ft_from_house, location, tree_count) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
+        preparedStatement.setInt(1, quotes.getQuoteID());
+        preparedStatement.setInt(2, quotes.getServiceID());
+        
+        // Set the customerid retrieved from the session
+        preparedStatement.setInt(3, customerIdInt);
+        
+        preparedStatement.setTimestamp(4, quotes.getSchedulestart());
+        preparedStatement.setTimestamp(5, quotes.getScheduleend());
+
+        preparedStatement.setString(6, quotes.getDate());
+        preparedStatement.setInt(7, quotes.gettotalcost());
+        preparedStatement.setString(8, quotes.getCustnote());
+        preparedStatement.setString(9, quotes.getHeightFT());
+        preparedStatement.setString(10, quotes.getdiameter_width());
+        preparedStatement.setString(11, quotes.getft_from_house());
+        preparedStatement.setString(12, quotes.getlocation());
+        preparedStatement.setString(13, quotes.gettree_count());
+
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    
     
     public boolean deletequote(int quoteid) throws SQLException {
         String sql = "DELETE FROM quote WHERE quoteid = ?";        
@@ -254,6 +271,8 @@ public class quoteDAO
             int serviceID = resultSet.getInt("serviceID");
             int customerID = resultSet.getInt("customerID");
             int offerID = resultSet.getInt("offerID");
+            Timestamp schedulestart = resultSet.getTimestamp("schedulestart");
+            Timestamp scheduleend = resultSet.getTimestamp("scheduleend");
             String date = resultSet.getString("date");
             int totalcost = resultSet.getInt("totalcost"); 
             String custnote = resultSet.getString("custnote"); 
@@ -265,7 +284,7 @@ public class quoteDAO
             String clientDecision = resultSet.getString("clientDecision"); 
             String supplierDecision = resultSet.getString("supplierDecision");
           
-            quote = new quote(quoteID, serviceID, customerID, offerID, date, totalcost, custnote,  heightFT, diameter_width,ft_from_house, location,tree_count,clientDecision, supplierDecision);
+            quote = new quote(quoteID, serviceID, customerID, offerID,schedulestart,scheduleend, date, totalcost, custnote,  heightFT, diameter_width,ft_from_house, location,tree_count,clientDecision, supplierDecision);
         }
         resultSet.close();
         statement.close();

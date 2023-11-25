@@ -19,6 +19,8 @@
                 <th>QuoteID</th>
                 <th>serviceID</th>
                 <th>CustomerID</th>
+                <th>schedulestart</th>
+                <th>scheduleend</th>
                 <th>Date</th>
                 <th>TotalCost</th>
                 <th>CustomerNote</th>
@@ -30,6 +32,8 @@
                     <td>"${quote.quoteid}" </td>
                     <td>"${quote.serviceid}"</td>
                     <td>"${quote.customerid}"</td>
+                    <td>"${quote.schedulestart}"</td>
+                    <td>"${quote.scheduleend}"</td>
                     <td>"${quote.date}"</td>
                     <td>"${quote.totalcost}"</td>
                     <td>"${quote.custnote}"</td>

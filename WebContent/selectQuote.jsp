@@ -13,6 +13,8 @@
                 <th>ServiceID</th>
                 <th>offer_id</th>
                 <th>CustomerID</th>
+                <th>schedulestart</th>
+                <th>scheduleend</th>
                 <th>Date</th>
                 <th>TotalCost</th>
                 <th>CustomerNote</th>
@@ -33,6 +35,8 @@
                 <td><c:out value="${quote.serviceID}" /></td>
                 <td><c:out value="${quote.customerID}" /></td>
                 <td><c:out value="${quote.offer_id}" /></td>
+                <td><c:out value="${quote.schedulestart}" /></td>
+                <td><c:out value="${quote.scheduleend}" /></td>
                 <td><c:out value="${quote.date}" /></td>
                 <td><c:out value="${quote.totalcost}" /></td>
                 <td><c:out value="${quote.custnote}" /></td>

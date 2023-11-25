@@ -14,8 +14,10 @@
             <tr>
 				<th>QuoteID</th>
                 <th>ServiceID</th>
-                <th>offer_id</th>
+                
                 <th>CustomerID</th>
+                <th>schedulestart</th>
+                <th>scheduleend</th>
                 <th>Date</th>
                 <th>TotalCost</th>
                 <th>Note</th>
@@ -40,7 +42,9 @@
             <td><c:out value="${quote.quoteID}" /></td>
                 <td><c:out value="${quote.serviceID}" /></td>
                 <td><c:out value="${quote.customerID}" /></td>
-                <td><c:out value="${quote.offer_id}" /></td>
+                
+                <td><c:out value="${quote.schedulestart}" /></td>
+                <td><c:out value="${quote.scheduleend}" /></td>
                 <td><c:out value="${quote.date}" /></td>
                 <td><c:out value="${quote.totalcost}" /></td>
                 <td><c:out value="${quote.custnote}" /></td>
@@ -49,8 +53,8 @@
                 <td><c:out value="${quote.ft_from_house}" /></td>
                 <td><c:out value="${quote.location}" /></td>
                 <td><c:out value="${quote.tree_count}" /></td>
-                <td> <a href="customerreply?id=${quote.quoteID}&date=${quote.date}" target="_self"><input type="button" value="${quote.clientDecision}" disabled /></a></td>
-                <td> <a href="supplierreply?id=${quote.quoteID}&date=${quote.date}" target="_self"><input type="button" value="${quote.supplierDecision}" /></a></td>
+                <td> <a href="customerreply?id=${quote.quoteID}&date=${quote.date}&schedulestart=${quote.schedulestart}&scheduleend=${quote.scheduleend}" target="_self"><input type="button" value="${quote.clientDecision}" disabled /></a></td>
+                <td> <a href="supplierreply?id=${quote.quoteID}&date=${quote.date}&schedulestart=${quote.schedulestart}&scheduleend=${quote.scheduleend}" target="_self"><input type="button" value="${quote.supplierDecision}" /></a></td>
                
             </tr>
             </c:forEach>

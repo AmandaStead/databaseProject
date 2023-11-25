@@ -1,17 +1,23 @@
+import java.sql.Timestamp;
+
 public class orderofwork {
     private int quoteId;
-    private String date;
     private int price;
+    private Timestamp schedulestart;
+    private Timestamp scheduleend;
+    
 
     // Constructors
 
     public orderofwork() {
     }
 
-    public orderofwork(int quoteId, String date , int price) {
+    public orderofwork(int quoteId,int price,Timestamp schedulestart,Timestamp scheduleend) {
         this.quoteId = quoteId;
-        this.date = date;
         this.price = price;
+        this.schedulestart = schedulestart;
+        this.scheduleend = scheduleend;
+       
     }
 
     // Getters and Setters
@@ -24,13 +30,20 @@ public class orderofwork {
         this.quoteId = quoteId;
     }
 
-    public String getDate() {
-        return date;
+    public Timestamp getschedulestart() {
+        return schedulestart;
     }
+    public void setschedulestart(Timestamp schedulestart) {
+        this.schedulestart = schedulestart;
+    }
+    public Timestamp getschedulend() {
+        return scheduleend;
+    }
+    public void setscheduleend(Timestamp scheduleend) {
+        this.scheduleend = scheduleend;
+    }
+    
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     public int getPrice() {
         return price;
@@ -46,7 +59,8 @@ public class orderofwork {
     public String toString() {
         return "OrderOfWork{" +
                 "quoteId=" + quoteId +
-                ", date=" + date +
+                ", schedulestart=" + schedulestart +
+                ", scheduleend=" + scheduleend +
                 ", price=" + price +
                 '}';
     }
