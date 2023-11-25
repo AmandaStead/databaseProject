@@ -30,7 +30,7 @@
             <c:forEach var="quote" items="${get_quote}">
                 <tr style="text-align:center">
                     <td>"${quote.quoteid}" </td>
-                    <td>"${quote.serviceid}"</td>
+                   
                     <td>"${quote.customerid}"</td>
                     <td>"${quote.schedulestart}"</td>
                     <td>"${quote.scheduleend}"</td>

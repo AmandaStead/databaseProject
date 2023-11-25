@@ -32,9 +32,9 @@
  <c:forEach var="quote" items="${listquote}">
             <tr style="text-align:center">
                 <td><c:out value="${quote.quoteID}" /></td>
-                <td><c:out value="${quote.serviceID}" /></td>
+               
                 <td><c:out value="${quote.customerID}" /></td>
-                <td><c:out value="${quote.offer_id}" /></td>
+               
                 <td><c:out value="${quote.schedulestart}" /></td>
                 <td><c:out value="${quote.scheduleend}" /></td>
                 <td><c:out value="${quote.date}" /></td>

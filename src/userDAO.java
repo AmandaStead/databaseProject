@@ -326,17 +326,55 @@ public class userDAO
         // Create new tables
         
         statement.executeUpdate("CREATE TABLE if not EXISTS User (customerid INT PRIMARY KEY AUTO_INCREMENT, email VARCHAR(50) NOT NULL, firstname VARCHAR(10), lastName VARCHAR(10) NOT NULL, phone VARCHAR(10), password VARCHAR(20) NOT NULL, birthday DATE NOT NULL, adress_street_num VARCHAR(4), adress_street VARCHAR(30), adress_city VARCHAR(20), adress_state VARCHAR(2), adress_zip_code VARCHAR(5), cc_num VARCHAR(16) DEFAULT 0000, cc_exp DATE, cc_cvv VARCHAR(3));");
-        statement.executeUpdate("CREATE TABLE if not EXISTS quote (quoteid INT PRIMARY KEY AUTO_INCREMENT, serviceid INT, offer_id INT, customerid INT,schedulestart DATETIME,scheduleend DATETIME, date DATE, totalcost DECIMAL(10,2), custnote VARCHAR(50), heightFT INT, diameter_width INT, ft_from_house INT, location VARCHAR(50), tree_count VARCHAR(20), clientDecision VARCHAR(50), supplierDecision VARCHAR(50));");     
+        statement.executeUpdate("CREATE TABLE if not EXISTS quote (quoteid INT PRIMARY KEY AUTO_INCREMENT, customerid INT,schedulestart DATETIME,scheduleend DATETIME, date DATE, totalcost DECIMAL(10,2), custnote VARCHAR(50), heightFT INT, diameter_width INT, ft_from_house INT, location VARCHAR(50), tree_count VARCHAR(20), clientDecision VARCHAR(50), supplierDecision VARCHAR(50));");     
         statement.executeUpdate("CREATE TABLE if not EXISTS tree(id INTEGER,quoteid INTEGER,size DOUBLE,height DOUBLE,	distanceFromHouse DOUBLE,PRIMARY KEY(id),FOREIGN KEY(quoteid) REFERENCES quote(quoteid));");
-        statement.executeUpdate("CREATE TABLE if not EXISTS QuotesMessages(id INTEGER,customerid INTEGER,quoteid INTEGER,msgtime DATETIME,price DOUBLE,schedulestart DATETIME,scheduleend DATETIME,note VARCHAR(200),PRIMARY KEY(id),FOREIGN KEY(customerid) REFERENCES User(customerid),FOREIGN KEY(quoteid) REFERENCES User(customerid));");
+        statement.executeUpdate("CREATE TABLE if not EXISTS QuotesMessages(id INTEGER,customerid INTEGER,quoteid INTEGER,msgtime DATETIME,price DOUBLE,schedulestart DATETIME,scheduleend DATETIME,note VARCHAR(200),PRIMARY KEY(id));");
         statement.executeUpdate("CREATE TABLE if not EXISTS orderofwork(id INT PRIMARY KEY AUTO_INCREMENT,quoteid INTEGER,price DECIMAL(10,2),schedulestart DATETIME,scheduleend DATETIME, FOREIGN KEY(quoteid) REFERENCES quote(quoteid));");
-        statement.executeUpdate("CREATE TABLE if not EXISTS Bills (id INTEGER,orderid INTEGER,price DOUBLE,discount DOUBLE,balance DOUBLE,status VARCHAR(20),PRIMARY KEY(id),FOREIGN KEY(orderid) REFERENCES orderofwork(id));");
-        statement.executeUpdate("CREATE TABLE if not EXISTS BillsMessages(id INTEGER,customerid INTEGER,billid INTEGER,msgtime DATETIME,price DOUBLE,schedulestart DATETIME,scheduleend DATETIME,note VARCHAR(200),PRIMARY KEY(id),FOREIGN KEY(customerid) REFERENCES User(customerid),FOREIGN KEY(billid) REFERENCES Bills(id));");
+        statement.executeUpdate("CREATE TABLE if not EXISTS Bills (id INTEGER,orderid INTEGER,price DOUBLE,discount DOUBLE,balance DOUBLE,status VARCHAR(20),PRIMARY KEY(id));");
+        statement.executeUpdate("CREATE TABLE if not EXISTS BillsMessages(id INTEGER,customerid INTEGER,billid INTEGER,msgtime DATETIME,price DOUBLE,schedulestart DATETIME,scheduleend DATETIME,note VARCHAR(200),PRIMARY KEY(id));");
         
         
       
         
         // Insert data
+        
+        statement.executeUpdate("INSERT INTO BillsMessages(id,customerid,billid,msgtime,price,schedulestart,scheduleend,note) VALUES('1','1','1','2023-01-01 01:00:00','1000','2023-02-02 04:00:00','2024-01-01 03:00:00','Need to reschedule'),"+
+        		 "('2','2','2','2023-02-02 10:00:00','500','2023-03-03 04:00:00','2023-03-10 05:00:00','Call first, yes'),"+
+        	        "('3','3','3','2023-04-04 04:00:00','200','2023-05-05 05:00:30','2023-05-05 06:00:00','this time will work'),"+
+        	        "('4','4','4','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?'),"+
+        	        "('5','5','5','2024-02-02 06:00:00','600','2024-07-07 04:00:00','2024-04-04 03:00:00','this will work'),"+
+        	        "('6','6','6','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?'),"+
+        	        "('7','7','7','2023-02-02 10:00:00','500','2023-03-03 04:00:00','2023-03-10 05:00:00','Call first, yes'),"+
+        	        "('8','8','8','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?'),"+
+        	        "('9','9','9','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?'),"+
+        	        "('10','10','10','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?');");
+        	        
+       
+        statement.executeUpdate("INSERT INTO Bills(id,orderid,price,discount,balance,status) VALUES ('1','1','250','50','100','pending'),"+
+        "('2','2','700','150','500','paid'),"+
+        "('3','3','400','80','320','paid')," +
+        "('4','4','500','100','400','pending'),"+
+        "('5','5','1000','300','700','paid'),"+
+        "('6','7','700','100','600','paid'),"+
+        "('7','7','500','100','400','pending'),"+
+        "('8','8','500','100','400','pending'),"+
+        "('9','9','400','100','300','pending'),"+
+        "('10','10','700','200','500','paid');");
+        		
+        
+        statement.executeUpdate("INSERT INTO QuotesMessages(id,customerid,quoteid,msgtime,price,schedulestart,scheduleend,note) VALUES ('1','1','1','2023-10-26 15:30:00','200','2023-10-26 15:30:00','2023-10-26 15:30:00','this time will work')," +
+        "('2','2','2','2023-02-02 10:00:00','500','2023-03-03 04:00:00','2023-03-10 05:00:00','Call first, yes'),"+
+        "('3','3','3','2023-04-04 04:00:00','200','2023-05-05 05:00:30','2023-05-05 06:00:00','this time will work'),"+
+        "('4','4','4','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?'),"+
+        "('5','5','5','2024-02-02 06:00:00','600','2024-07-07 04:00:00','2024-04-04 03:00:00','this will work'),"+
+        "('6','6','6','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?'),"+
+        "('7','7','7','2023-02-02 10:00:00','500','2023-03-03 04:00:00','2023-03-10 05:00:00','Call first, yes'),"+
+        "('8','8','8','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?'),"+
+        "('9','9','9','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?'),"+
+        "('10','10','10','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?');");
+        
+        
+        
         statement.executeUpdate("INSERT INTO User (email, firstname, lastname, phone, password, birthday, adress_street_num, adress_street, adress_city, adress_state, adress_zip_code, cc_num, cc_exp, cc_cvv) VALUES ('susie@gmail.com', 'Susie ', 'Guzman', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202','414123541254145', '2020-01-01', '441'), "+
         		"('susie2@gmail.com', 'Susie ', 'Guzman', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202','414123541254145', '2020-01-01', '441'),"+
     		 	"('don@gmail.com', 'Don', 'Cummings', '5842124561', 'don123', '1969-03-20', '1000', 'hi street', 'mama', 'MO', '12345','414123541254145', '2020-01-01', '441'),"+
@@ -351,16 +389,16 @@ public class userDAO
     			"('john', 'default', 'default','0000000000', 'pass1234', '2020-10-10', '0000', 'Default', 'Default', 'OH', '12345','default', '2020-02-02', '000'),"+
     			"('root', 'default', 'default','0000000000', 'pass1234', '2020-10-10', '0000', 'Default', 'Default', 'OH', '12345', 'default', '2020-02-02', '000');");  
         
-	statement.executeUpdate("INSERT INTO quote(quoteid, serviceid, offer_id, customerid,schedulestart,scheduleend, date, totalcost, custnote, heightFT, diameter_width, ft_from_house,location, tree_count,clientDecision, supplierDecision) VALUES ('10','10','10','10','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111','Need 3 trees trimmed', '5', '10', 10, 'Right side of house','4', 'agreement','agreement'),"+
-        		"('1','1','1','1','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '1 tree taken down', '8', '3','8','Front of House', '6', 'agreement','disagree'),"+    
-        		"('2','2','2','2','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '4 trees removed', '5','2', '8','backyard','3', 'agreement','disagree')," +
-        		"('3','3','3','3','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', 'Trees trimmed', '3','5','7','driveway','9', 'agreement','agreement')," +
-        		"('4','4','4','4','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', 'Trees trimmed', '12','6','12','driveway','5', 'Disagree','agreement')," +
-        		"('5','5','5','5','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111','3 trimmed', '7','4', '8', 'front yard right side','2', 'agreement', 'disagree')," +
-        		"('6','6','6','6','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '6 trees trimmed', '5','4','17','backyard','6', 'Disagree','agreement')," +
-        		"('7','7','7','7','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '2 Trees removed and 5 trimmed', '4','5','15','side of house','5', 'agreement','agreement')," +
-        		"('8','8','8','8','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111','1 tree trimmed', '6','6','17','side of house','11', 'Disagree','Disagree')," +
-        		"('9','9','9','9','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '1 tree trimmed, 2 removed', '6','2','7','front yard','12','Disagree','agreement');");  
+	statement.executeUpdate("INSERT INTO quote(quoteid,customerid,schedulestart,scheduleend, date, totalcost, custnote, heightFT, diameter_width, ft_from_house,location, tree_count,clientDecision, supplierDecision) VALUES ('10','10','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111','Need 3 trees trimmed', '5', '10', 10, 'Right side of house','4', 'agreement','agreement'),"+
+        		"('1','1','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '1 tree taken down', '8', '3','8','Front of House', '6', 'agreement','disagree'),"+    
+        		"('2','2','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '4 trees removed', '5','2', '8','backyard','3', 'agreement','disagree')," +
+        		"('3','3','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', 'Trees trimmed', '3','5','7','driveway','9', 'agreement','agreement')," +
+        		"('4','4','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', 'Trees trimmed', '12','6','12','driveway','5', 'Disagree','agreement')," +
+        		"('5','5','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111','3 trimmed', '7','4', '8', 'front yard right side','2', 'agreement', 'disagree')," +
+        		"('6','6','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '6 trees trimmed', '5','4','17','backyard','6', 'Disagree','agreement')," +
+        		"('7','7','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '2 Trees removed and 5 trimmed', '4','5','15','side of house','5', 'agreement','agreement')," +
+        		"('8','8','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111','1 tree trimmed', '6','6','17','side of house','11', 'Disagree','Disagree')," +
+        		"('9','9','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '1 tree trimmed, 2 removed', '6','2','7','front yard','12','Disagree','agreement');");  
 	 statement.executeUpdate("INSERT INTO tree (id, quoteid,size,height,distanceFromHouse) VALUES ('1','1','10','15','25'),"
 	      		+ "('2','2','20', '25','50'),"
 	      		+ "('3','3','30', '35','15'),"

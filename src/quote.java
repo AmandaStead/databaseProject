@@ -47,12 +47,12 @@ public class quote {
     // Getters and setters 
 
     
-    public quote(int quoteID, int serviceid, int customerid, int offer_id,Timestamp schedulestart,Timestamp scheduleend, String date, int totalcost, String custnote, String heightft, String diameter_width, String ft_from_house, String location, String tree_count, String clientDecision, String supplierDecision) {
+    public quote(int quoteID, int customerid, Timestamp schedulestart,Timestamp scheduleend, String date, int totalcost, String custnote, String heightft, String diameter_width, String ft_from_house, String location, String tree_count, String clientDecision, String supplierDecision) {
     	
       	this.quoteID = quoteID;
-      	this.serviceID = serviceid;
+      	
       	this.customerID = customerid;
-      	this.offer_id = offer_id;
+      	
       	this.schedulestart = schedulestart;
       	this.scheduleend = scheduleend;
     	this.date = date;
@@ -90,14 +90,14 @@ public class quote {
 
 
 
-	public quote(int quoteid, int serviceid, int offer_id, Timestamp schedulestart, Timestamp scheduleend,String date, int totalcost, String custnote,
+	public quote(int quoteid, Timestamp schedulestart, Timestamp scheduleend,String date, int totalcost, String custnote,
 			String heightft, String diameter_width, String ft_from_house, String location, String tree_count,
 			String clientDecision, String supplierDecision) {
 		// TODO Auto-generated constructor stub
 		this.quoteID = quoteid;
-      	this.serviceID = serviceid;
       	
-      	this.offer_id = offer_id;
+      	
+      	
       	this.schedulestart = schedulestart;
       	this.scheduleend = scheduleend;
     	this.date = date;
@@ -120,12 +120,6 @@ public class quote {
         return quoteID;
     }
 
-    public int getServiceID() {
-        return serviceID;
-    }
-    public int getoffer_id() {
-        return offer_id;
-    }
 
     public int getCustomerID() {
         return customerID;
@@ -185,13 +179,6 @@ public class quote {
     // Setter methods
     public void setQuoteID(int quoteID) {
         this.quoteID = quoteID;
-    }
-
-    public void setServiceID(int serviceID) {
-        this.serviceID = serviceID;
-    }
-    public void setoffer_id(int offer_id) {
-        this.offer_id = offer_id;
     }
 
 

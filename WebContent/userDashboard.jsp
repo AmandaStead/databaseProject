@@ -33,7 +33,7 @@
             <caption><h2>List of Quotes</h2></caption>
             <tr>
 				<th>QuoteID</th>
-                <th>ServiceID</th>
+                
                 
                 <th>CustomerID</th>
                 <th>schedulestart</th>
@@ -55,7 +55,7 @@
             <c:forEach var="quote" items="${listquote}">
             <tr style="text-align:center">
                 <td><c:out value="${quote.quoteID}" /></td>
-                <td><c:out value="${quote.serviceID}" /></td>
+                
                 <td><c:out value="${quote.customerID}" /></td>
                 
                 <td><c:out value="${quote.schedulestart}" /></td>

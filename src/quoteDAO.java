@@ -103,9 +103,9 @@ public class quoteDAO
          
         while (resultSet.next()) {
         	int quoteid = resultSet.getInt("quoteid");
-            int serviceid = resultSet.getInt("serviceid");
+            
             int customerid = resultSet.getInt("customerid");
-            int offer_id = resultSet.getInt("offer_id");
+            
             Timestamp schedulestart = resultSet.getTimestamp("schedulestart");
             Timestamp scheduleend = resultSet.getTimestamp("scheduleend");
             String date = resultSet.getString("date");
@@ -121,7 +121,7 @@ public class quoteDAO
             
 
              
-            quote quotes = new quote(quoteid,serviceid, customerid, offer_id,schedulestart,scheduleend, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
+            quote quotes = new quote(quoteid,customerid,schedulestart,scheduleend, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
             listquote.add(quotes);
         }        
         resultSet.close();
@@ -140,9 +140,9 @@ public class quoteDAO
         ResultSet resultSet = statement.executeQuery(sql);
         while (resultSet.next()) {
         	int quoteid = resultSet.getInt("quoteid");
-            int serviceid = resultSet.getInt("serviceid");
+            
             int customerid = resultSet.getInt("customerid");
-            int offer_id = resultSet.getInt("offer_id");
+            
             Timestamp schedulestart = resultSet.getTimestamp("schedulestart");
             Timestamp scheduleend = resultSet.getTimestamp("scheduleend");
             String date = resultSet.getString("date");
@@ -158,7 +158,7 @@ public class quoteDAO
             
 
              
-            quote quotes = new quote(quoteid,serviceid, customerid, offer_id,schedulestart,scheduleend, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
+            quote quotes = new quote(quoteid,customerid,schedulestart,scheduleend, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
             listquote.add(quotes);
         }        
         resultSet.close();
@@ -198,25 +198,25 @@ public class quoteDAO
 
         int customerIdInt = Integer.parseInt(customerId);
 
-        String sql = "insert into quote(quoteid, serviceid,customerid, schedulestart, scheduleend, date, totalcost, custnote, heightft, diameter_width, ft_from_house, location, tree_count) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into quote(quoteid,customerid, schedulestart, scheduleend, date, totalcost, custnote, heightft, diameter_width, ft_from_house, location, tree_count) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
         preparedStatement.setInt(1, quotes.getQuoteID());
-        preparedStatement.setInt(2, quotes.getServiceID());
+        
         
         // Set the customerid retrieved from the session
-        preparedStatement.setInt(3, customerIdInt);
+        preparedStatement.setInt(2, customerIdInt);
         
-        preparedStatement.setTimestamp(4, quotes.getSchedulestart());
-        preparedStatement.setTimestamp(5, quotes.getScheduleend());
+        preparedStatement.setTimestamp(3, quotes.getSchedulestart());
+        preparedStatement.setTimestamp(4, quotes.getScheduleend());
 
-        preparedStatement.setString(6, quotes.getDate());
-        preparedStatement.setInt(7, quotes.gettotalcost());
-        preparedStatement.setString(8, quotes.getCustnote());
-        preparedStatement.setString(9, quotes.getHeightFT());
-        preparedStatement.setString(10, quotes.getdiameter_width());
-        preparedStatement.setString(11, quotes.getft_from_house());
-        preparedStatement.setString(12, quotes.getlocation());
-        preparedStatement.setString(13, quotes.gettree_count());
+        preparedStatement.setString(5, quotes.getDate());
+        preparedStatement.setInt(6, quotes.gettotalcost());
+        preparedStatement.setString(7, quotes.getCustnote());
+        preparedStatement.setString(8, quotes.getHeightFT());
+        preparedStatement.setString(9, quotes.getdiameter_width());
+        preparedStatement.setString(10, quotes.getft_from_house());
+        preparedStatement.setString(11, quotes.getlocation());
+        preparedStatement.setString(12, quotes.gettree_count());
 
         preparedStatement.executeUpdate();
         preparedStatement.close();
@@ -268,9 +268,9 @@ public class quoteDAO
          
         if (resultSet.next()) {
         	
-            int serviceID = resultSet.getInt("serviceID");
+            
             int customerID = resultSet.getInt("customerID");
-            int offerID = resultSet.getInt("offerID");
+            
             Timestamp schedulestart = resultSet.getTimestamp("schedulestart");
             Timestamp scheduleend = resultSet.getTimestamp("scheduleend");
             String date = resultSet.getString("date");
@@ -284,7 +284,7 @@ public class quoteDAO
             String clientDecision = resultSet.getString("clientDecision"); 
             String supplierDecision = resultSet.getString("supplierDecision");
           
-            quote = new quote(quoteID, serviceID, customerID, offerID,schedulestart,scheduleend, date, totalcost, custnote,  heightFT, diameter_width,ft_from_house, location,tree_count,clientDecision, supplierDecision);
+            quote = new quote(quoteID,customerID,schedulestart,scheduleend, date, totalcost, custnote,  heightFT, diameter_width,ft_from_house, location,tree_count,clientDecision, supplierDecision);
         }
         resultSet.close();
         statement.close();
