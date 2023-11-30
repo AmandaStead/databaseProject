@@ -85,6 +85,8 @@ public class quoteDAO
         }
     }
     
+ 
+        
     public List<quote> listOnequote(HttpServletRequest request) throws SQLException {
     	HttpSession session = request.getSession();
         String customerId = (String) session.getAttribute("customerId");
@@ -237,7 +239,7 @@ public class quoteDAO
     }
      
     public boolean update(quote quotes) throws SQLException {
-        String sql = "update quote set supplierDecision=?,custnote = ?, totalcost=? where quoteid=?";
+        String sql = "update quote set supplierDecision=?,custnote = ?, totalcost=?, scheduleend=? where quoteid=?";
         connect_func();
         
         preparedStatement = (PreparedStatement) connect.prepareStatement(sql);
@@ -246,7 +248,9 @@ public class quoteDAO
         preparedStatement.setString(1, quotes.getsupplierDecision());
         preparedStatement.setString(2, quotes.getCustnote());
         preparedStatement.setInt(3, quotes.gettotalcost());
-        preparedStatement.setInt(4, quotes.getQuoteID());
+        preparedStatement.setTimestamp(4, quotes.getScheduleend());
+        preparedStatement.setInt(5, quotes.getQuoteID());
+        
         
 	
         boolean rowUpdated = preparedStatement.executeUpdate() > 0;

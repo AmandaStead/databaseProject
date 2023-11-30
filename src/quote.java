@@ -18,6 +18,8 @@ public class quote {
     protected String clientDecision;
     protected String supplierDecision;
     
+    
+    
 
     public quote(Timestamp schedulestart,String date, String custnote, String heightFT, String diameter_width, String ft_from_house, String location, String tree_count) {
        //createquoite 
@@ -71,13 +73,14 @@ public class quote {
 
 
 
-	public quote(int quoteID, String custnote, int totalcost,String clientDecision, String supplierDecision) {
+	public quote(int quoteID, String custnote, int totalcost,String clientDecision, String supplierDecision, Timestamp scheduleend) {
 		
 		this.quoteID = quoteID;
 		this.custnote = custnote;
 		this.totalcost = totalcost;
 		this.clientDecision = clientDecision;
 		this.supplierDecision = supplierDecision;
+		this.scheduleend = scheduleend;
 		
 		// TODO Auto-generated constructor stub
 	}

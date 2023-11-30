@@ -21,6 +21,9 @@
         
         <label for="supplierDecision">Decision ('Agree', 'Disagree', or 'Quit'):</label>
         <input type="text" name="supplierDecision" id="supplierDecision" required><br>
+        
+        <label for="scheduleend">Schedule End Date: ('2020-01-04 12:00:00'):</label>
+        <input type="text" name="scheduleend" id="scheduleend" required><br>
 
         <input type="submit" value="Submit Quote">
     </form>

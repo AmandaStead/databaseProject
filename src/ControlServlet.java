@@ -27,9 +27,10 @@ public class ControlServlet extends HttpServlet {
 	    private static final long serialVersionUID = 1L;
 	    private userDAO userDAO = new userDAO();
 	    private quoteDAO quoteDAO = new quoteDAO();
+	    private statsDAO statsDAO = new statsDAO();
 	    public ControlServlet()
 		{
-			
+	    	
 		}
 		private String currentUser;
 	    private HttpSession session=null;
@@ -82,6 +83,10 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("The action is: list user quote");
                 userQuoteView(request, response);           	
                 break;
+        	case "/rootPageBigClients":
+        		System.out.println("The action is: list user quote");
+        		rootPageBigClients(request, response);           	
+                break;
         	case "/createquote": 
                 System.out.println("The action is: createquote");
                 createquote(request, response);           	
@@ -110,6 +115,7 @@ public class ControlServlet extends HttpServlet {
                 System.out.println("The action is: insertorderofwork");
                 insertorderofwork(request, response);           	
                 break;
+    	  
     	    
                 
                 
@@ -275,9 +281,19 @@ public class ControlServlet extends HttpServlet {
 	        int totalcost = Integer.parseInt(request.getParameter("totalcost"));
 	        String clientDecision = request.getParameter("clientDecision");
 	        String supplierDecision = request.getParameter("supplierDecision");
-	        
+	        String scheduleEndStr = request.getParameter("scheduleend");
+	        Timestamp scheduleEnd = null;
+	        if (scheduleEndStr != null && !scheduleEndStr.isEmpty()) {
+	            try {
+	                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	                Date parsedDate = dateFormat.parse(scheduleEndStr);
+	                scheduleEnd = new Timestamp(parsedDate.getTime());
+	            } catch (ParseException e) {
+	                e.printStackTrace(); 
+	            }
+	        }
      
-	        quote quotes = new quote(quoteid,custnote,totalcost,clientDecision,supplierDecision);
+	        quote quotes = new quote(quoteid,custnote,totalcost,clientDecision,supplierDecision,scheduleEnd);
 	        quoteDAO.update(quotes);
 	        response.sendRedirect("Successful.jsp");
 	    }
@@ -305,6 +321,11 @@ public class ControlServlet extends HttpServlet {
 	    	System.out.println("Owner view quote");
 			request.setAttribute("listquote", quoteDAO.listAllquotes());
 	    	request.getRequestDispatcher("QuoteList.jsp").forward(request, response);
+	    }
+	    private void rootPageBigClients(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("rootPageBigClients");
+			request.setAttribute("BigClients", statsDAO.BigClients());
+	    	request.getRequestDispatcher("BigClients.jsp").forward(request, response);
 	    }
 	    
 	    private void userQuoteView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{

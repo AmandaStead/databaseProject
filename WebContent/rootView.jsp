@@ -19,6 +19,7 @@
 	
 	
 	<a href="login.jsp"target ="_self" > logout</a><br><br> 
+	<a href="Statistics.jsp"target ="_self" > Statistics</a><br><br>
 	
 	
 
