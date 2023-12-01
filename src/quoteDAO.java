@@ -93,6 +93,41 @@ public class quoteDAO
         disconnect();        
         return listquote;
     }
+    public List<quote> Onetreequotes() throws SQLException {
+        List<quote> listquote = new ArrayList<quote>();        
+        String sql = "SELECT *\r\n"
+        		+ "FROM quote\r\n"
+        		+ "WHERE tree_count = 1;";      
+        connect_func();      
+        statement = (Statement) connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+        	int quoteid = resultSet.getInt("quoteid");
+            
+            int customerid = resultSet.getInt("customerid");
+            
+            Timestamp schedulestart = resultSet.getTimestamp("schedulestart");
+            Timestamp scheduleend = resultSet.getTimestamp("scheduleend");
+            String date = resultSet.getString("date");
+            int totalcost = resultSet.getInt("totalcost");
+            String custnote = resultSet.getString("custnote");
+            String heightft = resultSet.getString("heightft"); 
+            String diameter_width = resultSet.getString("diameter_width"); 
+            String ft_from_house = resultSet.getString("ft_from_house"); 
+            String location = resultSet.getString("location");
+            String tree_count = resultSet.getString("tree_count");
+            String clientDecision = resultSet.getString("clientDecision");
+            String supplierDecision = resultSet.getString("supplierDecision");
+            
+
+             
+            quote quotes = new quote(quoteid,customerid,schedulestart,scheduleend, date, totalcost,custnote, heightft, diameter_width, ft_from_house, location,tree_count,clientDecision, supplierDecision);
+            listquote.add(quotes);
+        }        
+        resultSet.close();
+        disconnect();        
+        return listquote;
+    }
     
     
     

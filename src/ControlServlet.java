@@ -91,6 +91,10 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("The action is: list Big Clients");
         		rootPageEasyClients(request, response);           	
                 break;
+        	case "/rootPageOnetreequotes":
+        		System.out.println("The action is: list Big Clients");
+        		rootPageOnetreequotes(request, response);           	
+                break;
         	case "/createquote": 
                 System.out.println("The action is: createquote");
                 createquote(request, response);           	
@@ -120,7 +124,7 @@ public class ControlServlet extends HttpServlet {
                 insertorderofwork(request, response);           	
                 break;
     	  
- 
+                
     	
     	}
 	    	
@@ -313,6 +317,12 @@ public class ControlServlet extends HttpServlet {
 			request.setAttribute("listquote", quoteDAO.EasyClients());
 	    	request.getRequestDispatcher("QuoteList.jsp").forward(request, response);
 	    }
+	    private void rootPageOnetreequotes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("rootPageOnetreequotes");
+			request.setAttribute("listquote", quoteDAO.Onetreequotes());
+	    	request.getRequestDispatcher("QuoteList.jsp").forward(request, response);
+	    }
+	    
 	    
 	    private void userQuoteView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 	    	System.out.println("User view quote");
