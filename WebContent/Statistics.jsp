@@ -26,24 +26,16 @@
 
     
             
-                        <form action="ButtonActionServlet" method="post">
+<form action="rootPageBigClients" method="post">
+        
+
+        <input type="submit" value="BigClients">
+</form>
+ 
                             
-                            <br><button type="submit">Big clients</button><br>
-                            <br><button type="submit">Easy clients</button><br>
-                            <br><button type="submit">Big clients</button><br>
-                            <br><button type="submit">One tree quotes</button><br>
-                            <br><button type="submit">Prospective clients</button><br>
-                            <br><button type="submit">Highest tree</button><br>
-                            <br><button type="submit">Overdue bills</button><br>
-                            <br><button type="submit">Bad clients</button><br>
-                            <br><button type="submit">Good clients</button><br>
-                            <br><button type="submit">Statistics</button><br>
-                        </form>
-                    </td>
-                </tr>
-          
-        </tbody>
-    </table>
+                            
+                
+             
 
 </body>
 </html>

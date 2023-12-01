@@ -34,6 +34,8 @@ public class statsDAO
 	private static final int customerid = 0;
 	public static Object insertquote;
 	public static Object insertorderfwork;
+	public static Object rootPageBigClients;
+	public static Object BigClients;
 	private Connection connect = null;
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
@@ -88,40 +90,39 @@ public class statsDAO
     }
 
     public List<BigClients> BigClients() throws SQLException {
-        List<BigClients> BigClients = new ArrayList<>();
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-
+    	List<BigClients> BigClients = new ArrayList<>();
+        String sql = "SELECT\r\n"
+        		+ "    u.firstname,\r\n"
+        		+ "    u.lastname,\r\n"
+        		+ "    u.customerid,\r\n"
+        		+ "    q.quoteid,\r\n"
+        		+ "    q.customerid AS quote_customerid,\r\n"
+        		+ "    q.tree_count\r\n"
+        		+ "FROM\r\n"
+        		+ "    user u\r\n"
+        		+ "JOIN\r\n"
+        		+ "    quote q ON u.customerid = q.customerid\r\n"
+        		+ "JOIN\r\n"
+        		+ "    tree t ON q.quoteid = t.quoteid\r\n"
+        		+ "WHERE\r\n"
+        		+ "    q.tree_count = (\r\n"
+        		+ "        SELECT MAX(tree_count)\r\n"
+        		+ "        FROM quote\r\n"
+        		+ "    );";
         connect_func();
-            
-            
+        statement = (Statement) connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
 
-            // Your SQL query to retrieve the required information
-            String sql = "SELECT u.firstname, u.lastname, u.customerid, " +
-                         "q.quoteid, q.customerid as quote_customerid, " +
-                         "COUNT(t.id) as tree_count " +
-                         "FROM user u " +
-                         "JOIN quote q ON u.customerid = q.customerid " +
-                         "JOIN tree t ON q.quoteid = t.quoteid " +
-                         "GROUP BY u.customerid, q.quoteid " +
-                         "ORDER BY tree_count DESC " +
-                         "LIMIT 1";
 
-            statement = connection.prepareStatement(sql);
-            resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-            
-                
-            	String firstname = resultSet.getString("firstname");
-            	String lastname = resultSet.getString("lastname");
-            	int customerid = resultSet.getInt("customerid");
-                int quoteid = resultSet.getInt("quoteid");
-                int quote_customerid = resultSet.getInt("quote_customerid");
-                String tree_count = resultSet.getString("tree_count");
-                
-                
+        
+            String firstname = resultSet.getString("firstname");
+            String lastname = resultSet.getString("lastname");
+            int customerid = resultSet.getInt("customerid");
+            int quoteid = resultSet.getInt("quoteid");
+            int quote_customerid = resultSet.getInt("quote_customerid");
+            String tree_count = resultSet.getString("tree_count");
+          
                 
                 BigClients BigClient = new BigClients(firstname,lastname,customerid,quoteid,quote_customerid,tree_count);
                 BigClients.add(BigClient);

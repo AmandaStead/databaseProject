@@ -84,7 +84,7 @@ public class ControlServlet extends HttpServlet {
                 userQuoteView(request, response);           	
                 break;
         	case "/rootPageBigClients":
-        		System.out.println("The action is: list user quote");
+        		System.out.println("The action is: list Big Clients");
         		rootPageBigClients(request, response);           	
                 break;
         	case "/createquote": 
@@ -116,20 +116,7 @@ public class ControlServlet extends HttpServlet {
                 insertorderofwork(request, response);           	
                 break;
     	  
-    	    
-                
-                
-         
-        	
-           	
-	    
-    	
-    	
-	    
-            
-	    
-
-    	
+ 
     	
     	}
 	    	
@@ -199,17 +186,7 @@ public class ControlServlet extends HttpServlet {
 	     
 	        System.out.println("opening supplier decision finished: 111111111111111111111111111111111111");}
         	
-	    private void listquote(HttpServletRequest request, HttpServletResponse response)
-	            throws SQLException, IOException, ServletException {
-	        System.out.println("listQuote started: 00000000000000000000000000000000000");
 
-
-			List<quote> listquote = quoteDAO.listAllquotes();
-	        request.setAttribute("listquote", listquote);
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("QuoteList.jsp");       
-	        dispatcher.forward(request, response);
-	     
-	        System.out.println("listQuote finished: 111111111111111111111111111111111111");}
 	    
 	    private void createquote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 
