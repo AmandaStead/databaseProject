@@ -87,6 +87,10 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("The action is: list Big Clients");
         		rootPageBigClients(request, response);           	
                 break;
+        	case "/rootPageEasyClients":
+        		System.out.println("The action is: list Big Clients");
+        		rootPageEasyClients(request, response);           	
+                break;
         	case "/createquote": 
                 System.out.println("The action is: createquote");
                 createquote(request, response);           	
@@ -303,6 +307,11 @@ public class ControlServlet extends HttpServlet {
 	    	System.out.println("rootPageBigClients");
 			request.setAttribute("BigClients", statsDAO.BigClients());
 	    	request.getRequestDispatcher("BigClients.jsp").forward(request, response);
+	    }
+	    private void rootPageEasyClients(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("rootPageEasyClients");
+			request.setAttribute("listquote", quoteDAO.EasyClients());
+	    	request.getRequestDispatcher("QuoteList.jsp").forward(request, response);
 	    }
 	    
 	    private void userQuoteView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{

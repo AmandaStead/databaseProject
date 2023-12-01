@@ -17,7 +17,7 @@
         <input type="text" name="totalcost" id="totalcost" required><br>
         
         <label for="custnote">Note:</label>
-        <textarea name="custnote" id="custnote" rows="4" required></textarea><br>
+        <textarea name="custnote" id="custnote" rows="4"></textarea><br>
         
         <label for="supplierDecision">Decision ('Agree', 'Disagree', or 'Quit'):</label>
         <input type="text" name="supplierDecision" id="supplierDecision" required><br>

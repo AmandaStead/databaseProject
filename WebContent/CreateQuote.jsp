@@ -27,7 +27,7 @@
         
 
         <label for="custnote">Note:</label>
-        <textarea name="custnote" id="custnote" rows="4" required></textarea><br>
+        <textarea name="custnote" id="custnote" rows="4"></textarea><br>
 
         <label for="heightFT">Height (in Feet):</label>
         <input type="text" name="heightFT" id="heightFT" required><br>
