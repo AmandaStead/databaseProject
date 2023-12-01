@@ -31,7 +31,46 @@
 
         <input type="submit" value="BigClients">
 </form>
- 
+<form action="rootPageEasyClients" method="post">
+        
+
+        <input type="submit" value="EasyClients">
+</form>
+ <form action="rootPageOnetreequotes" method="post">
+        
+
+        <input type="submit" value="One tree quotes">
+</form>
+<form action="rootPageProspectiveclients" method="post">
+        
+
+        <input type="submit" value="Prospective clients">
+</form>
+<form action="rootPageHighesttree" method="post">
+        
+
+        <input type="submit" value="Highest tree">
+</form>
+<form action="rootPageOverduebills" method="post">
+        
+
+        <input type="submit" value="Overdue bills">
+</form>
+<form action="rootPageBadclients" method="post">
+        
+
+        <input type="submit" value="Bad clients">
+</form>
+<form action="rootPageGood clients" method="post">
+        
+
+        <input type="submit" value="Good clients">
+</form>
+<form action="rootPageStatistics" method="post">
+        
+
+        <input type="submit" value="Statistics">
+</form>
                             
                             
                 
