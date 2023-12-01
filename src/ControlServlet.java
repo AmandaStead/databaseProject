@@ -88,12 +88,16 @@ public class ControlServlet extends HttpServlet {
         		rootPageBigClients(request, response);           	
                 break;
         	case "/rootPageEasyClients":
-        		System.out.println("The action is: list Big Clients");
+        		System.out.println("The action is: rootPageEasyClients");
         		rootPageEasyClients(request, response);           	
                 break;
         	case "/rootPageOnetreequotes":
-        		System.out.println("The action is: list Big Clients");
+        		System.out.println("The action is: list rootPageOnetreequotes");
         		rootPageOnetreequotes(request, response);           	
+                break;
+        	case "/rootPageProspectiveclients":
+        		System.out.println("The action is: list rootPageProspectiveclients");
+        		rootPageProspectiveclients(request, response);           	
                 break;
         	case "/createquote": 
                 System.out.println("The action is: createquote");
@@ -321,6 +325,11 @@ public class ControlServlet extends HttpServlet {
 	    	System.out.println("rootPageOnetreequotes");
 			request.setAttribute("listquote", quoteDAO.Onetreequotes());
 	    	request.getRequestDispatcher("QuoteList.jsp").forward(request, response);
+	    }
+	    private void rootPageProspectiveclients(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("rootPageProspectiveclients");
+			request.setAttribute("Prospectiveclients", statsDAO.Prospectiveclients());
+	    	request.getRequestDispatcher("Prospectiveclients.jsp").forward(request, response);
 	    }
 	    
 	    

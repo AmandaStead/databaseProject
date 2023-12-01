@@ -1,3 +1,5 @@
+import java.sql.Timestamp;
+
 public class BigClients {
     protected String firstname;
     protected String lastname;
@@ -5,6 +7,10 @@ public class BigClients {
     protected int quoteid;
     protected int quote_customerid;
     protected String tree_count;
+    protected int id;
+    protected int price;
+    protected Timestamp schedulestart;
+    protected Timestamp schedulend;
 
     // Constructors...
 
@@ -23,8 +29,20 @@ public class BigClients {
 
     
     
-	public BigClients(String firstname, String lastname) {
+	public BigClients(int quoteid,int price,Timestamp schedulestart, Timestamp scheduleend) {
 		// TODO Auto-generated constructor stub
+		
+		this.quoteid = quoteid;
+		this.price = price;
+		this.schedulestart = schedulestart;
+		this.schedulend = scheduleend;
+	}
+
+
+
+	public BigClients(int customerid, String firstname, String lastname) {
+		// TODO Auto-generated constructor stub
+		this.customerid = customerid;
 		this.firstname = firstname;
 		this.lastname = lastname;
 	}

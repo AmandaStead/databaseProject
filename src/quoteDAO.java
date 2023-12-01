@@ -97,7 +97,7 @@ public class quoteDAO
         List<quote> listquote = new ArrayList<quote>();        
         String sql = "SELECT *\r\n"
         		+ "FROM quote\r\n"
-        		+ "WHERE tree_count = 1;";      
+        		+ "WHERE tree_count = 1 and clientdecision = 'agree' and supplierdecision = 'agree';";       
         connect_func();      
         statement = (Statement) connect.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
