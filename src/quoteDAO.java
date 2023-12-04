@@ -56,6 +56,38 @@ public class quoteDAO
         }
     }
     
+    public List<quote> Bills() throws SQLException {
+        List<quote> Bills = new ArrayList<quote>();        
+        String sql = "SELECT *\r\n"
+        		+ "FROM bills\r\n"
+        		+ "WHERE status = 'pending'\r\n"
+        		+ "      AND DATEDIFF(CURDATE(), generated_date) > 7;\r\n"
+        		+ "\r\n"
+        		+ "\r\n"
+        		+ "";      
+        connect_func();      
+        statement = (Statement) connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+        	int id = resultSet.getInt("id");
+            
+            int orderid = resultSet.getInt("orderid");
+            double price = resultSet.getDouble("price");
+            double discount = resultSet.getDouble("discount");
+            double balance = resultSet.getDouble("balance");
+            String status =resultSet.getString("status");
+            Timestamp curdate = resultSet.getTimestamp("curdate");
+            Timestamp generated_date = resultSet.getTimestamp("generated_date");
+             
+            quote quotes = new quote(id,orderid,price,discount,balance,status,curdate,generated_date);
+            Bills.add(quotes);
+        }        
+        resultSet.close();
+        disconnect();        
+        return Bills;
+    }
+    
+    
     public List<quote> EasyClients() throws SQLException {
         List<quote> listquote = new ArrayList<quote>();        
         String sql = "SELECT *\r\n"

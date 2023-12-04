@@ -5,7 +5,7 @@ public class BigClients {
     protected String lastname;
     protected int customerid;
     protected int quoteid;
-    protected int quote_customerid;
+    
     protected String tree_count;
     protected int id;
     protected int price;
@@ -14,7 +14,7 @@ public class BigClients {
 
     // Constructors...
 
-    public BigClients(String firstname, String lastname, int customerid, int quoteid, int quote_customerid, String tree_count) {
+    public BigClients(String firstname, String lastname, int customerid, int quoteid, String tree_count) {
 		// TODO Auto-generated constructor stub
     	
     	
@@ -23,7 +23,7 @@ public class BigClients {
     	this.lastname = lastname;
     	this.customerid = customerid;
     	this.quoteid = quoteid;
-    	this.quote_customerid = quote_customerid;
+    	
     	this.tree_count = tree_count;
 	}
 
@@ -85,14 +85,7 @@ public class BigClients {
         this.quoteid = quoteid;
     }
 
-    // Getter and Setter for quote_customerid
-    public int getQuote_customerid() {
-        return quote_customerid;
-    }
 
-    public void setQuote_customerid(int quote_customerid) {
-        this.quote_customerid = quote_customerid;
-    }
 
     // Getter and Setter for tree_count
     public String getTree_count() {

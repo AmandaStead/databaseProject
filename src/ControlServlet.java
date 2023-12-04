@@ -99,6 +99,14 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("The action is: list rootPageProspectiveclients");
         		rootPageProspectiveclients(request, response);           	
                 break;
+        	case "/rootPageHighestTree":
+        		System.out.println("The action is: list rootPageHighestTree");
+        		rootPageHighestTree(request, response);           	
+                break;
+        	case "/rootPageBills":
+        		System.out.println("The action is: list rootPageBills");
+        		rootPageBills(request, response);           	
+                break;
         	case "/createquote": 
                 System.out.println("The action is: createquote");
                 createquote(request, response);           	
@@ -331,6 +339,17 @@ public class ControlServlet extends HttpServlet {
 			request.setAttribute("Prospectiveclients", statsDAO.Prospectiveclients());
 	    	request.getRequestDispatcher("Prospectiveclients.jsp").forward(request, response);
 	    }
+	    private void rootPageHighestTree(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("rootPageHighestTree");
+			request.setAttribute("HighestTree", statsDAO.HighestTree());
+	    	request.getRequestDispatcher("HighestTree.jsp").forward(request, response);
+	    }
+	    private void rootPageBills(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("rootPageBills");
+			request.setAttribute("Bills", quoteDAO.Bills());
+	    	request.getRequestDispatcher("Bills.jsp").forward(request, response);
+	    }
+
 	    
 	    
 	    private void userQuoteView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{

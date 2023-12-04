@@ -5,11 +5,25 @@ public class orderofwork {
     private int price;
     private Timestamp schedulestart;
     private Timestamp scheduleend;
+    private int size;
+    private int height;
+    private int distancefromhouse;
+    
+    
+    
+    
+    
+   
     
 
     // Constructors
 
-    public orderofwork() {
+    public orderofwork(int quoteId, int size, int height, int distancefromhouse) {
+        //Highest Tree
+    	this.quoteId = quoteId;
+    	this.size = size;
+    	this.height = height;
+    	this.distancefromhouse = distancefromhouse;
     }
 
     public orderofwork(int quoteId,int price,Timestamp schedulestart,Timestamp scheduleend) {
@@ -17,11 +31,32 @@ public class orderofwork {
         this.price = price;
         this.schedulestart = schedulestart;
         this.scheduleend = scheduleend;
-       
+
     }
 
     // Getters and Setters
-
+    
+    public int getsize() {
+    	return size;
+    }
+    public int getheight() {
+    	return height;
+    }
+    public int getdistancefromhouse() {
+    	return distancefromhouse;
+    	
+    }
+    public void setsize(int size) {
+    	this.size = size;
+    }
+    public void setheight(int height) {
+    	this.height = height;
+    }
+    public void setdistancefromhouse(int distancefromhouse) {
+    	this.distancefromhouse = distancefromhouse;
+    	
+    }
+    
     public int getQuoteId() {
         return quoteId;
     }

@@ -18,6 +18,20 @@ public class quote {
     protected String clientDecision;
     protected String supplierDecision;
     
+    //bills
+    protected int id;
+    protected int orderid;
+    protected double price;
+    protected double discount;
+    protected double balance;
+    protected String status;
+    protected Timestamp curdate;
+    protected Timestamp generated_date;
+    
+    
+    
+    
+
     
     
 
@@ -42,7 +56,16 @@ public class quote {
         
         
     }
-
+    public quote(int id,int orderid,double price,double discount,double balance,String status,Timestamp curdate,Timestamp generated_date) {
+    	this.id=id;
+    	this.orderid=orderid;
+    	this.price=price;
+    	this.discount=discount;
+    	this.balance=balance;
+    	this.status=status;
+    	this.curdate=curdate;
+    	this.generated_date=generated_date;
+    }
     
    
 
@@ -116,8 +139,70 @@ public class quote {
 		
 	}
 
+	 public int getId() {
+	        return id;
+	    }
 
+	    public int getOrderid() {
+	        return orderid;
+	    }
 
+	    public double getPrice() {
+	        return price;
+	    }
+
+	    public double getDiscount() {
+	        return discount;
+	    }
+
+	    public double getBalance() {
+	        return balance;
+	    }
+
+	    public String getStatus() {
+	        return status;
+	    }
+
+	    public Timestamp getgenerated_date() {
+	        return generated_date;
+	    }
+
+	    public Timestamp getcurdate() {
+	        return curdate;
+	    }
+
+	    // Setters
+	    public void setId(int id) {
+	        this.id = id;
+	    }
+
+	    public void setOrderid(int orderid) {
+	        this.orderid = orderid;
+	    }
+
+	    public void setPrice(double price) {
+	        this.price = price;
+	    }
+
+	    public void setDiscount(double discount) {
+	        this.discount = discount;
+	    }
+
+	    public void setBalance(double balance) {
+	        this.balance = balance;
+	    }
+
+	    public void setStatus(String status) {
+	        this.status = status;
+	    }
+
+	    public void setgenerated_date(Timestamp generated_date) {
+	        this.generated_date = generated_date;
+	    }
+
+	    public void setcurdate(Timestamp curdate) {
+	        this.curdate = curdate;
+	    }
 
 	public int getQuoteID() {
         return quoteID;

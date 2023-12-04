@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Root page</title>
+<title>Highest Tree</title>
 </head>
 <body>
 
@@ -19,28 +19,27 @@
 	<a href="login.jsp"target ="_self" > logout</a><br><br> 
 	
 	
-	
 
-<h1>List Big Clients</h1>
+<h1>List Highest Tree</h1>
     <div align="center">
         <table border="1" cellpadding="6">
             
             <tr>
-            	  <th>First Name</th>
-                <th>Last Name</th>
-                <th>Customer ID</th>
-                <th>Quote ID</th>
-               
-                <th>Tree Count</th>
+            	<th>id</th>
+            	<th>Quoteid</th>
+                <th>Size</th>
+                <th>Height</th>
+                <th>Distance from house</th>
+                
             </tr>
-            <c:forEach var="BigClient" items="${BigClients}">
+            <c:forEach var="trees" items="${HighestTree}">
                 <tr style="text-align:center">
-                	<td>${BigClient.firstname}</td>
-                    <td>${BigClient.lastname}</td>
-                    <td>${BigClient.customerid}</td>
-                    <td>${BigClient.quoteid}</td>
+                	<td>${trees.id}</td>
+                	<td>${trees.quoteid}</td>
+                    <td>${trees.size}</td>
+                    <td>${trees.height}</td>
+                    <td>${trees.distancefromhouse}</td>
                     
-                    <td>${BigClient.tree_count}</td>
             </c:forEach>
             
 

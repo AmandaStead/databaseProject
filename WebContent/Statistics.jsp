@@ -46,12 +46,12 @@
 
         <input type="submit" value="Prospective clients">
 </form>
-<form action="rootPageHighesttree" method="post">
+<form action="rootPageHighestTree" method="post">
         
 
         <input type="submit" value="Highest tree">
 </form>
-<form action="rootPageOverduebills" method="post">
+<form action="rootPageBills" method="post">
         
 
         <input type="submit" value="Overdue bills">

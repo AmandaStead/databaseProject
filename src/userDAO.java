@@ -330,10 +330,10 @@ public class userDAO
         statement.executeUpdate("CREATE TABLE if not EXISTS tree(id INTEGER,quoteid INTEGER,size DOUBLE,height DOUBLE,	distanceFromHouse DOUBLE,PRIMARY KEY(id),FOREIGN KEY(quoteid) REFERENCES quote(quoteid));");
         statement.executeUpdate("CREATE TABLE if not EXISTS QuotesMessages(id INTEGER,customerid INTEGER,quoteid INTEGER,msgtime DATETIME,price DOUBLE,schedulestart DATETIME,scheduleend DATETIME,note VARCHAR(200),PRIMARY KEY(id));");
         statement.executeUpdate("CREATE TABLE if not EXISTS orderofwork(id INT PRIMARY KEY AUTO_INCREMENT,quoteid INTEGER,price DECIMAL(10,2),schedulestart DATETIME,scheduleend DATETIME, FOREIGN KEY(quoteid) REFERENCES quote(quoteid));");
-        statement.executeUpdate("CREATE TABLE if not EXISTS Bills (id INTEGER,orderid INTEGER,price DOUBLE,discount DOUBLE,balance DOUBLE,status VARCHAR(20),PRIMARY KEY(id));");
+        statement.executeUpdate("CREATE TABLE if not EXISTS Bills (id INTEGER,orderid INTEGER,price DOUBLE,discount DOUBLE,balance DOUBLE,status VARCHAR(20),curdate DATETIME DEFAULT CURRENT_TIMESTAMP,generated_date DATETIME,PRIMARY KEY(id));");
         statement.executeUpdate("CREATE TABLE if not EXISTS BillsMessages(id INTEGER,customerid INTEGER,billid INTEGER,msgtime DATETIME,price DOUBLE,schedulestart DATETIME,scheduleend DATETIME,note VARCHAR(200),PRIMARY KEY(id));");
         
-        
+    
       
         
         // Insert data
@@ -350,16 +350,16 @@ public class userDAO
         	        "('10','10','10','2024-02-02 01:00:00','250','2024-03-03 05:30:00','2024-06-06 02:00:00','can we do cheaper price?');");
         	        
        
-        statement.executeUpdate("INSERT INTO Bills(id,orderid,price,discount,balance,status) VALUES ('1','1','250','50','100','pending'),"+
-        "('2','2','700','150','500','paid'),"+
-        "('3','3','400','80','320','paid')," +
-        "('4','4','500','100','400','pending'),"+
-        "('5','5','1000','300','700','paid'),"+
-        "('6','7','700','100','600','paid'),"+
-        "('7','7','500','100','400','pending'),"+
-        "('8','8','500','100','400','pending'),"+
-        "('9','9','400','100','300','pending'),"+
-        "('10','10','700','200','500','paid');");
+        statement.executeUpdate("INSERT INTO Bills(id,orderid,price,discount,balance,status,Generated_Date) VALUES ('1','1','250','50','100','pending','2023-11-20 04:00:00'),"+
+        "('2','2','700','150','500','paid','2023-11-01 06:00:00'),"+
+        "('3','3','400','80','320','paid','2023-11-05 02:00:00')," +
+        "('4','4','500','100','400','pending','2023-10-20 02:00:00'),"+
+        "('5','5','1000','300','700','paid','2023-10-05 04:00:00'),"+
+        "('6','7','700','100','600','paid','2023-11-20 04:00:00'),"+
+        "('7','7','500','100','400','pending','2023-10-15 08:00:00'),"+
+        "('8','8','500','100','400','pending','2023-11-23 04:00:00'),"+
+        "('9','9','400','100','300','pending','2023-09-20 05:00:00'),"+
+        "('10','10','700','200','500','paid','2023-11-12 03:00:00');");
         		
         
         statement.executeUpdate("INSERT INTO QuotesMessages(id,customerid,quoteid,msgtime,price,schedulestart,scheduleend,note) VALUES ('1','1','1','2023-10-26 15:30:00','200','2023-10-26 15:30:00','2023-10-26 15:30:00','this time will work')," +

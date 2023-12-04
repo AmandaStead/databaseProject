@@ -90,6 +90,49 @@ public class statsDAO
     }
 
 
+    public List<tree> HighestTree() throws SQLException {
+    	List<tree> HighestTree = new ArrayList<>();
+        String sql = "SELECT t.*\r\n"
+        		+ "FROM tree t\r\n"
+        		+ "WHERE t.height = (\r\n"
+        		+ "    SELECT MAX(height)\r\n"
+        		+ "    FROM tree\r\n"
+        		+ ");\r\n"
+        		+ "";
+        connect_func();
+        statement = (Statement) connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+
+
+        
+        	int id = resultSet.getInt("id");
+            int quoteid = resultSet.getInt("quoteid");
+            double size = resultSet.getDouble("size");
+            double height = resultSet.getDouble("height");
+            double distancefromhouse = resultSet.getDouble("distancefromhouse");
+            
+          
+                
+            tree trees = new tree(id,quoteid,size,height,distancefromhouse);
+            HighestTree.add(trees);
+               
+                
+            }      
+     
+            resultSet.close();
+            disconnect();        
+            return HighestTree;
+        }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public List<BigClients> Prospectiveclients() throws SQLException {
     	List<BigClients> Prospectiveclients = new ArrayList<>();
         String sql = "SELECT user.customerid, user.firstname, user.lastname\r\n"
@@ -159,11 +202,11 @@ public class statsDAO
             String lastname = resultSet.getString("lastname");
             int customerid = resultSet.getInt("customerid");
             int quoteid = resultSet.getInt("quoteid");
-            int quote_customerid = resultSet.getInt("quote_customerid");
+            
             String tree_count = resultSet.getString("tree_count");
           
                 
-                BigClients BigClient = new BigClients(firstname,lastname,customerid,quoteid,quote_customerid,tree_count);
+                BigClients BigClient = new BigClients(firstname,lastname,customerid,quoteid,tree_count);
                 BigClients.add(BigClient);
                
                 
