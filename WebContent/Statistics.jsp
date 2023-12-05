@@ -56,23 +56,25 @@
 
         <input type="submit" value="Overdue bills">
 </form>
-<form action="rootPageBadclients" method="post">
+<form action="rootPageBadClients" method="post">
         
 
         <input type="submit" value="Bad clients">
 </form>
-<form action="rootPageGood clients" method="post">
+<form action="rootPageGoodClients" method="post">
         
 
         <input type="submit" value="Good clients">
 </form>
+
 <form action="rootPageStatistics" method="post">
         
 
         <input type="submit" value="Statistics">
 </form>
                             
-                            
+   
+                       
                 
              
 

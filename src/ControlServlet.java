@@ -91,6 +91,14 @@ public class ControlServlet extends HttpServlet {
         		System.out.println("The action is: rootPageEasyClients");
         		rootPageEasyClients(request, response);           	
                 break;
+        	case "/rootPageBadClients":
+        		System.out.println("The action is: rootPageBadClients");
+        		rootPageBadClients(request, response);           	
+                break;
+        	case "/rootPageGoodClients":
+        		System.out.println("The action is: rootPageGoodClients");
+        		rootPageGoodClients(request, response);           	
+                break;
         	case "/rootPageOnetreequotes":
         		System.out.println("The action is: list rootPageOnetreequotes");
         		rootPageOnetreequotes(request, response);           	
@@ -349,6 +357,17 @@ public class ControlServlet extends HttpServlet {
 			request.setAttribute("Bills", quoteDAO.Bills());
 	    	request.getRequestDispatcher("Bills.jsp").forward(request, response);
 	    }
+	    private void rootPageBadClients(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("rootPageBadClients");
+			request.setAttribute("BadClients", quoteDAO.BadClients());
+	    	request.getRequestDispatcher("BadClients.jsp").forward(request, response);
+	    }
+	    private void rootPageGoodClients(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("rootPageGoodClients");
+			request.setAttribute("GoodClients", quoteDAO.GoodClients());
+	    	request.getRequestDispatcher("GoodClients.jsp").forward(request, response);
+	    }
+
 
 	    
 	    

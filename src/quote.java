@@ -29,7 +29,8 @@ public class quote {
     protected Timestamp generated_date;
     
     
-    
+    protected String firstname;
+    protected String lastname;
     
 
     
@@ -55,6 +56,11 @@ public class quote {
         
         
         
+    }
+    public quote(int customerID,String firstname,String lastname) {
+    	this.customerID=customerID;
+    	this.firstname=firstname;
+    	this.lastname=lastname;
     }
     public quote(int id,int orderid,double price,double discount,double balance,String status,Timestamp curdate,Timestamp generated_date) {
     	this.id=id;
@@ -139,7 +145,26 @@ public class quote {
 		
 	}
 
-	 public int getId() {
+	public quote(int customerID, String firstname, String lastname, String status, Timestamp generated_date,
+			Timestamp curdate) {
+		
+		this.customerID = customerID;
+		this.firstname=firstname;
+		this.lastname=lastname;
+		this.status=status;
+		this.generated_date=generated_date;
+		this.curdate=curdate;
+		
+	}
+	public String getfirstname() {
+		return firstname;
+	}
+	
+	public String getlastname() {
+		return lastname;
+	}
+	
+	public int getId() {
 	        return id;
 	    }
 
@@ -172,6 +197,12 @@ public class quote {
 	    }
 
 	    // Setters
+	    public void setfirstname(String firstname) {
+	    	this.firstname = firstname;
+	    }
+	    public void setlastname(String lastname) {
+	    	this.lastname = lastname;
+	    }
 	    public void setId(int id) {
 	        this.id = id;
 	    }
