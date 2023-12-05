@@ -55,6 +55,52 @@ public class quoteDAO
             System.out.println(connect);
         }
     }
+    public List<quote> Statistics() throws SQLException {
+        List<quote> Statistics = new ArrayList<quote>();        
+        String sql = "SELECT\r\n"
+        		+ "    user.firstname,\r\n"
+        		+ "    user.lastname,\r\n"
+        		+ "    quote.tree_count,\r\n"
+        		+ "    quote.totalcost,\r\n"
+        		+ "    bills.balance,\r\n"
+        		+ "    orderofwork.scheduleend,\r\n"
+        		+ "    bills.status\r\n"
+        		+ "FROM\r\n"
+        		+ "    bills\r\n"
+        		+ "JOIN\r\n"
+        		+ "    orderofwork ON bills.orderid = orderofwork.quoteid\r\n"
+        		+ "JOIN\r\n"
+        		+ "    quote ON orderofwork.quoteid = quote.quoteid\r\n"
+        		+ "JOIN\r\n"
+        		+ "    user ON quote.customerID = user.customerID\r\n"
+        		+ "WHERE\r\n"
+        		+ "    bills.status = 'pending'"
+        		+ "\r\n"
+        		+ "\r\n"
+        		+ "";  
+        connect_func();      
+        statement = (Statement) connect.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {        	
+            String firstname = resultSet.getString("firstname");
+            String lastname = resultSet.getString("lastname");
+            String tree_count =resultSet.getString("tree_count");
+            int totalcost = resultSet.getInt("totalcost");
+            double balance =resultSet.getDouble("balance");
+            Timestamp scheduleend = resultSet.getTimestamp("scheduleend");
+            String status =resultSet.getString("status");
+           
+          
+            
+             
+             
+            quote quotes = new quote(firstname,lastname,tree_count,totalcost,balance,scheduleend,status);
+            Statistics.add(quotes);
+        }        
+        resultSet.close();
+        disconnect();        
+        return Statistics;
+    }
     public List<quote> GoodClients() throws SQLException {
         List<quote> GoodClients = new ArrayList<quote>();        
         String sql = "SELECT user.customerid, user.firstname, user.lastname,bills.status,bills.generated_date,bills.curdate \r\n"

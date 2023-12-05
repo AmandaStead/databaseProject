@@ -353,13 +353,13 @@ public class userDAO
         statement.executeUpdate("INSERT INTO Bills(id,orderid,price,discount,balance,status,Generated_Date) VALUES ('1','1','250','50','100','pending','2023-12-20 04:00:00'),"+
         "('2','2','700','150','500','paid','2023-12-04 21:22:00'),"+
         "('3','3','400','80','320','paid','2023-11-05 02:00:00')," +
-        "('4','4','500','100','400','pending','2023-10-20 02:00:00'),"+
+        "('4','4','500','100','150','paid','2023-10-20 02:00:00'),"+
         "('5','5','1000','300','700','paid','2023-12-04 04:00:00'),"+
         "('6','7','700','100','600','paid','2023-12-02 04:00:00'),"+
-        "('7','7','500','100','400','pending','2023-10-15 08:00:00'),"+
-        "('8','8','500','100','400','pending','2023-11-23 04:00:00'),"+
-        "('9','9','400','100','300','pending','2023-09-20 05:00:00'),"+
-        "('10','10','700','200','500','paid','2023-11-12 03:00:00');");
+        "('7','7','500','100','50','pending','2023-10-15 08:00:00'),"+
+        "('8','8','500','100','75','pending','2023-11-23 04:00:00'),"+
+        "('9','9','400','100','100','pending','2023-09-20 05:00:00'),"+
+        "('10','10','700','200','85','pending','2023-11-12 03:00:00');");
         		
         
         statement.executeUpdate("INSERT INTO QuotesMessages(id,customerid,quoteid,msgtime,price,schedulestart,scheduleend,note) VALUES ('1','1','1','2023-10-26 15:30:00','200','2023-10-26 15:30:00','2023-10-26 15:30:00','this time will work')," +
@@ -390,15 +390,15 @@ public class userDAO
     			"('root', 'default', 'default','0000000000', 'pass1234', '2020-10-10', '0000', 'Default', 'Default', 'OH', '12345', 'default', '2020-02-02', '000');");  
         
 	statement.executeUpdate("INSERT INTO quote(quoteid,customerid,schedulestart,scheduleend, date, totalcost, custnote, heightFT, diameter_width, ft_from_house,location, tree_count,clientDecision, supplierDecision) VALUES ('10','10','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111','Need 3 trees trimmed', '5', '10', 10, 'Right side of house','4', 'agreement','agreement'),"+
-        		"('1','1','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '1 tree taken down', '8', '3','8','Front of House', '6', 'agreement','disagree'),"+    
-        		"('2','2','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '4 trees removed', '5','2', '8','backyard','3', 'agreement','disagree')," +
-        		"('3','3','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', 'Trees trimmed', '3','5','7','driveway','9', 'agreement','agreement')," +
-        		"('4','4','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', 'Trees trimmed', '12','6','12','driveway','5', 'Disagree','agreement')," +
-        		"('5','5','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111','3 trimmed', '7','4', '8', 'front yard right side','2', 'agreement', 'disagree')," +
-        		"('6','6','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '6 trees trimmed', '5','4','17','backyard','6', 'Disagree','agreement')," +
-        		"('7','7','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '2 Trees removed and 5 trimmed', '4','5','15','side of house','5', 'agreement','agreement')," +
-        		"('8','8','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111','1 tree trimmed', '6','6','17','side of house','11', 'Disagree','Disagree')," +
-        		"('9','9','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111', '1 tree trimmed, 2 removed', '6','2','7','front yard','12','Disagree','agreement');");  
+        		"('1','1','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '500', '1 tree taken down', '8', '3','8','Front of House', '1', 'agreement','disagree'),"+    
+        		"('2','2','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '325', '4 trees removed', '5','2', '8','backyard','1', 'agree','agree')," +
+        		"('3','3','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '150', 'Trees trimmed', '3','5','7','driveway','9', 'agreement','agreement')," +
+        		"('4','4','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '300', 'Trees trimmed', '12','6','12','driveway','1', 'agree','agree')," +
+        		"('5','5','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '400','3 trimmed', '7','4', '8', 'front yard right side','2', 'agreement', 'disagree')," +
+        		"('6','6','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '550', '6 trees trimmed', '5','4','17','backyard','6', 'Disagree','agreement')," +
+        		"('7','7','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '375', '2 Trees removed and 5 trimmed', '4','5','15','side of house','5', 'agreement','agreement')," +
+        		"('8','8','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '100','1 tree trimmed', '6','6','17','side of house','11', 'Disagree','Disagree')," +
+        		"('9','9','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '190', '1 tree trimmed, 2 removed', '6','2','7','front yard','12','Disagree','agreement');");  
 	 statement.executeUpdate("INSERT INTO tree (id, quoteid,size,height,distanceFromHouse) VALUES ('1','1','10','15','25'),"
 	      		+ "('2','2','20', '25','50'),"
 	      		+ "('3','3','30', '35','15'),"

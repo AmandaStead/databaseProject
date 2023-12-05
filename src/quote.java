@@ -156,6 +156,16 @@ public class quote {
 		this.curdate=curdate;
 		
 	}
+	public quote(String firstname, String lastname, String tree_count, int totalcost, double balance,
+			Timestamp scheduleend, String status) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.tree_count = tree_count;
+		this.totalcost = totalcost;
+		this.balance = balance;
+		this.scheduleend = scheduleend;
+		this.status = status;
+	}
 	public String getfirstname() {
 		return firstname;
 	}

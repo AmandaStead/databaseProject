@@ -143,7 +143,11 @@ public class ControlServlet extends HttpServlet {
                 System.out.println("The action is: insertorderofwork");
                 insertorderofwork(request, response);           	
                 break;
-    	  
+    	    case "/rootPageStatistics": 
+                System.out.println("The action is: rootPageStatistics");
+                rootPageStatistics(request, response);           	
+                break;
+                
                 
     	
     	}
@@ -367,6 +371,12 @@ public class ControlServlet extends HttpServlet {
 			request.setAttribute("GoodClients", quoteDAO.GoodClients());
 	    	request.getRequestDispatcher("GoodClients.jsp").forward(request, response);
 	    }
+	    private void rootPageStatistics(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+	    	System.out.println("rootPageStatistics");
+			request.setAttribute("Statistics", quoteDAO.Statistics());
+	    	request.getRequestDispatcher("Statistic.jsp").forward(request, response);
+	    }
+
 
 
 	    
