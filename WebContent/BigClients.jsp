@@ -29,8 +29,7 @@
             	  <th>First Name</th>
                 <th>Last Name</th>
                 <th>Customer ID</th>
-                <th>Quote ID</th>
-               
+                <th>Quote ID</th>               
                 <th>Tree Count</th>
             </tr>
             <c:forEach var="BigClient" items="${BigClients}">
@@ -38,8 +37,7 @@
                 	<td>${BigClient.firstname}</td>
                     <td>${BigClient.lastname}</td>
                     <td>${BigClient.customerid}</td>
-                    <td>${BigClient.quoteid}</td>
-                    
+                    <td>${BigClient.quoteid}</td>                    
                     <td>${BigClient.tree_count}</td>
             </c:forEach>
             

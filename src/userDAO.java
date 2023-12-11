@@ -326,7 +326,7 @@ public class userDAO
         // Create new tables
         
         statement.executeUpdate("CREATE TABLE if not EXISTS User (customerid INT PRIMARY KEY AUTO_INCREMENT, email VARCHAR(50) NOT NULL, firstname VARCHAR(10), lastName VARCHAR(10) NOT NULL, phone VARCHAR(10), password VARCHAR(20) NOT NULL, birthday DATE NOT NULL, adress_street_num VARCHAR(4), adress_street VARCHAR(30), adress_city VARCHAR(20), adress_state VARCHAR(2), adress_zip_code VARCHAR(5), cc_num VARCHAR(16) DEFAULT 0000, cc_exp DATE, cc_cvv VARCHAR(3));");
-        statement.executeUpdate("CREATE TABLE if not EXISTS quote (quoteid INT PRIMARY KEY AUTO_INCREMENT, customerid INT,schedulestart DATETIME,scheduleend DATETIME, date DATE, totalcost DECIMAL(10,2), custnote VARCHAR(50), heightFT INT, diameter_width INT, ft_from_house INT, location VARCHAR(50), tree_count VARCHAR(20), clientDecision VARCHAR(50), supplierDecision VARCHAR(50));");     
+        statement.executeUpdate("CREATE TABLE if not EXISTS quote (quoteid INT PRIMARY KEY AUTO_INCREMENT, customerid INT,schedulestart DATETIME,scheduleend DATETIME, date DATE, totalcost DECIMAL(10,2), custnote VARCHAR(50), heightFT INT, diameter_width INT, ft_from_house INT, location VARCHAR(50), tree_count INT, clientDecision VARCHAR(50), supplierDecision VARCHAR(50));");     
         statement.executeUpdate("CREATE TABLE if not EXISTS tree(id INTEGER,quoteid INTEGER,size DOUBLE,height DOUBLE,	distanceFromHouse DOUBLE,PRIMARY KEY(id),FOREIGN KEY(quoteid) REFERENCES quote(quoteid));");
         statement.executeUpdate("CREATE TABLE if not EXISTS QuotesMessages(id INTEGER,customerid INTEGER,quoteid INTEGER,msgtime DATETIME,price DOUBLE,schedulestart DATETIME,scheduleend DATETIME,note VARCHAR(200),PRIMARY KEY(id));");
         statement.executeUpdate("CREATE TABLE if not EXISTS orderofwork(id INT PRIMARY KEY AUTO_INCREMENT,quoteid INTEGER,price DECIMAL(10,2),schedulestart DATETIME,scheduleend DATETIME, FOREIGN KEY(quoteid) REFERENCES quote(quoteid));");
@@ -391,10 +391,10 @@ public class userDAO
         
 	statement.executeUpdate("INSERT INTO quote(quoteid,customerid,schedulestart,scheduleend, date, totalcost, custnote, heightFT, diameter_width, ft_from_house,location, tree_count,clientDecision, supplierDecision) VALUES ('10','10','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '111','Need 3 trees trimmed', '5', '10', 10, 'Right side of house','4', 'agreement','agreement'),"+
         		"('1','1','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '500', '1 tree taken down', '8', '3','8','Front of House', '1', 'agreement','disagree'),"+    
-        		"('2','2','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '325', '4 trees removed', '5','2', '8','backyard','1', 'agree','agree')," +
-        		"('3','3','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '150', 'Trees trimmed', '3','5','7','driveway','9', 'agreement','agreement')," +
+        		"('2','2','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '325', '4 trees removed', '5','2', '8','backyard','19', 'agree','agree')," +
+        		"('3','3','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '150', 'Trees trimmed', '3','5','7','driveway','19', 'agreement','agreement')," +
         		"('4','4','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '300', 'Trees trimmed', '12','6','12','driveway','1', 'agree','agree')," +
-        		"('5','5','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '400',NULL, '7','4', '8', 'front yard right side','2', 'agree', 'agree')," +
+        		"('5','5','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '400',NULL, '7','4', '9', 'front yard right side','15', 'agree', 'agree')," +
         		"('6','6','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '550',NULL, '5','4','17','backyard','6', 'agree','agree')," +
         		"('7','7','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '375', '2 Trees removed and 5 trimmed', '4','5','15','side of house','5', 'agreement','agreement')," +
         		"('8','8','2020-01-04 12:00:00','2020-01-04 12:00:00','2020-01-01', '100','1 tree trimmed', '6','6','17','side of house','11', 'Disagree','Disagree')," +
