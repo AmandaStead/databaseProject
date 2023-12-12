@@ -137,7 +137,17 @@ public class quoteDAO
     
     public List<quote> BadClients() throws SQLException {
         List<quote> BadClients = new ArrayList<quote>();        
-        String sql = "SELECT user.customerid, user.firstname, user.lastname FROM user LEFT JOIN quote ON user.customerid = quote.customerid LEFT JOIN orderofwork ON quote.quoteid = orderofwork.quoteid LEFT JOIN bills ON orderofwork.quoteid = bills.orderid WHERE bills.id IS NULL OR (bills.status = 'pending' AND bills.generated_date < CURDATE() - INTERVAL 7 DAY) GROUP BY user.customerid, user.firstname, user.lastname HAVING COUNT(bills.orderid) = 0;";      
+        String sql =  "SELECT user.customerid, user.firstname, user.lastname,bills.status,bills.generated_date,bills.curdate \r\n"
+        		+ "FROM user \r\n"
+        		+ "JOIN quote ON user.customerid = quote.customerid \r\n"
+        		+ "JOIN orderofwork ON quote.quoteid = orderofwork.quoteid \r\n"
+        		+ "JOIN bills ON orderofwork.quoteid = bills.orderid \r\n"
+        		+ "WHERE bills.status = 'pending' \r\n"
+        		+ "AND bills.generated_date < curdate() - INTERVAL 7 DAY\r\n"
+        		+ "GROUP BY user.customerid, user.firstname, user.lastname,bills.status,bills.generated_date,bills.curdate ;\r\n"
+        		+ "\r\n"
+        		+ "\r\n"
+        		+ "";      
         connect_func();      
         statement = (Statement) connect.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -145,9 +155,12 @@ public class quoteDAO
         	int customerID = resultSet.getInt("customerID");
             String firstname = resultSet.getString("firstname");
             String lastname = resultSet.getString("lastname");
+            String status =resultSet.getString("status");
+            Timestamp generated_date = resultSet.getTimestamp("generated_date");
+            Timestamp curdate = resultSet.getTimestamp("curdate");
              
              
-            quote quotes = new quote(customerID,firstname,lastname);
+            quote quotes = new quote(customerID,firstname,lastname,status,generated_date,curdate);
             BadClients.add(quotes);
         }        
         resultSet.close();

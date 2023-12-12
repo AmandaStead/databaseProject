@@ -29,6 +29,10 @@
             	  <th>customerid</th>
                 <th>firstname</th>
                 <th>lastname</th>
+                <th>status</th>
+                <th>generated_date</th>
+                <th>curdate</th>
+                
               
                
                 
@@ -38,6 +42,9 @@
                 	<td>${quotes.customerID}</td>
                     <td>${quotes.firstname}</td>
                     <td>${quotes.lastname}</td>
+                    <td>${quotes.status}</td>
+                    <td>${quotes.generated_date}</td>
+                    <td>${quotes.curdate}</td>
                     
                     
                     
