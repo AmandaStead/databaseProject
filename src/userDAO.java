@@ -358,8 +358,8 @@ public class userDAO
         "('6','7','700','100','600','paid','2023-12-02 04:00:00','2023-12-20 04:00:00'),"+
         "('7','7','500','100','50','pending','2023-10-15 08:00:00','2023-12-20 04:00:00'),"+
         "('8','8','500','100','75','pending','2023-11-23 04:00:00','2023-12-20 04:00:00'),"+
-        "('9','9','400','100','100','pending','2023-09-20 05:00:00','2023-12-20 04:00:00'),"+
-        "('10','10','700','200','85','pending','2023-11-12 03:00:00','2023-12-20 04:00:00');");
+        "('9','9','400','100','300','pending','2023-09-20 05:00:00','2023-12-20 04:00:00'),"+
+        "('10','10','700','200','500','pending','2023-11-12 03:00:00','2023-12-20 04:00:00');");
         		
         
         statement.executeUpdate("INSERT INTO QuotesMessages(id,customerid,quoteid,msgtime,price,schedulestart,scheduleend,note) VALUES ('1','1','1','2023-10-26 15:30:00','200','2023-10-26 15:30:00','2023-10-26 15:30:00','this time will work')," +
@@ -376,7 +376,7 @@ public class userDAO
         
         
         statement.executeUpdate("INSERT INTO User (email, firstname, lastname, phone, password, birthday, adress_street_num, adress_street, adress_city, adress_state, adress_zip_code, cc_num, cc_exp, cc_cvv) VALUES ('susie@gmail.com', 'Susie ', 'Guzman', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202','414123541254145', '2020-01-01', '441'), "+
-        		"('susie2@gmail.com', 'Susie ', 'Guzman', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202','414123541254145', '2020-01-01', '441'),"+
+        		"('susie2@gmail.com', 'Melanie ', 'Crystal', '5842124561', 'susie1234', '2000-06-27', '1234', 'whatever street', 'detroit', 'MI', '48202','414123541254145', '2020-01-01', '441'),"+
     		 	"('don@gmail.com', 'Don', 'Cummings', '5842124561', 'don123', '1969-03-20', '1000', 'hi street', 'mama', 'MO', '12345','414123541254145', '2020-01-01', '441'),"+
     	 	 	"('margarita@gmail.com', 'Margarita', 'Lawson', '5842124561','margarita1234', '1980-02-02', '1234', 'ivan street', 'tata','CO','12561', '414123541254145', '2020-01-01', '441'),"+
     		 	"('jo@gmail.com', 'Jo', 'Brady', '5842124561', 'jo1234', '2002-02-02', '3214','marko street', 'brat', 'DU', '54321','414123541254145', '2020-01-01', '441'),"+

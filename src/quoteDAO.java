@@ -137,17 +137,17 @@ public class quoteDAO
     
     public List<quote> BadClients() throws SQLException {
         List<quote> BadClients = new ArrayList<quote>();        
-        String sql =  "SELECT user.customerid, user.firstname, user.lastname,bills.status,bills.generated_date,bills.curdate \r\n"
-        		+ "FROM user \r\n"
-        		+ "JOIN quote ON user.customerid = quote.customerid \r\n"
-        		+ "JOIN orderofwork ON quote.quoteid = orderofwork.quoteid \r\n"
-        		+ "JOIN bills ON orderofwork.quoteid = bills.orderid \r\n"
-        		+ "WHERE bills.status = 'pending' \r\n"
-        		+ "AND bills.generated_date < curdate() - INTERVAL 7 DAY\r\n"
-        		+ "GROUP BY user.customerid, user.firstname, user.lastname,bills.status,bills.generated_date,bills.curdate ;\r\n"
-        		+ "\r\n"
-        		+ "\r\n"
-        		+ "";      
+        String sql =  "SELECT user.customerid, user.firstname, user.lastname, bills.status,bills.generated_date, bills.curdate,bills.price,bills.discount,bills.balance \r\n"
+        	    
+        	+ "FROM user JOIN quote ON user.customerid = quote.customerid JOIN orderofwork ON quote.quoteid = orderofwork.quoteid JOIN \r\n"
+        	   +"bills ON orderofwork.quoteid = bills.orderid WHERE bills.status = 'pending' AND bills.generated_date < curdate() - INTERVAL 7 DAY AND bills.price - bills.discount = bills.balance \r\n"
+        	+ "GROUP BY user.customerid, user.firstname, user.lastname, bills.status, bills.generated_date, bills.curdate,bills.price,bills.discount,bills.balance"
+        	+ "\r\n"
+    		+ "\r\n"
+    		+ "";
+
+
+        	      
         connect_func();      
         statement = (Statement) connect.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -158,9 +158,12 @@ public class quoteDAO
             String status =resultSet.getString("status");
             Timestamp generated_date = resultSet.getTimestamp("generated_date");
             Timestamp curdate = resultSet.getTimestamp("curdate");
+            double price = resultSet.getInt("price");
+            double discount = resultSet.getInt("discount");
+            double balance = resultSet.getDouble("balance");
              
              
-            quote quotes = new quote(customerID,firstname,lastname,status,generated_date,curdate);
+            quote quotes = new quote(customerID,firstname,lastname,status,generated_date,curdate,price,discount,balance);
             BadClients.add(quotes);
         }        
         resultSet.close();

@@ -32,6 +32,9 @@
                 <th>status</th>
                 <th>generated_date</th>
                 <th>curdate</th>
+                <th>price</th>
+                <th>discount</th>
+                <th>balance</th>
                 
               
                
@@ -45,6 +48,9 @@
                     <td>${quotes.status}</td>
                     <td>${quotes.generated_date}</td>
                     <td>${quotes.curdate}</td>
+                     <td>${quotes.price}</td>
+                      <td>${quotes.discount}</td>
+                       <td>${quotes.balance}</td>
                     
                     
                     

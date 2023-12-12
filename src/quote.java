@@ -166,6 +166,21 @@ public class quote {
 		this.scheduleend = scheduleend;
 		this.status = status;
 	}
+	public quote(int customerID, String firstname, String lastname, String status, Timestamp generated_date,
+			Timestamp curdate, double price, double discount, double balance) {
+		// TODO Auto-generated constructor stub
+		this.customerID = customerID;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.status = status;
+		this.generated_date = generated_date;
+		this.curdate = curdate;
+		this.price = price;
+		this.discount = discount;
+		this.balance = balance;
+		
+		
+	}
 	public String getfirstname() {
 		return firstname;
 	}
