@@ -49,6 +49,17 @@ public class BigClients {
 
 
 
+	public BigClients(int quoteid, int customerid, String firstname, String lastname) {
+		// TODO Auto-generated constructor stub
+		this.quoteid = quoteid;
+		this.customerid = customerid;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		
+	}
+
+
+
 	// Getter and Setter for firstname
     public String getFirstname() {
         return firstname;

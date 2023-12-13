@@ -26,6 +26,7 @@
           
             <tr>
             	
+                 <th>quoteid</th>
                 <th>customerid</th>
                 <th>firstname</th>
                 <th>lastname</th>
@@ -35,6 +36,7 @@
             <c:forEach var="BigClient" items="${Prospectiveclients}">
                 <tr style="text-align:center">
                 	
+                    <td>${BigClient.quoteid}</td>
                     <td>${BigClient.customerid}</td>
                     <td>${BigClient.firstname}</td>
                     <td>${BigClient.lastname}</td>

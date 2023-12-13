@@ -135,8 +135,9 @@ public class statsDAO
     
     public List<BigClients> Prospectiveclients() throws SQLException {
     	List<BigClients> Prospectiveclients = new ArrayList<>();
-        String sql = "SELECT user.customerid, user.firstname, user.lastname\r\n"
-        		+ "FROM user user\r\n"
+        String sql = "SELECT quote.quoteid,user.customerid, user.firstname, user.lastname\r\n"
+        		+ "FROM user\r\n"
+        		+ "JOIN quote ON user.customerid = quote.customerid\r\n"
         		+ "WHERE user.customerid IN (\r\n"
         		+ "    SELECT DISTINCT quote.customerid\r\n"
         		+ "    FROM quote \r\n"
@@ -144,6 +145,7 @@ public class statsDAO
         		+ "    AND quote.quoteid NOT IN (\r\n"
         		+ "        SELECT DISTINCT orderofwork.quoteid\r\n"
         		+ "        FROM orderofwork\r\n"
+        		+ "        GROUP BY quote.quoteid,user.customerid,user.firstname,user.lastname\r\n"
         		+ "    )\r\n"
         		+ "    );";
         connect_func();
@@ -153,13 +155,14 @@ public class statsDAO
 
 
         
-            
+        	int quoteid = resultSet.getInt("quoteid");
             int customerid = resultSet.getInt("customerid");
             String firstname = resultSet.getString("firstname");
             String lastname = resultSet.getString("lastname");
+            
           
                 
-                BigClients BigClient = new BigClients(customerid,firstname,lastname);
+                BigClients BigClient = new BigClients(quoteid,customerid,firstname,lastname);
                 Prospectiveclients.add(BigClient);
                
                 
